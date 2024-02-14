@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 
-const FileUpload = () => {
+const CSVUpload = () => {
   const [file, setFile] = useState(null);
-  const [headings, setHeadings] = useState(null);
   const [dataName, setDataName] = useState(null);
+  const [headings, setHeadings] = useState(null);
 
   const handleFileChange = (e) => {
     setFile(e.target.files[0]);
-    setDataName(null); // Reset dataName when a new file is selected
+    setDataName(null);
+    setHeadings(null); // Reset headings when a new file is selected
   };
 
   const handleUpload = async () => {
@@ -15,7 +16,7 @@ const FileUpload = () => {
       const formData = new FormData();
       formData.append('file', file);
 
-      const response = await fetch('http://localhost:5000/api/data-analysis', {
+      const response = await fetch('http://localhost:5000/api/csv-upload', {
         method: 'POST',
         body: formData,
       });
@@ -28,12 +29,13 @@ const FileUpload = () => {
 
       if (result && result.headings) {
         setHeadings(result.headings);
-        // Set the dataName (filename in this case) in the state
-        setDataName(file.name);
+      }
+
+      if (result && result.dataName) {
+        setDataName(result.dataName);
       }
     } catch (error) {
       console.error('Error during file upload:', error.message);
-      // Additional logging or user feedback can be added here
     }
   };
 
@@ -62,4 +64,4 @@ const FileUpload = () => {
   );
 };
 
-export default FileUpload;
+export default CSVUpload;

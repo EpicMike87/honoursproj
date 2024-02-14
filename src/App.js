@@ -2,19 +2,24 @@ import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Home from "./components/Home";
-import FileUpload from "./components/FileUpload";
+import Navigation from "./components/Navigation";
+import CSVUpload from "./components/CSVUpload";
+import JSONUpload from "./components/JSONUpload";
 
 function App() {
   return (
     <>
-    <div className = "wrapper">
-    <BrowserRouter>
-      <Routes>
-        <Route key="home" path="/" element={<Home />} />
-        <Route key="upload" path="/upload" element={<FileUpload />} />
-      </Routes>
-    </BrowserRouter>
-    </div>
+      <div className="wrapper">
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Navigation />}>
+              <Route path="/" element={<Home />} />
+              <Route path="/csv" element={<CSVUpload />} />
+              <Route path="/json" element={<JSONUpload />} />
+            </Route>
+          </Routes>
+        </BrowserRouter>
+      </div>
     </>
   );
 }
