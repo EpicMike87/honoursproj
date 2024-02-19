@@ -30,7 +30,7 @@ const JSONUpload = () => {
 
       const result = await response.json();
 
-      console.log('Received JSON data:', result); // Add this line for debugging
+      console.log('Received JSON data:', result);
 
       if (result && result.headings) {
         setHeadings(result.headings);

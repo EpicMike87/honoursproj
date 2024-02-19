@@ -51,6 +51,14 @@ def perform_json_upload():
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
+@app.route('/api/get-uploaded-filenames', methods=['GET'])
+def get_uploaded_filenames():
+    try:
+        filenames = [f for f in os.listdir(app.config['UPLOADED_DATA_DEST']) if os.path.isfile(os.path.join(app.config['UPLOADED_DATA_DEST'], f))]
+        return jsonify({'filenames': filenames}), 200
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
 def get_csv_column_headings(filename):
     data = pd.read_csv(os.path.join(app.config['UPLOADED_DATA_DEST'], filename))
     headings = list(data.columns)
@@ -71,7 +79,6 @@ def get_json_column_headings(filename):
                 raise ValueError('Invalid JSON file structure')
     except Exception as e:
         raise ValueError('Invalid JSON file') from e
-
 
 if __name__ == '__main__':
     app.run(debug=True)
