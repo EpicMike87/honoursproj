@@ -14,6 +14,9 @@ const Navigation = () => {
         <Link to="json" className="nav-button">
           Upload JSON
         </Link>
+        <Link to="visualise" className="nav-button">
+          Visualise
+        </Link>
       </div>
       <Outlet />
     </div>

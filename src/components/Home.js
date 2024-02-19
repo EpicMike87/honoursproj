@@ -4,7 +4,7 @@ const Home = () => {
   const [uploadedFileNames, setUploadedFileNames] = useState([]);
 
   useEffect(() => {
-    console.log('Fetching uploaded filenames...');
+    console.log('Fetching uploaded files...');
     fetch('http://localhost:5000/api/get-uploaded-filenames')
       .then(response => {
         console.log('Response status:', response.status);
@@ -19,7 +19,7 @@ const Home = () => {
 
   return (
     <div>
-      <h1>List of Files</h1>
+      <h1>List of Datasets</h1>
       {uploadedFileNames.length > 0 ? (
         <div>
           <p>Uploaded Files:</p>

@@ -8,7 +8,7 @@ const CSVUpload = () => {
   const handleFileChange = (e) => {
     setFile(e.target.files[0]);
     setDataName(null);
-    setHeadings(null); // Reset headings when a new file is selected
+    setHeadings(null);
   };
 
   const handleUpload = async () => {
