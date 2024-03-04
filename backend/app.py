@@ -1,5 +1,6 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
+from flask import send_file
 from flask_uploads import UploadSet, configure_uploads, DATA
 
 import os
@@ -80,6 +81,27 @@ def get_headings():
             return jsonify({'error': 'Unsupported file type'}), 400
 
         return jsonify({'headings': headings}), 200
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+    
+@app.route('/api/get-data-values', methods=['GET'])
+def get_data_values():
+    try:
+        selected_file = request.args.get('file')
+
+        if not selected_file:
+            return jsonify({'error': 'No file specified'}), 400
+
+        file_path = os.path.join(app.config['UPLOADED_DATA_DEST'], selected_file)
+
+        if not os.path.exists(file_path):
+            return jsonify({'error': 'File not found'}), 404
+
+        data = pd.read_csv(file_path)
+        data_values = data.to_dict(orient='records')
+
+        return jsonify({'data_values': data_values}), 200
 
     except Exception as e:
         return jsonify({'error': str(e)}), 500

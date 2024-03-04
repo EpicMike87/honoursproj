@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import Table from '../services/Table';
 
 const DataPage = () => {
   const [uploadedFileNames, setUploadedFileNames] = useState([]);
   const [selectedFileName, setSelectedFileName] = useState(null);
+  const [dataValues, setDataValues] = useState(null);
 
   useEffect(() => {
     console.log('Fetching uploaded files...');
@@ -14,6 +16,19 @@ const DataPage = () => {
       })
       .catch(error => console.error('Error fetching uploaded filenames:', error));
   }, []);
+
+  useEffect(() => {
+    if (selectedFileName) {
+      console.log(`Fetching data values for file: ${selectedFileName}`);
+      fetch(`http://localhost:5000/api/get-data-values?file=${selectedFileName}`)
+        .then(response => response.json())
+        .then(data => {
+          console.log('Received data values:', data);
+          setDataValues(data.data_values);
+        })
+        .catch(error => console.error('Error fetching data values:', error));
+    }
+  }, [selectedFileName]);
 
   const handleButtonClick = (fileName) => {
     console.log(`Button clicked for file: ${fileName}`);
@@ -44,7 +59,11 @@ const DataPage = () => {
         {selectedFileName ? (
           <>
             <h2>{selectedFileName}</h2>
-            <p>The table for the selected data will go here.</p>
+            {dataValues ? (
+              <Table headings={Object.keys(dataValues[0])} rows={dataValues} />
+            ) : (
+              <p>Loading data...</p>
+            )}
           </>
         ) : (
           <p>Select a file to display data.</p>
