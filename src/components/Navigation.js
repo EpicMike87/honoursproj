@@ -8,11 +8,20 @@ const Navigation = () => {
         <Link to="/" className="nav-button">
           Home
         </Link>
+        <Link to="data" className="nav-button">
+          My Data
+        </Link>
         <Link to="csv" className="nav-button">
           Upload CSV
         </Link>
         <Link to="json" className="nav-button">
           Upload JSON
+        </Link>
+        <Link to="xml" className="nav-button">
+          Upload XML
+        </Link>
+        <Link to="clean" className="nav-button">
+          Clean Data
         </Link>
         <Link to="visualise" className="nav-button">
           Visualise

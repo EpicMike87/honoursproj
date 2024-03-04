@@ -1,37 +1,38 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
 const Home = () => {
-  const [uploadedFileNames, setUploadedFileNames] = useState([]);
-
-  useEffect(() => {
-    console.log('Fetching uploaded files...');
-    fetch('http://localhost:5000/api/get-uploaded-filenames')
-      .then(response => {
-        console.log('Response status:', response.status);
-        return response.json();
-      })
-      .then(data => {
-        console.log('Received data:', data);
-        setUploadedFileNames(data.filenames);
-      })
-      .catch(error => console.error('Error fetching uploaded filenames:', error));
-  }, []);
-
   return (
     <div>
-      <h1>List of Datasets</h1>
-      {uploadedFileNames.length > 0 ? (
-        <div>
-          <p>Uploaded Files:</p>
-          <ul>
-            {uploadedFileNames.map((fileName, index) => (
-              <li key={index}>{fileName}</li>
-            ))}
-          </ul>
+      <h1>User Guide</h1>
+      
+      <div style={{ display: 'flex' }}>
+        <div style={{ flex: 1, marginRight: '20px' }}>
+          <h2>Column 1</h2>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+            Nulla facilisi. Integer vel ante ac nisl placerat ullamcorper. 
+            Suspendisse potenti.
+          </p>
         </div>
-      ) : (
-        <p>No files uploaded yet.</p>
-      )}
+
+        <div style={{ flex: 1, marginRight: '20px' }}>
+          <h2>Column 2</h2>
+          <p>
+            Sed euismod semper libero, at condimentum elit mattis nec. 
+            Vestibulum congue quam ac turpis tincidunt, id bibendum metus 
+            malesuada. Nunc vel est ac justo facilisis dignissim.
+          </p>
+        </div>
+
+        <div style={{ flex: 1 }}>
+          <h2>Column 3</h2>
+          <p>
+            Fusce id justo non libero egestas luctus nec vel sem. Quisque 
+            congue dolor vitae enim hendrerit, eget fringilla risus 
+            ultrices.
+          </p>
+        </div>
+      </div>
     </div>
   );
 };
