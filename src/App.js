@@ -5,6 +5,7 @@ import Home from "./components/Home";
 import Navigation from "./components/Navigation";
 import CSVUpload from "./components/CSVUpload";
 import JSONUpload from "./components/JSONUpload";
+import XMLUpload from "./components/XMLUpload";
 import Visualise from "./components/Visualise";
 import Placeholder from "./components/Placeholder";
 import DataPage from "./components/Datapage";
@@ -19,7 +20,7 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/csv" element={<CSVUpload />} />
               <Route path="/json" element={<JSONUpload />} />
-              <Route path="/xml" element={<Placeholder />} />
+              <Route path="/xml" element={<XMLUpload />} />
               <Route path="/data" element={<DataPage />} />
               <Route path="/clean" element={<Placeholder />} />
               <Route path="/visualise" element={<Visualise />} />

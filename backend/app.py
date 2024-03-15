@@ -2,6 +2,7 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 from flask import send_file
 from flask_uploads import UploadSet, configure_uploads, DATA
+import xml.etree.ElementTree as ET
 
 import os
 import pandas as pd
@@ -53,6 +54,30 @@ def perform_json_upload():
 
     except Exception as e:
         return jsonify({'error': str(e)}), 500
+    
+@app.route('/api/xml-upload', methods=['POST'])
+def perform_xml_upload():
+    try:
+        if 'file' not in request.files:
+            return jsonify({'error': 'No file provided'}), 400
+
+        file = request.files['file']
+        filename = file.filename
+
+        if not filename.endswith('.xml'):
+            return jsonify({'error': 'Unsupported file type'}), 400
+
+        saved_filename = data_files.save(file)
+        print("Saved filename:", saved_filename)
+
+        headings = get_xml_headings(saved_filename)
+
+        return jsonify(headings=headings), 200
+
+    except Exception as e:
+        print("Exception:", e)
+        return jsonify({'error': 'Internal Server Error'}), 500
+
 
 @app.route('/api/get-uploaded-filenames', methods=['GET'])
 def get_uploaded_filenames():
@@ -144,6 +169,27 @@ def get_json_column_headings(filename):
                 raise ValueError('Invalid JSON file structure')
     except Exception as e:
         raise ValueError('Invalid JSON file') from e
+    
+def get_xml_headings(filename):
+    try:
+        tree = ET.parse(os.path.join(app.config['UPLOADED_DATA_DEST'], filename))
+        root = tree.getroot()
+
+        def traverse(element, headings):
+            headings.add(element.tag)
+            for child in element:
+                traverse(child, headings)
+
+        headings = set()
+        traverse(root, headings)
+        return list(headings)
+
+    except ET.ParseError as parse_error:
+        raise ValueError(f'Error parsing XML file: {parse_error}') from parse_error
+
+    except Exception as e:
+        raise ValueError(f'Unexpected error: {e}') from e
+
     
 def calculate_histogram(selected_file, column_name):
     try:
