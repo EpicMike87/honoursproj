@@ -34,8 +34,9 @@ const XMLUpload = () => {
 
   return (
     <div>
+      <h2>Upload XML</h2>
       <input type="file" onChange={handleFileChange} />
-      <button onClick={handleUpload}>Upload XML</button>
+      <button onClick={handleUpload}>Confirm</button>
 
       {headings && (
         <div>

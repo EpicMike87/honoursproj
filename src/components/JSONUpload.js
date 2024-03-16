@@ -48,6 +48,7 @@ const JSONUpload = () => {
 
   return (
     <div>
+      <h2>Upload JSON</h2>
       <input type="file" onChange={handleFileChange} />
       <button onClick={handleUpload} disabled={loading}>
         {loading ? 'Uploading...' : 'Confirm'}

@@ -41,6 +41,7 @@ const CSVUpload = () => {
 
   return (
     <div>
+      <h2>Upload CSV</h2>
       <input type="file" onChange={handleFileChange} />
       <button onClick={handleUpload}>Confirm</button>
 
