@@ -1,48 +1,61 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState } from 'react';
+import Plot from 'react-plotly.js';
 
-const Histogram = ({ selectedFile, selectedColumn }) => {
-  const [histogramData, setHistogramData] = useState([]);
+const Histogram = ({ histogramData, column, binSize }) => {
+  const [setError] = useState(null);
 
-  const generateHistogram = useCallback(async () => {
+  const dataValues = histogramData && histogramData.data_values;
+
+  const generateHistogramData = () => {
     try {
-      const response = await fetch('http://localhost:5000/api/generate-histogram', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          selected_file: selectedFile,
-          selected_column: selectedColumn,
-        }),
-      });
-
-      if (!response.ok) {
-        throw new Error('Failed to generate histogram');
+      if (Array.isArray(dataValues)) {
+        const histogramMap = new Map();
+        dataValues.forEach(row => {
+          const xValue = row[column];
+          const binIndex = Math.floor(xValue / binSize) * binSize;
+          if (histogramMap.has(binIndex)) {
+            histogramMap.set(binIndex, histogramMap.get(binIndex) + 1);
+          } else {
+            histogramMap.set(binIndex, 1);
+          }
+        });
+        
+        console.log('Histogram Map:', histogramMap);
+        
+        const xData = Array.from(histogramMap.keys());
+        const yData = Array.from(histogramMap.values());
+        
+        console.log('xData:', xData);
+        console.log('yData:', yData);
+        
+        return { xData, yData };
+      } else {
+        throw new Error('Data values are not in the expected format');
       }
-
-      const data = await response.json();
-      console.log('Received histogram data:', data.histogram_data);
-
-      setHistogramData(prevHistogramData => [...prevHistogramData, ...data.histogram_data]);
     } catch (error) {
-      console.error('Error generating histogram:', error.message);
+      setError(error.message);
+      return null;
     }
-  }, [selectedFile, selectedColumn]);
+  };
 
-  useEffect(() => {
-    if (selectedFile && selectedColumn) {
-      generateHistogram();
-    }
-  }, [generateHistogram, selectedFile, selectedColumn]);
+  const { xData, yData } = generateHistogramData();
+
+  if (!xData || !yData) {
+    return <p>Error generating histogram data</p>;
+  }
 
   return (
     <div>
-      <h3>Histogram:</h3>
-      <ul>
-        {histogramData.map((value, index) => (
-          <li key={index}>{value}</li>
-        ))}
-      </ul>
+      <Plot
+        data={[
+          {
+            x: xData,
+            y: yData,
+            type: 'histogram',
+          },
+        ]}
+        layout={{ width: 600, height: 400, title: 'Histogram' }}
+      />
     </div>
   );
 };

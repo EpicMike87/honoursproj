@@ -17,6 +17,8 @@ configure_uploads(app, data_files)
 
 # API Routes
 
+# Get DATA
+
 @app.route('/api/csv-upload', methods=['POST'])
 def perform_csv_upload():
     try:
@@ -78,6 +80,7 @@ def perform_xml_upload():
         print("Exception:", e)
         return jsonify({'error': 'Internal Server Error'}), 500
 
+# Get Values
 
 @app.route('/api/get-uploaded-filenames', methods=['GET'])
 def get_uploaded_filenames():
@@ -130,24 +133,6 @@ def get_data_values():
 
     except Exception as e:
         return jsonify({'error': str(e)}), 500
-    
-@app.route('/api/generate-histogram', methods=['POST'])
-def generate_histogram():
-    try:
-        selected_file = request.json.get('selected_file')
-        selected_column = request.json.get('selected_column')
-
-        if not selected_file or not selected_column:
-            return jsonify({'error': 'No selected file or column provided'}), 400
-
-        histogram_data = calculate_histogram(selected_file, selected_column)
-
-        return jsonify({'histogram_data': histogram_data}), 200
-
-    except Exception as e:
-        return jsonify({'error': str(e)}), 500    
-    
-# Functions
 
 def get_csv_column_headings(filename):
     data = pd.read_csv(os.path.join(app.config['UPLOADED_DATA_DEST'], filename))
@@ -190,17 +175,23 @@ def get_xml_headings(filename):
     except Exception as e:
         raise ValueError(f'Unexpected error: {e}') from e
 
-    
-def calculate_histogram(selected_file, column_name):
+@app.route('/api/generate-histogram', methods=['POST'])
+def generate_histogram():
     try:
-        file_path = os.path.join(app.config['UPLOADED_DATA_DEST'], selected_file)
-        data = pd.read_csv(file_path)
-        histogram_data = data[column_name].value_counts().tolist()
+        selected_file = request.form['file']
+        selected_column = request.form['column']
+    
+        data = pd.read_csv(f"data/{selected_file}")
 
-        return histogram_data
+        if selected_column not in data.columns:
+            return jsonify({'error': f'Column {selected_column} not found in the dataset'}), 400
+
+        histogram_data = data[selected_column].value_counts().sort_index().tolist()
+
+        return jsonify({'histogram_data': histogram_data}), 200
 
     except Exception as e:
-        raise ValueError('Error calculating histogram') from e  
+        return jsonify({'error': str(e)}), 500
 
 if __name__ == '__main__':
     app.run(debug=True)

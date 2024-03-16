@@ -4,35 +4,80 @@ import Histogram from '../services/Histogram';
 const Visualise = () => {
   const [uploadedFileNames, setUploadedFileNames] = useState([]);
   const [selectedFile, setSelectedFile] = useState(null);
+  const [selectedColumn, setSelectedColumn] = useState(null); // Selected column for histogram
   const [selectedFileHeadings, setSelectedFileHeadings] = useState([]);
+  const [loadingFiles, setLoadingFiles] = useState(false);
+  const [loadingHeadings, setLoadingHeadings] = useState(false);
+  const [binSize, setBinSize] = useState(1); // Default bin size
+  const [error, setError] = useState(null);
+  const [histogramData, setHistogramData] = useState(null);
 
   useEffect(() => {
-    console.log('Fetching uploaded files...');
+    setLoadingFiles(true);
     fetch('http://localhost:5000/api/get-uploaded-filenames')
-      .then(response => response.json())
-      .then(data => {
-        console.log('Received data:', data);
-        setUploadedFileNames(data.filenames);
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Failed to fetch uploaded filenames');
+        }
+        return response.json();
       })
-      .catch(error => console.error('Error fetching uploaded files:', error));
+      .then(data => {
+        setUploadedFileNames(data.filenames);
+        setLoadingFiles(false);
+      })
+      .catch(error => {
+        setError(error.message);
+        setLoadingFiles(false);
+      });
   }, []);
 
   useEffect(() => {
     if (selectedFile) {
-      console.log(`Fetching headings for ${selectedFile}...`);
+      setLoadingHeadings(true);
       fetch(`http://localhost:5000/api/get-headings?file=${selectedFile}`)
-        .then(response => response.json())
-        .then(data => {
-          console.log('Received headings data:', data);
-          setSelectedFileHeadings(data.headings);
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Failed to fetch headings');
+          }
+          return response.json();
         })
-        .catch(error => console.error('Error fetching headings:', error));
+        .then(data => {
+          setSelectedFileHeadings(data.headings);
+          setLoadingHeadings(false);
+        })
+        .catch(error => {
+          setError(error.message);
+          setLoadingHeadings(false);
+        });
     }
   }, [selectedFile]);
+
+  const handleColumnSelect = (event) => {
+    setSelectedColumn(event.target.value);
+  };
+
+  const handleBinSizeChange = (event) => {
+    setBinSize(parseInt(event.target.value));
+  };
+
+  const generateHistogram = async () => {
+    try {
+      const response = await fetch(`http://localhost:5000/api/get-data-values?file=${selectedFile}&column=${selectedColumn}&binSize=${binSize}`);
+      if (!response.ok) {
+        throw new Error('Failed to get data values');
+      }
+      const data = await response.json();
+      setHistogramData(data);
+    } catch (error) {
+      setError(error.message);
+    }
+  };
 
   return (
     <div>
       <h1>Select Data</h1>
+      {loadingFiles && <p>Loading uploaded files...</p>}
+      {error && <p>Error: {error}</p>}
       {uploadedFileNames.length > 0 ? (
         <div>
           <p>Uploaded Files:</p>
@@ -51,21 +96,31 @@ const Visualise = () => {
       {selectedFile && (
         <div>
           <h2>Selected File: {selectedFile}</h2>
+          {loadingHeadings && <p>Loading headings...</p>}
           {selectedFileHeadings.length > 0 && (
             <div>
               <h3>Headings:</h3>
-              <ul>
+              <label>Select Column:</label>
+              <select onChange={handleColumnSelect}>
+                <option value="">Select Column</option>
                 {selectedFileHeadings.map((heading, index) => (
-                  <li key={index}>{heading}</li>
+                  <option key={index} value={heading}>
+                    {heading}
+                  </option>
                 ))}
-              </ul>
-              <Histogram selectedFile={selectedFile} />
+              </select>
+              <label>Bin Size:</label>
+              <input type="number" min="1" value={binSize} onChange={handleBinSizeChange} />
+              {selectedColumn && (
+                <div>
+                  <button onClick={generateHistogram}>Generate Histogram</button>
+                  {histogramData && <Histogram histogramData={histogramData} column={selectedColumn} binSize={binSize} />}
+                </div>
+              )}
             </div>
           )}
         </div>
       )}
-
-      <button>Generate Graph</button>
     </div>
   );
 };
