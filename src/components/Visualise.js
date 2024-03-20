@@ -4,11 +4,11 @@ import Histogram from '../services/Histogram';
 const Visualise = () => {
   const [uploadedFileNames, setUploadedFileNames] = useState([]);
   const [selectedFile, setSelectedFile] = useState(null);
-  const [selectedColumn, setSelectedColumn] = useState(null); // Selected column for histogram
+  const [selectedColumn, setSelectedColumn] = useState(null);
   const [selectedFileHeadings, setSelectedFileHeadings] = useState([]);
   const [loadingFiles, setLoadingFiles] = useState(false);
   const [loadingHeadings, setLoadingHeadings] = useState(false);
-  const [binSize, setBinSize] = useState(1); // Default bin size
+  const [binSize, setBinSize] = useState(1);
   const [error, setError] = useState(null);
   const [histogramData, setHistogramData] = useState(null);
 
@@ -74,53 +74,69 @@ const Visualise = () => {
   };
 
   return (
-    <div>
-      <h1>Select Data</h1>
-      {loadingFiles && <p>Loading uploaded files...</p>}
-      {error && <p>Error: {error}</p>}
-      {uploadedFileNames.length > 0 ? (
-        <div>
-          <p>Uploaded Files:</p>
-          <ul>
-            {uploadedFileNames.map((fileName, index) => (
-              <li key={index} onClick={() => setSelectedFile(fileName)}>
-                {fileName}
-              </li>
-            ))}
-          </ul>
-        </div>
-      ) : (
-        <p>No files uploaded yet.</p>
-      )}
+    <div className="Visualise-container">
+      <h1 className="Visualise-heading">Visualise Data</h1>
 
-      {selectedFile && (
-        <div>
-          <h2>Selected File: {selectedFile}</h2>
-          {loadingHeadings && <p>Loading headings...</p>}
-          {selectedFileHeadings.length > 0 && (
+      <div className="Visualise-columns">
+        <div className="Visualise-column">
+          <h2>Histogram</h2>
+          {loadingFiles && <p>Loading uploaded files...</p>}
+          {error && <p>Error: {error}</p>}
+          {uploadedFileNames.length > 0 ? (
             <div>
-              <h3>Headings:</h3>
-              <label>Select Column:</label>
-              <select onChange={handleColumnSelect}>
-                <option value="">Select Column</option>
-                {selectedFileHeadings.map((heading, index) => (
-                  <option key={index} value={heading}>
-                    {heading}
-                  </option>
+              <p>Uploaded Files:</p>
+              <ul>
+                {uploadedFileNames.map((fileName, index) => (
+                  <li key={index} onClick={() => setSelectedFile(fileName)}>
+                    {fileName}
+                  </li>
                 ))}
-              </select>
-              <label>Bin Size:</label>
-              <input type="number" min="1" value={binSize} onChange={handleBinSizeChange} />
-              {selectedColumn && (
+              </ul>
+            </div>
+          ) : (
+            <p>No files uploaded yet.</p>
+          )}
+
+          {selectedFile && (
+            <div>
+              <h2>Selected File: {selectedFile}</h2>
+              {loadingHeadings && <p>Loading headings...</p>}
+              {selectedFileHeadings.length > 0 && (
                 <div>
-                  <button onClick={generateHistogram}>Generate Histogram</button>
-                  {histogramData && <Histogram histogramData={histogramData} column={selectedColumn} binSize={binSize} />}
+                  <h3>Headings:</h3>
+                  <label>Select Column:</label>
+                  <select onChange={handleColumnSelect}>
+                    <option value="">Select Column</option>
+                    {selectedFileHeadings.map((heading, index) => (
+                      <option key={index} value={heading}>
+                        {heading}
+                      </option>
+                    ))}
+                  </select>
+                  <label>Bin Size:</label>
+                  <input type="number" min="1" value={binSize} onChange={handleBinSizeChange} />
+                  {selectedColumn && (
+                    <div>
+                      <button onClick={generateHistogram}>Generate Histogram</button>
+                      {histogramData && <Histogram histogramData={histogramData} column={selectedColumn} binSize={binSize} />}
+                    </div>
+                  )}
                 </div>
               )}
             </div>
           )}
         </div>
-      )}
+
+        <div className="Visualise-column">
+          <h2>Column 2</h2>
+          <p>Some more visualisations will go here.</p>
+        </div>
+
+        <div className="Visualise-column">
+          <h2>Column 3</h2>
+          <p>Some more visualisations will go here.</p>
+        </div>
+      </div>
     </div>
   );
 };

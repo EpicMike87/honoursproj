@@ -1,40 +1,37 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Plot from 'react-plotly.js';
 
 const Histogram = ({ histogramData, column, binSize }) => {
-  const [setError] = useState(null);
-
-  const dataValues = histogramData && histogramData.data_values;
-
   const generateHistogramData = () => {
     try {
-      if (Array.isArray(dataValues)) {
-        const histogramMap = new Map();
-        dataValues.forEach(row => {
-          const xValue = row[column];
-          const binIndex = Math.floor(xValue / binSize) * binSize;
-          if (histogramMap.has(binIndex)) {
-            histogramMap.set(binIndex, histogramMap.get(binIndex) + 1);
-          } else {
-            histogramMap.set(binIndex, 1);
-          }
-        });
-        
-        console.log('Histogram Map:', histogramMap);
-        
-        const xData = Array.from(histogramMap.keys());
-        const yData = Array.from(histogramMap.values());
-        
-        console.log('xData:', xData);
-        console.log('yData:', yData);
-        
-        return { xData, yData };
-      } else {
+      const dataValues = histogramData && histogramData.data_values;
+      if (!Array.isArray(dataValues)) {
         throw new Error('Data values are not in the expected format');
       }
+
+      const histogramMap = new Map();
+      dataValues.forEach(row => {
+        const xValue = row[column];
+        const binIndex = Math.floor(xValue / binSize) * binSize;
+        if (histogramMap.has(binIndex)) {
+          histogramMap.set(binIndex, histogramMap.get(binIndex) + 1);
+        } else {
+          histogramMap.set(binIndex, 1);
+        }
+      });
+
+      console.log('Histogram Map:', histogramMap);
+
+      const xData = Array.from(histogramMap.keys());
+      const yData = Array.from(histogramMap.values());
+
+      console.log('xData:', xData);
+      console.log('yData:', yData);
+
+      return { xData, yData };
     } catch (error) {
-      setError(error.message);
-      return null;
+      console.error(error.message);
+      return { xData: [], yData: [] };
     }
   };
 

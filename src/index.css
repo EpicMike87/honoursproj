@@ -66,3 +66,36 @@ code {
 .Data-right-column {
   flex: 3;
 }
+
+.Visualise-container {
+  text-align: center;
+}
+
+.Visualise-heading {
+  margin-bottom: 20px;
+}
+
+.Visualise-columns {
+  display: flex;
+}
+
+.Visualise-column {
+  flex: 1;
+  margin-right: 20px;
+  text-align: left;
+}
+
+.Visualise-column:last-child {
+  margin-right: 0;
+}
+
+.Visualise-content h2 {
+  color: #333;
+  font-size: 1.5em;
+  margin-bottom: 10px;
+}
+
+.Visualise-content p {
+  color: #555;
+  font-size: 1em;
+}
