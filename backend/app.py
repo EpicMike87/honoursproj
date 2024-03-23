@@ -1,9 +1,6 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
-from flask import send_file
 from flask_uploads import UploadSet, configure_uploads, DATA
-import xml.etree.ElementTree as ET
-
 import os
 import pandas as pd
 import json
@@ -117,10 +114,14 @@ def get_headings():
 @app.route('/api/get-csv-data-values', methods=['GET'])
 def get_csv_data_values():
     try:
-        filename = request.args.get('file')
-        data = pd.read_csv(os.path.join(app.config['UPLOADED_DATA_DEST'], filename))
+        selected_file = request.args.get('file')
+        if not selected_file:
+            return jsonify({'error': 'No file specified'}), 400
+
+        data = pd.read_csv(os.path.join(app.config['UPLOADED_DATA_DEST'], selected_file))
         data_values = data.to_dict(orient='records')
         return jsonify({'data_values': data_values}), 200
+
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
@@ -128,42 +129,20 @@ def get_csv_data_values():
 def get_json_data_values():
     try:
         selected_file = request.args.get('file')
-
         if not selected_file:
             return jsonify({'error': 'No file specified'}), 400
 
-        file_path = os.path.join(app.config['UPLOADED_DATA_DEST'], selected_file)
-
-        if not os.path.exists(file_path):
-            return jsonify({'error': 'File not found'}), 404
-
-        data_values = get_json_data_values(selected_file)
-
-        return jsonify({'data_values': data_values}), 200
-
-    except Exception as e:
-        return jsonify({'error': str(e)}), 500
-
-@app.route('/api/get-xml-data-values', methods=['GET'])
-def get_xml_data_values():
-    try:
-        selected_file = request.args.get('file')
-
-        if not selected_file:
-            return jsonify({'error': 'No file specified'}), 400
-
-        file_path = os.path.join(app.config['UPLOADED_DATA_DEST'], selected_file)
-
-        if not os.path.exists(file_path):
-            return jsonify({'error': 'File not found'}), 404
-
-        data_values = get_xml_data_values(selected_file)
-
-        return jsonify({'data_values': data_values}), 200
+        with open(os.path.join(app.config['UPLOADED_DATA_DEST'], selected_file), 'r') as json_file:
+            json_data = json.load(json_file)
+            if isinstance(json_data, list):
+                return jsonify({'data_values': json_data}), 200
+            elif isinstance(json_data, dict):
+                return jsonify({'data_values': [json_data]}), 200
+            else:
+                raise ValueError('Invalid JSON file structure')
 
     except Exception as e:
         return jsonify({'error': str(e)}), 500
-
 
     
 def get_xml_headings(filename):

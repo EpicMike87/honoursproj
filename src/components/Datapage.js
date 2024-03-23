@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Table from '../services/Table';
+import { TableCSV, TableJSON, TableXML } from '../services/Table';
 
 const DataPage = () => {
   const [uploadedFileNames, setUploadedFileNames] = useState([]);
@@ -21,7 +21,18 @@ const DataPage = () => {
   useEffect(() => {
     if (selectedFileName) {
       console.log(`Fetching data values for file: ${selectedFileName}`);
-      fetch(`http://localhost:5000/api/get-csv-data-values?file=${selectedFileName}`)
+      const fileType = selectedFileName.split('.').pop().toLowerCase();
+      let apiUrl;
+      
+      if (fileType === 'csv') {
+        apiUrl = `http://localhost:5000/api/get-csv-data-values?file=${selectedFileName}`;
+      } else if (fileType === 'json') {
+        apiUrl = `http://localhost:5000/api/get-json-data-values?file=${selectedFileName}`;
+      } else if (fileType === 'xml') {
+        apiUrl = `http://localhost:5000/api/get-xml-data-values?file=${selectedFileName}`;
+      }
+
+      fetch(apiUrl)
         .then(response => response.json())
         .then(data => {
           console.log('Received data values:', data);
@@ -62,7 +73,11 @@ const DataPage = () => {
           <>
             <h2>{selectedFileName}</h2>
             {dataValues ? (
-              <Table headings={headings} rows={dataValues} />
+              <>
+                {selectedFileName.endsWith('.csv') && <TableCSV headings={headings} rows={dataValues} />}
+                {selectedFileName.endsWith('.json') && <TableJSON dataValues={dataValues} />}
+                {selectedFileName.endsWith('.xml') && <TableXML dataValues={dataValues} />}
+              </>
             ) : (
               <p>Loading data...</p>
             )}
