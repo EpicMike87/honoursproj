@@ -69,16 +69,17 @@ def perform_xml_upload():
         if not filename.endswith('.xml'):
             return jsonify({'error': 'Unsupported file type'}), 400
 
-        saved_filename = data_files.save(file)
-        print("Saved filename:", saved_filename)
+        file_path = os.path.join(app.config['UPLOADED_DATA_DEST'], filename)
+        file.save(file_path)
 
-        headings = get_xml_headings(saved_filename)
+        headings = get_xml_headings(filename)
 
         return jsonify(headings=headings), 200
 
     except Exception as e:
         print("Exception:", e)
         return jsonify({'error': 'Internal Server Error'}), 500
+
 
 # Get Values
 
@@ -113,8 +114,18 @@ def get_headings():
     except Exception as e:
         return jsonify({'error': str(e)}), 500
     
-@app.route('/api/get-data-values', methods=['GET'])
-def get_data_values():
+@app.route('/api/get-csv-data-values', methods=['GET'])
+def get_csv_data_values():
+    try:
+        filename = request.args.get('file')
+        data = pd.read_csv(os.path.join(app.config['UPLOADED_DATA_DEST'], filename))
+        data_values = data.to_dict(orient='records')
+        return jsonify({'data_values': data_values}), 200
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/api/get-json-data-values', methods=['GET'])
+def get_json_data_values():
     try:
         selected_file = request.args.get('file')
 
@@ -126,34 +137,34 @@ def get_data_values():
         if not os.path.exists(file_path):
             return jsonify({'error': 'File not found'}), 404
 
-        data = pd.read_csv(file_path)
-        data_values = data.to_dict(orient='records')
+        data_values = get_json_data_values(selected_file)
 
         return jsonify({'data_values': data_values}), 200
 
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
-def get_csv_column_headings(filename):
-    data = pd.read_csv(os.path.join(app.config['UPLOADED_DATA_DEST'], filename))
-    headings = list(data.columns)
-    return headings
-
-def get_json_column_headings(filename):
+@app.route('/api/get-xml-data-values', methods=['GET'])
+def get_xml_data_values():
     try:
-        with open(os.path.join(app.config['UPLOADED_DATA_DEST'], filename), 'r') as json_file:
-            json_data = json.load(json_file)
+        selected_file = request.args.get('file')
 
-            if isinstance(json_data, list) and len(json_data) > 0:
-                headings = list(json_data[0].keys())
-                return headings
-            elif isinstance(json_data, dict):
-                headings = list(json_data.keys())
-                return headings
-            else:
-                raise ValueError('Invalid JSON file structure')
+        if not selected_file:
+            return jsonify({'error': 'No file specified'}), 400
+
+        file_path = os.path.join(app.config['UPLOADED_DATA_DEST'], selected_file)
+
+        if not os.path.exists(file_path):
+            return jsonify({'error': 'File not found'}), 404
+
+        data_values = get_xml_data_values(selected_file)
+
+        return jsonify({'data_values': data_values}), 200
+
     except Exception as e:
-        raise ValueError('Invalid JSON file') from e
+        return jsonify({'error': str(e)}), 500
+
+
     
 def get_xml_headings(filename):
     try:

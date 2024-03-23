@@ -1,0 +1,1514 @@
+[
+   {
+      "pedestrianCount":127,
+      "processDate":"2023-10-31T00:00:00Z",
+      "location":{
+         "description":"Argyle Street near Queen Street Junction",
+         "latitude":55.85765,
+         "longitude":-4.252807
+      }
+   },
+   {
+      "pedestrianCount":72,
+      "processDate":"2023-10-31T01:00:00Z",
+      "location":{
+         "description":"Argyle Street near Queen Street Junction",
+         "latitude":55.85765,
+         "longitude":-4.252807
+      }
+   },
+   {
+      "pedestrianCount":43,
+      "processDate":"2023-10-31T02:00:00Z",
+      "location":{
+         "description":"Argyle Street near Queen Street Junction",
+         "latitude":55.85765,
+         "longitude":-4.252807
+      }
+   },
+   {
+      "pedestrianCount":36,
+      "processDate":"2023-10-31T03:00:00Z",
+      "location":{
+         "description":"Argyle Street near Queen Street Junction",
+         "latitude":55.85765,
+         "longitude":-4.252807
+      }
+   },
+   {
+      "pedestrianCount":33,
+      "processDate":"2023-10-31T04:00:00Z",
+      "location":{
+         "description":"Argyle Street near Queen Street Junction",
+         "latitude":55.85765,
+         "longitude":-4.252807
+      }
+   },
+   {
+      "pedestrianCount":85,
+      "processDate":"2023-10-31T05:00:00Z",
+      "location":{
+         "description":"Argyle Street near Queen Street Junction",
+         "latitude":55.85765,
+         "longitude":-4.252807
+      }
+   },
+   {
+      "pedestrianCount":279,
+      "processDate":"2023-10-31T06:00:00Z",
+      "location":{
+         "description":"Argyle Street near Queen Street Junction",
+         "latitude":55.85765,
+         "longitude":-4.252807
+      }
+   },
+   {
+      "pedestrianCount":630,
+      "processDate":"2023-10-31T07:00:00Z",
+      "location":{
+         "description":"Argyle Street near Queen Street Junction",
+         "latitude":55.85765,
+         "longitude":-4.252807
+      }
+   },
+   {
+      "pedestrianCount":1316,
+      "processDate":"2023-10-31T08:00:00Z",
+      "location":{
+         "description":"Argyle Street near Queen Street Junction",
+         "latitude":55.85765,
+         "longitude":-4.252807
+      }
+   },
+   {
+      "pedestrianCount":1572,
+      "processDate":"2023-10-31T09:00:00Z",
+      "location":{
+         "description":"Argyle Street near Queen Street Junction",
+         "latitude":55.85765,
+         "longitude":-4.252807
+      }
+   },
+   {
+      "pedestrianCount":2171,
+      "processDate":"2023-10-31T10:00:00Z",
+      "location":{
+         "description":"Argyle Street near Queen Street Junction",
+         "latitude":55.85765,
+         "longitude":-4.252807
+      }
+   },
+   {
+      "pedestrianCount":2959,
+      "processDate":"2023-10-31T11:00:00Z",
+      "location":{
+         "description":"Argyle Street near Queen Street Junction",
+         "latitude":55.85765,
+         "longitude":-4.252807
+      }
+   },
+   {
+      "pedestrianCount":4026,
+      "processDate":"2023-10-31T12:00:00Z",
+      "location":{
+         "description":"Argyle Street near Queen Street Junction",
+         "latitude":55.85765,
+         "longitude":-4.252807
+      }
+   },
+   {
+      "pedestrianCount":4358,
+      "processDate":"2023-10-31T13:00:00Z",
+      "location":{
+         "description":"Argyle Street near Queen Street Junction",
+         "latitude":55.85765,
+         "longitude":-4.252807
+      }
+   },
+   {
+      "pedestrianCount":3615,
+      "processDate":"2023-10-31T14:00:00Z",
+      "location":{
+         "description":"Argyle Street near Queen Street Junction",
+         "latitude":55.85765,
+         "longitude":-4.252807
+      }
+   },
+   {
+      "pedestrianCount":3685,
+      "processDate":"2023-10-31T15:00:00Z",
+      "location":{
+         "description":"Argyle Street near Queen Street Junction",
+         "latitude":55.85765,
+         "longitude":-4.252807
+      }
+   },
+   {
+      "pedestrianCount":4008,
+      "processDate":"2023-10-31T16:00:00Z",
+      "location":{
+         "description":"Argyle Street near Queen Street Junction",
+         "latitude":55.85765,
+         "longitude":-4.252807
+      }
+   },
+   {
+      "pedestrianCount":3868,
+      "processDate":"2023-10-31T17:00:00Z",
+      "location":{
+         "description":"Argyle Street near Queen Street Junction",
+         "latitude":55.85765,
+         "longitude":-4.252807
+      }
+   },
+   {
+      "pedestrianCount":2330,
+      "processDate":"2023-10-31T18:00:00Z",
+      "location":{
+         "description":"Argyle Street near Queen Street Junction",
+         "latitude":55.85765,
+         "longitude":-4.252807
+      }
+   },
+   {
+      "pedestrianCount":1136,
+      "processDate":"2023-10-31T19:00:00Z",
+      "location":{
+         "description":"Argyle Street near Queen Street Junction",
+         "latitude":55.85765,
+         "longitude":-4.252807
+      }
+   },
+   {
+      "pedestrianCount":710,
+      "processDate":"2023-10-31T20:00:00Z",
+      "location":{
+         "description":"Argyle Street near Queen Street Junction",
+         "latitude":55.85765,
+         "longitude":-4.252807
+      }
+   },
+   {
+      "pedestrianCount":600,
+      "processDate":"2023-10-31T21:00:00Z",
+      "location":{
+         "description":"Argyle Street near Queen Street Junction",
+         "latitude":55.85765,
+         "longitude":-4.252807
+      }
+   },
+   {
+      "pedestrianCount":1508,
+      "processDate":"2023-10-31T22:00:00Z",
+      "location":{
+         "description":"Argyle Street near Queen Street Junction",
+         "latitude":55.85765,
+         "longitude":-4.252807
+      }
+   },
+   {
+      "pedestrianCount":559,
+      "processDate":"2023-10-31T23:00:00Z",
+      "location":{
+         "description":"Argyle Street near Queen Street Junction",
+         "latitude":55.85765,
+         "longitude":-4.252807
+      }
+   },
+   {
+      "pedestrianCount":93,
+      "processDate":"2023-10-31T00:00:00Z",
+      "location":{
+         "description":"Buchanan Street near Buchanan Galleries Entrance",
+         "latitude":55.864119,
+         "longitude":-4.251806
+      }
+   },
+   {
+      "pedestrianCount":37,
+      "processDate":"2023-10-31T01:00:00Z",
+      "location":{
+         "description":"Buchanan Street near Buchanan Galleries Entrance",
+         "latitude":55.864119,
+         "longitude":-4.251806
+      }
+   },
+   {
+      "pedestrianCount":39,
+      "processDate":"2023-10-31T02:00:00Z",
+      "location":{
+         "description":"Buchanan Street near Buchanan Galleries Entrance",
+         "latitude":55.864119,
+         "longitude":-4.251806
+      }
+   },
+   {
+      "pedestrianCount":48,
+      "processDate":"2023-10-31T03:00:00Z",
+      "location":{
+         "description":"Buchanan Street near Buchanan Galleries Entrance",
+         "latitude":55.864119,
+         "longitude":-4.251806
+      }
+   },
+   {
+      "pedestrianCount":15,
+      "processDate":"2023-10-31T04:00:00Z",
+      "location":{
+         "description":"Buchanan Street near Buchanan Galleries Entrance",
+         "latitude":55.864119,
+         "longitude":-4.251806
+      }
+   },
+   {
+      "pedestrianCount":16,
+      "processDate":"2023-10-31T05:00:00Z",
+      "location":{
+         "description":"Buchanan Street near Buchanan Galleries Entrance",
+         "latitude":55.864119,
+         "longitude":-4.251806
+      }
+   },
+   {
+      "pedestrianCount":136,
+      "processDate":"2023-10-31T06:00:00Z",
+      "location":{
+         "description":"Buchanan Street near Buchanan Galleries Entrance",
+         "latitude":55.864119,
+         "longitude":-4.251806
+      }
+   },
+   {
+      "pedestrianCount":519,
+      "processDate":"2023-10-31T07:00:00Z",
+      "location":{
+         "description":"Buchanan Street near Buchanan Galleries Entrance",
+         "latitude":55.864119,
+         "longitude":-4.251806
+      }
+   },
+   {
+      "pedestrianCount":1592,
+      "processDate":"2023-10-31T08:00:00Z",
+      "location":{
+         "description":"Buchanan Street near Buchanan Galleries Entrance",
+         "latitude":55.864119,
+         "longitude":-4.251806
+      }
+   },
+   {
+      "pedestrianCount":1463,
+      "processDate":"2023-10-31T09:00:00Z",
+      "location":{
+         "description":"Buchanan Street near Buchanan Galleries Entrance",
+         "latitude":55.864119,
+         "longitude":-4.251806
+      }
+   },
+   {
+      "pedestrianCount":1729,
+      "processDate":"2023-10-31T10:00:00Z",
+      "location":{
+         "description":"Buchanan Street near Buchanan Galleries Entrance",
+         "latitude":55.864119,
+         "longitude":-4.251806
+      }
+   },
+   {
+      "pedestrianCount":2375,
+      "processDate":"2023-10-31T11:00:00Z",
+      "location":{
+         "description":"Buchanan Street near Buchanan Galleries Entrance",
+         "latitude":55.864119,
+         "longitude":-4.251806
+      }
+   },
+   {
+      "pedestrianCount":3358,
+      "processDate":"2023-10-31T12:00:00Z",
+      "location":{
+         "description":"Buchanan Street near Buchanan Galleries Entrance",
+         "latitude":55.864119,
+         "longitude":-4.251806
+      }
+   },
+   {
+      "pedestrianCount":3205,
+      "processDate":"2023-10-31T13:00:00Z",
+      "location":{
+         "description":"Buchanan Street near Buchanan Galleries Entrance",
+         "latitude":55.864119,
+         "longitude":-4.251806
+      }
+   },
+   {
+      "pedestrianCount":2978,
+      "processDate":"2023-10-31T14:00:00Z",
+      "location":{
+         "description":"Buchanan Street near Buchanan Galleries Entrance",
+         "latitude":55.864119,
+         "longitude":-4.251806
+      }
+   },
+   {
+      "pedestrianCount":2884,
+      "processDate":"2023-10-31T15:00:00Z",
+      "location":{
+         "description":"Buchanan Street near Buchanan Galleries Entrance",
+         "latitude":55.864119,
+         "longitude":-4.251806
+      }
+   },
+   {
+      "pedestrianCount":3044,
+      "processDate":"2023-10-31T16:00:00Z",
+      "location":{
+         "description":"Buchanan Street near Buchanan Galleries Entrance",
+         "latitude":55.864119,
+         "longitude":-4.251806
+      }
+   },
+   {
+      "pedestrianCount":2830,
+      "processDate":"2023-10-31T17:00:00Z",
+      "location":{
+         "description":"Buchanan Street near Buchanan Galleries Entrance",
+         "latitude":55.864119,
+         "longitude":-4.251806
+      }
+   },
+   {
+      "pedestrianCount":1943,
+      "processDate":"2023-10-31T18:00:00Z",
+      "location":{
+         "description":"Buchanan Street near Buchanan Galleries Entrance",
+         "latitude":55.864119,
+         "longitude":-4.251806
+      }
+   },
+   {
+      "pedestrianCount":1393,
+      "processDate":"2023-10-31T19:00:00Z",
+      "location":{
+         "description":"Buchanan Street near Buchanan Galleries Entrance",
+         "latitude":55.864119,
+         "longitude":-4.251806
+      }
+   },
+   {
+      "pedestrianCount":1070,
+      "processDate":"2023-10-31T20:00:00Z",
+      "location":{
+         "description":"Buchanan Street near Buchanan Galleries Entrance",
+         "latitude":55.864119,
+         "longitude":-4.251806
+      }
+   },
+   {
+      "pedestrianCount":728,
+      "processDate":"2023-10-31T21:00:00Z",
+      "location":{
+         "description":"Buchanan Street near Buchanan Galleries Entrance",
+         "latitude":55.864119,
+         "longitude":-4.251806
+      }
+   },
+   {
+      "pedestrianCount":1160,
+      "processDate":"2023-10-31T22:00:00Z",
+      "location":{
+         "description":"Buchanan Street near Buchanan Galleries Entrance",
+         "latitude":55.864119,
+         "longitude":-4.251806
+      }
+   },
+   {
+      "pedestrianCount":563,
+      "processDate":"2023-10-31T23:00:00Z",
+      "location":{
+         "description":"Buchanan Street near Buchanan Galleries Entrance",
+         "latitude":55.864119,
+         "longitude":-4.251806
+      }
+   },
+   {
+      "pedestrianCount":131,
+      "processDate":"2023-10-31T00:00:00Z",
+      "location":{
+         "description":"Buchanan Street near Gordon Street Junction",
+         "latitude":55.860058,
+         "longitude":-4.2548
+      }
+   },
+   {
+      "pedestrianCount":52,
+      "processDate":"2023-10-31T01:00:00Z",
+      "location":{
+         "description":"Buchanan Street near Gordon Street Junction",
+         "latitude":55.860058,
+         "longitude":-4.2548
+      }
+   },
+   {
+      "pedestrianCount":18,
+      "processDate":"2023-10-31T02:00:00Z",
+      "location":{
+         "description":"Buchanan Street near Gordon Street Junction",
+         "latitude":55.860058,
+         "longitude":-4.2548
+      }
+   },
+   {
+      "pedestrianCount":27,
+      "processDate":"2023-10-31T03:00:00Z",
+      "location":{
+         "description":"Buchanan Street near Gordon Street Junction",
+         "latitude":55.860058,
+         "longitude":-4.2548
+      }
+   },
+   {
+      "pedestrianCount":26,
+      "processDate":"2023-10-31T04:00:00Z",
+      "location":{
+         "description":"Buchanan Street near Gordon Street Junction",
+         "latitude":55.860058,
+         "longitude":-4.2548
+      }
+   },
+   {
+      "pedestrianCount":57,
+      "processDate":"2023-10-31T05:00:00Z",
+      "location":{
+         "description":"Buchanan Street near Gordon Street Junction",
+         "latitude":55.860058,
+         "longitude":-4.2548
+      }
+   },
+   {
+      "pedestrianCount":122,
+      "processDate":"2023-10-31T06:00:00Z",
+      "location":{
+         "description":"Buchanan Street near Gordon Street Junction",
+         "latitude":55.860058,
+         "longitude":-4.2548
+      }
+   },
+   {
+      "pedestrianCount":412,
+      "processDate":"2023-10-31T07:00:00Z",
+      "location":{
+         "description":"Buchanan Street near Gordon Street Junction",
+         "latitude":55.860058,
+         "longitude":-4.2548
+      }
+   },
+   {
+      "pedestrianCount":1192,
+      "processDate":"2023-10-31T08:00:00Z",
+      "location":{
+         "description":"Buchanan Street near Gordon Street Junction",
+         "latitude":55.860058,
+         "longitude":-4.2548
+      }
+   },
+   {
+      "pedestrianCount":1304,
+      "processDate":"2023-10-31T09:00:00Z",
+      "location":{
+         "description":"Buchanan Street near Gordon Street Junction",
+         "latitude":55.860058,
+         "longitude":-4.2548
+      }
+   },
+   {
+      "pedestrianCount":1880,
+      "processDate":"2023-10-31T10:00:00Z",
+      "location":{
+         "description":"Buchanan Street near Gordon Street Junction",
+         "latitude":55.860058,
+         "longitude":-4.2548
+      }
+   },
+   {
+      "pedestrianCount":2485,
+      "processDate":"2023-10-31T11:00:00Z",
+      "location":{
+         "description":"Buchanan Street near Gordon Street Junction",
+         "latitude":55.860058,
+         "longitude":-4.2548
+      }
+   },
+   {
+      "pedestrianCount":3787,
+      "processDate":"2023-10-31T12:00:00Z",
+      "location":{
+         "description":"Buchanan Street near Gordon Street Junction",
+         "latitude":55.860058,
+         "longitude":-4.2548
+      }
+   },
+   {
+      "pedestrianCount":3924,
+      "processDate":"2023-10-31T13:00:00Z",
+      "location":{
+         "description":"Buchanan Street near Gordon Street Junction",
+         "latitude":55.860058,
+         "longitude":-4.2548
+      }
+   },
+   {
+      "pedestrianCount":3271,
+      "processDate":"2023-10-31T14:00:00Z",
+      "location":{
+         "description":"Buchanan Street near Gordon Street Junction",
+         "latitude":55.860058,
+         "longitude":-4.2548
+      }
+   },
+   {
+      "pedestrianCount":3170,
+      "processDate":"2023-10-31T15:00:00Z",
+      "location":{
+         "description":"Buchanan Street near Gordon Street Junction",
+         "latitude":55.860058,
+         "longitude":-4.2548
+      }
+   },
+   {
+      "pedestrianCount":3297,
+      "processDate":"2023-10-31T16:00:00Z",
+      "location":{
+         "description":"Buchanan Street near Gordon Street Junction",
+         "latitude":55.860058,
+         "longitude":-4.2548
+      }
+   },
+   {
+      "pedestrianCount":3041,
+      "processDate":"2023-10-31T17:00:00Z",
+      "location":{
+         "description":"Buchanan Street near Gordon Street Junction",
+         "latitude":55.860058,
+         "longitude":-4.2548
+      }
+   },
+   {
+      "pedestrianCount":1496,
+      "processDate":"2023-10-31T18:00:00Z",
+      "location":{
+         "description":"Buchanan Street near Gordon Street Junction",
+         "latitude":55.860058,
+         "longitude":-4.2548
+      }
+   },
+   {
+      "pedestrianCount":858,
+      "processDate":"2023-10-31T19:00:00Z",
+      "location":{
+         "description":"Buchanan Street near Gordon Street Junction",
+         "latitude":55.860058,
+         "longitude":-4.2548
+      }
+   },
+   {
+      "pedestrianCount":493,
+      "processDate":"2023-10-31T20:00:00Z",
+      "location":{
+         "description":"Buchanan Street near Gordon Street Junction",
+         "latitude":55.860058,
+         "longitude":-4.2548
+      }
+   },
+   {
+      "pedestrianCount":422,
+      "processDate":"2023-10-31T21:00:00Z",
+      "location":{
+         "description":"Buchanan Street near Gordon Street Junction",
+         "latitude":55.860058,
+         "longitude":-4.2548
+      }
+   },
+   {
+      "pedestrianCount":397,
+      "processDate":"2023-10-31T22:00:00Z",
+      "location":{
+         "description":"Buchanan Street near Gordon Street Junction",
+         "latitude":55.860058,
+         "longitude":-4.2548
+      }
+   },
+   {
+      "pedestrianCount":272,
+      "processDate":"2023-10-31T23:00:00Z",
+      "location":{
+         "description":"Buchanan Street near Gordon Street Junction",
+         "latitude":55.860058,
+         "longitude":-4.2548
+      }
+   },
+   {
+      "pedestrianCount":241,
+      "processDate":"2023-10-31T00:00:00Z",
+      "location":{
+         "description":"Sauchiehall Street near Wellington Street Junction",
+         "latitude":55.865149,
+         "longitude":-4.258004
+      }
+   },
+   {
+      "pedestrianCount":76,
+      "processDate":"2023-10-31T01:00:00Z",
+      "location":{
+         "description":"Sauchiehall Street near Wellington Street Junction",
+         "latitude":55.865149,
+         "longitude":-4.258004
+      }
+   },
+   {
+      "pedestrianCount":84,
+      "processDate":"2023-10-31T02:00:00Z",
+      "location":{
+         "description":"Sauchiehall Street near Wellington Street Junction",
+         "latitude":55.865149,
+         "longitude":-4.258004
+      }
+   },
+   {
+      "pedestrianCount":53,
+      "processDate":"2023-10-31T03:00:00Z",
+      "location":{
+         "description":"Sauchiehall Street near Wellington Street Junction",
+         "latitude":55.865149,
+         "longitude":-4.258004
+      }
+   },
+   {
+      "pedestrianCount":30,
+      "processDate":"2023-10-31T04:00:00Z",
+      "location":{
+         "description":"Sauchiehall Street near Wellington Street Junction",
+         "latitude":55.865149,
+         "longitude":-4.258004
+      }
+   },
+   {
+      "pedestrianCount":86,
+      "processDate":"2023-10-31T05:00:00Z",
+      "location":{
+         "description":"Sauchiehall Street near Wellington Street Junction",
+         "latitude":55.865149,
+         "longitude":-4.258004
+      }
+   },
+   {
+      "pedestrianCount":191,
+      "processDate":"2023-10-31T06:00:00Z",
+      "location":{
+         "description":"Sauchiehall Street near Wellington Street Junction",
+         "latitude":55.865149,
+         "longitude":-4.258004
+      }
+   },
+   {
+      "pedestrianCount":520,
+      "processDate":"2023-10-31T07:00:00Z",
+      "location":{
+         "description":"Sauchiehall Street near Wellington Street Junction",
+         "latitude":55.865149,
+         "longitude":-4.258004
+      }
+   },
+   {
+      "pedestrianCount":1420,
+      "processDate":"2023-10-31T08:00:00Z",
+      "location":{
+         "description":"Sauchiehall Street near Wellington Street Junction",
+         "latitude":55.865149,
+         "longitude":-4.258004
+      }
+   },
+   {
+      "pedestrianCount":1519,
+      "processDate":"2023-10-31T09:00:00Z",
+      "location":{
+         "description":"Sauchiehall Street near Wellington Street Junction",
+         "latitude":55.865149,
+         "longitude":-4.258004
+      }
+   },
+   {
+      "pedestrianCount":1709,
+      "processDate":"2023-10-31T10:00:00Z",
+      "location":{
+         "description":"Sauchiehall Street near Wellington Street Junction",
+         "latitude":55.865149,
+         "longitude":-4.258004
+      }
+   },
+   {
+      "pedestrianCount":2217,
+      "processDate":"2023-10-31T11:00:00Z",
+      "location":{
+         "description":"Sauchiehall Street near Wellington Street Junction",
+         "latitude":55.865149,
+         "longitude":-4.258004
+      }
+   },
+   {
+      "pedestrianCount":3502,
+      "processDate":"2023-10-31T12:00:00Z",
+      "location":{
+         "description":"Sauchiehall Street near Wellington Street Junction",
+         "latitude":55.865149,
+         "longitude":-4.258004
+      }
+   },
+   {
+      "pedestrianCount":3587,
+      "processDate":"2023-10-31T13:00:00Z",
+      "location":{
+         "description":"Sauchiehall Street near Wellington Street Junction",
+         "latitude":55.865149,
+         "longitude":-4.258004
+      }
+   },
+   {
+      "pedestrianCount":2644,
+      "processDate":"2023-10-31T14:00:00Z",
+      "location":{
+         "description":"Sauchiehall Street near Wellington Street Junction",
+         "latitude":55.865149,
+         "longitude":-4.258004
+      }
+   },
+   {
+      "pedestrianCount":2985,
+      "processDate":"2023-10-31T15:00:00Z",
+      "location":{
+         "description":"Sauchiehall Street near Wellington Street Junction",
+         "latitude":55.865149,
+         "longitude":-4.258004
+      }
+   },
+   {
+      "pedestrianCount":3088,
+      "processDate":"2023-10-31T16:00:00Z",
+      "location":{
+         "description":"Sauchiehall Street near Wellington Street Junction",
+         "latitude":55.865149,
+         "longitude":-4.258004
+      }
+   },
+   {
+      "pedestrianCount":3025,
+      "processDate":"2023-10-31T17:00:00Z",
+      "location":{
+         "description":"Sauchiehall Street near Wellington Street Junction",
+         "latitude":55.865149,
+         "longitude":-4.258004
+      }
+   },
+   {
+      "pedestrianCount":1664,
+      "processDate":"2023-10-31T18:00:00Z",
+      "location":{
+         "description":"Sauchiehall Street near Wellington Street Junction",
+         "latitude":55.865149,
+         "longitude":-4.258004
+      }
+   },
+   {
+      "pedestrianCount":1104,
+      "processDate":"2023-10-31T19:00:00Z",
+      "location":{
+         "description":"Sauchiehall Street near Wellington Street Junction",
+         "latitude":55.865149,
+         "longitude":-4.258004
+      }
+   },
+   {
+      "pedestrianCount":787,
+      "processDate":"2023-10-31T20:00:00Z",
+      "location":{
+         "description":"Sauchiehall Street near Wellington Street Junction",
+         "latitude":55.865149,
+         "longitude":-4.258004
+      }
+   },
+   {
+      "pedestrianCount":593,
+      "processDate":"2023-10-31T21:00:00Z",
+      "location":{
+         "description":"Sauchiehall Street near Wellington Street Junction",
+         "latitude":55.865149,
+         "longitude":-4.258004
+      }
+   },
+   {
+      "pedestrianCount":605,
+      "processDate":"2023-10-31T22:00:00Z",
+      "location":{
+         "description":"Sauchiehall Street near Wellington Street Junction",
+         "latitude":55.865149,
+         "longitude":-4.258004
+      }
+   },
+   {
+      "pedestrianCount":484,
+      "processDate":"2023-10-31T23:00:00Z",
+      "location":{
+         "description":"Sauchiehall Street near Wellington Street Junction",
+         "latitude":55.865149,
+         "longitude":-4.258004
+      }
+   },
+   {
+      "pedestrianCount":24,
+      "processDate":"2023-10-31T00:00:00Z",
+      "location":{
+         "description":"194 Bath Street (near Blythswood Street Junction)",
+         "latitude":55.864675,
+         "longitude":-4.262676
+      }
+   },
+   {
+      "pedestrianCount":9,
+      "processDate":"2023-10-31T01:00:00Z",
+      "location":{
+         "description":"194 Bath Street (near Blythswood Street Junction)",
+         "latitude":55.864675,
+         "longitude":-4.262676
+      }
+   },
+   {
+      "pedestrianCount":3,
+      "processDate":"2023-10-31T02:00:00Z",
+      "location":{
+         "description":"194 Bath Street (near Blythswood Street Junction)",
+         "latitude":55.864675,
+         "longitude":-4.262676
+      }
+   },
+   {
+      "pedestrianCount":1,
+      "processDate":"2023-10-31T03:00:00Z",
+      "location":{
+         "description":"194 Bath Street (near Blythswood Street Junction)",
+         "latitude":55.864675,
+         "longitude":-4.262676
+      }
+   },
+   {
+      "pedestrianCount":0,
+      "processDate":"2023-10-31T04:00:00Z",
+      "location":{
+         "description":"194 Bath Street (near Blythswood Street Junction)",
+         "latitude":55.864675,
+         "longitude":-4.262676
+      }
+   },
+   {
+      "pedestrianCount":14,
+      "processDate":"2023-10-31T05:00:00Z",
+      "location":{
+         "description":"194 Bath Street (near Blythswood Street Junction)",
+         "latitude":55.864675,
+         "longitude":-4.262676
+      }
+   },
+   {
+      "pedestrianCount":20,
+      "processDate":"2023-10-31T06:00:00Z",
+      "location":{
+         "description":"194 Bath Street (near Blythswood Street Junction)",
+         "latitude":55.864675,
+         "longitude":-4.262676
+      }
+   },
+   {
+      "pedestrianCount":59,
+      "processDate":"2023-10-31T07:00:00Z",
+      "location":{
+         "description":"194 Bath Street (near Blythswood Street Junction)",
+         "latitude":55.864675,
+         "longitude":-4.262676
+      }
+   },
+   {
+      "pedestrianCount":199,
+      "processDate":"2023-10-31T08:00:00Z",
+      "location":{
+         "description":"194 Bath Street (near Blythswood Street Junction)",
+         "latitude":55.864675,
+         "longitude":-4.262676
+      }
+   },
+   {
+      "pedestrianCount":154,
+      "processDate":"2023-10-31T09:00:00Z",
+      "location":{
+         "description":"194 Bath Street (near Blythswood Street Junction)",
+         "latitude":55.864675,
+         "longitude":-4.262676
+      }
+   },
+   {
+      "pedestrianCount":176,
+      "processDate":"2023-10-31T10:00:00Z",
+      "location":{
+         "description":"194 Bath Street (near Blythswood Street Junction)",
+         "latitude":55.864675,
+         "longitude":-4.262676
+      }
+   },
+   {
+      "pedestrianCount":154,
+      "processDate":"2023-10-31T11:00:00Z",
+      "location":{
+         "description":"194 Bath Street (near Blythswood Street Junction)",
+         "latitude":55.864675,
+         "longitude":-4.262676
+      }
+   },
+   {
+      "pedestrianCount":263,
+      "processDate":"2023-10-31T12:00:00Z",
+      "location":{
+         "description":"194 Bath Street (near Blythswood Street Junction)",
+         "latitude":55.864675,
+         "longitude":-4.262676
+      }
+   },
+   {
+      "pedestrianCount":267,
+      "processDate":"2023-10-31T13:00:00Z",
+      "location":{
+         "description":"194 Bath Street (near Blythswood Street Junction)",
+         "latitude":55.864675,
+         "longitude":-4.262676
+      }
+   },
+   {
+      "pedestrianCount":172,
+      "processDate":"2023-10-31T14:00:00Z",
+      "location":{
+         "description":"194 Bath Street (near Blythswood Street Junction)",
+         "latitude":55.864675,
+         "longitude":-4.262676
+      }
+   },
+   {
+      "pedestrianCount":174,
+      "processDate":"2023-10-31T15:00:00Z",
+      "location":{
+         "description":"194 Bath Street (near Blythswood Street Junction)",
+         "latitude":55.864675,
+         "longitude":-4.262676
+      }
+   },
+   {
+      "pedestrianCount":204,
+      "processDate":"2023-10-31T16:00:00Z",
+      "location":{
+         "description":"194 Bath Street (near Blythswood Street Junction)",
+         "latitude":55.864675,
+         "longitude":-4.262676
+      }
+   },
+   {
+      "pedestrianCount":315,
+      "processDate":"2023-10-31T17:00:00Z",
+      "location":{
+         "description":"194 Bath Street (near Blythswood Street Junction)",
+         "latitude":55.864675,
+         "longitude":-4.262676
+      }
+   },
+   {
+      "pedestrianCount":201,
+      "processDate":"2023-10-31T18:00:00Z",
+      "location":{
+         "description":"194 Bath Street (near Blythswood Street Junction)",
+         "latitude":55.864675,
+         "longitude":-4.262676
+      }
+   },
+   {
+      "pedestrianCount":147,
+      "processDate":"2023-10-31T19:00:00Z",
+      "location":{
+         "description":"194 Bath Street (near Blythswood Street Junction)",
+         "latitude":55.864675,
+         "longitude":-4.262676
+      }
+   },
+   {
+      "pedestrianCount":162,
+      "processDate":"2023-10-31T20:00:00Z",
+      "location":{
+         "description":"194 Bath Street (near Blythswood Street Junction)",
+         "latitude":55.864675,
+         "longitude":-4.262676
+      }
+   },
+   {
+      "pedestrianCount":125,
+      "processDate":"2023-10-31T21:00:00Z",
+      "location":{
+         "description":"194 Bath Street (near Blythswood Street Junction)",
+         "latitude":55.864675,
+         "longitude":-4.262676
+      }
+   },
+   {
+      "pedestrianCount":272,
+      "processDate":"2023-10-31T22:00:00Z",
+      "location":{
+         "description":"194 Bath Street (near Blythswood Street Junction)",
+         "latitude":55.864675,
+         "longitude":-4.262676
+      }
+   },
+   {
+      "pedestrianCount":211,
+      "processDate":"2023-10-31T23:00:00Z",
+      "location":{
+         "description":"194 Bath Street (near Blythswood Street Junction)",
+         "latitude":55.864675,
+         "longitude":-4.262676
+      }
+   },
+   {
+      "pedestrianCount":4,
+      "processDate":"2023-10-31T00:00:00Z",
+      "location":{
+         "description":"253 High Street (near George Street Junction)",
+         "latitude":55.860625,
+         "longitude":-4.239303
+      }
+   },
+   {
+      "pedestrianCount":0,
+      "processDate":"2023-10-31T01:00:00Z",
+      "location":{
+         "description":"253 High Street (near George Street Junction)",
+         "latitude":55.860625,
+         "longitude":-4.239303
+      }
+   },
+   {
+      "pedestrianCount":0,
+      "processDate":"2023-10-31T02:00:00Z",
+      "location":{
+         "description":"253 High Street (near George Street Junction)",
+         "latitude":55.860625,
+         "longitude":-4.239303
+      }
+   },
+   {
+      "pedestrianCount":1,
+      "processDate":"2023-10-31T03:00:00Z",
+      "location":{
+         "description":"253 High Street (near George Street Junction)",
+         "latitude":55.860625,
+         "longitude":-4.239303
+      }
+   },
+   {
+      "pedestrianCount":0,
+      "processDate":"2023-10-31T04:00:00Z",
+      "location":{
+         "description":"253 High Street (near George Street Junction)",
+         "latitude":55.860625,
+         "longitude":-4.239303
+      }
+   },
+   {
+      "pedestrianCount":0,
+      "processDate":"2023-10-31T05:00:00Z",
+      "location":{
+         "description":"253 High Street (near George Street Junction)",
+         "latitude":55.860625,
+         "longitude":-4.239303
+      }
+   },
+   {
+      "pedestrianCount":11,
+      "processDate":"2023-10-31T06:00:00Z",
+      "location":{
+         "description":"253 High Street (near George Street Junction)",
+         "latitude":55.860625,
+         "longitude":-4.239303
+      }
+   },
+   {
+      "pedestrianCount":59,
+      "processDate":"2023-10-31T07:00:00Z",
+      "location":{
+         "description":"253 High Street (near George Street Junction)",
+         "latitude":55.860625,
+         "longitude":-4.239303
+      }
+   },
+   {
+      "pedestrianCount":110,
+      "processDate":"2023-10-31T08:00:00Z",
+      "location":{
+         "description":"253 High Street (near George Street Junction)",
+         "latitude":55.860625,
+         "longitude":-4.239303
+      }
+   },
+   {
+      "pedestrianCount":139,
+      "processDate":"2023-10-31T09:00:00Z",
+      "location":{
+         "description":"253 High Street (near George Street Junction)",
+         "latitude":55.860625,
+         "longitude":-4.239303
+      }
+   },
+   {
+      "pedestrianCount":148,
+      "processDate":"2023-10-31T10:00:00Z",
+      "location":{
+         "description":"253 High Street (near George Street Junction)",
+         "latitude":55.860625,
+         "longitude":-4.239303
+      }
+   },
+   {
+      "pedestrianCount":242,
+      "processDate":"2023-10-31T11:00:00Z",
+      "location":{
+         "description":"253 High Street (near George Street Junction)",
+         "latitude":55.860625,
+         "longitude":-4.239303
+      }
+   },
+   {
+      "pedestrianCount":249,
+      "processDate":"2023-10-31T12:00:00Z",
+      "location":{
+         "description":"253 High Street (near George Street Junction)",
+         "latitude":55.860625,
+         "longitude":-4.239303
+      }
+   },
+   {
+      "pedestrianCount":251,
+      "processDate":"2023-10-31T13:00:00Z",
+      "location":{
+         "description":"253 High Street (near George Street Junction)",
+         "latitude":55.860625,
+         "longitude":-4.239303
+      }
+   },
+   {
+      "pedestrianCount":254,
+      "processDate":"2023-10-31T14:00:00Z",
+      "location":{
+         "description":"253 High Street (near George Street Junction)",
+         "latitude":55.860625,
+         "longitude":-4.239303
+      }
+   },
+   {
+      "pedestrianCount":211,
+      "processDate":"2023-10-31T15:00:00Z",
+      "location":{
+         "description":"253 High Street (near George Street Junction)",
+         "latitude":55.860625,
+         "longitude":-4.239303
+      }
+   },
+   {
+      "pedestrianCount":227,
+      "processDate":"2023-10-31T16:00:00Z",
+      "location":{
+         "description":"253 High Street (near George Street Junction)",
+         "latitude":55.860625,
+         "longitude":-4.239303
+      }
+   },
+   {
+      "pedestrianCount":198,
+      "processDate":"2023-10-31T17:00:00Z",
+      "location":{
+         "description":"253 High Street (near George Street Junction)",
+         "latitude":55.860625,
+         "longitude":-4.239303
+      }
+   },
+   {
+      "pedestrianCount":117,
+      "processDate":"2023-10-31T18:00:00Z",
+      "location":{
+         "description":"253 High Street (near George Street Junction)",
+         "latitude":55.860625,
+         "longitude":-4.239303
+      }
+   },
+   {
+      "pedestrianCount":70,
+      "processDate":"2023-10-31T19:00:00Z",
+      "location":{
+         "description":"253 High Street (near George Street Junction)",
+         "latitude":55.860625,
+         "longitude":-4.239303
+      }
+   },
+   {
+      "pedestrianCount":61,
+      "processDate":"2023-10-31T20:00:00Z",
+      "location":{
+         "description":"253 High Street (near George Street Junction)",
+         "latitude":55.860625,
+         "longitude":-4.239303
+      }
+   },
+   {
+      "pedestrianCount":37,
+      "processDate":"2023-10-31T21:00:00Z",
+      "location":{
+         "description":"253 High Street (near George Street Junction)",
+         "latitude":55.860625,
+         "longitude":-4.239303
+      }
+   },
+   {
+      "pedestrianCount":17,
+      "processDate":"2023-10-31T22:00:00Z",
+      "location":{
+         "description":"253 High Street (near George Street Junction)",
+         "latitude":55.860625,
+         "longitude":-4.239303
+      }
+   },
+   {
+      "pedestrianCount":4,
+      "processDate":"2023-10-31T23:00:00Z",
+      "location":{
+         "description":"253 High Street (near George Street Junction)",
+         "latitude":55.860625,
+         "longitude":-4.239303
+      }
+   },
+   {
+      "pedestrianCount":184,
+      "processDate":"2023-10-31T00:00:00Z",
+      "location":{
+         "description":"Sauchiehall Street near Elmbank Street Junction",
+         "latitude":55.8661,
+         "longitude":-4.268708
+      }
+   },
+   {
+      "pedestrianCount":170,
+      "processDate":"2023-10-31T01:00:00Z",
+      "location":{
+         "description":"Sauchiehall Street near Elmbank Street Junction",
+         "latitude":55.8661,
+         "longitude":-4.268708
+      }
+   },
+   {
+      "pedestrianCount":46,
+      "processDate":"2023-10-31T02:00:00Z",
+      "location":{
+         "description":"Sauchiehall Street near Elmbank Street Junction",
+         "latitude":55.8661,
+         "longitude":-4.268708
+      }
+   },
+   {
+      "pedestrianCount":73,
+      "processDate":"2023-10-31T03:00:00Z",
+      "location":{
+         "description":"Sauchiehall Street near Elmbank Street Junction",
+         "latitude":55.8661,
+         "longitude":-4.268708
+      }
+   },
+   {
+      "pedestrianCount":33,
+      "processDate":"2023-10-31T04:00:00Z",
+      "location":{
+         "description":"Sauchiehall Street near Elmbank Street Junction",
+         "latitude":55.8661,
+         "longitude":-4.268708
+      }
+   },
+   {
+      "pedestrianCount":33,
+      "processDate":"2023-10-31T05:00:00Z",
+      "location":{
+         "description":"Sauchiehall Street near Elmbank Street Junction",
+         "latitude":55.8661,
+         "longitude":-4.268708
+      }
+   },
+   {
+      "pedestrianCount":70,
+      "processDate":"2023-10-31T06:00:00Z",
+      "location":{
+         "description":"Sauchiehall Street near Elmbank Street Junction",
+         "latitude":55.8661,
+         "longitude":-4.268708
+      }
+   },
+   {
+      "pedestrianCount":131,
+      "processDate":"2023-10-31T07:00:00Z",
+      "location":{
+         "description":"Sauchiehall Street near Elmbank Street Junction",
+         "latitude":55.8661,
+         "longitude":-4.268708
+      }
+   },
+   {
+      "pedestrianCount":447,
+      "processDate":"2023-10-31T08:00:00Z",
+      "location":{
+         "description":"Sauchiehall Street near Elmbank Street Junction",
+         "latitude":55.8661,
+         "longitude":-4.268708
+      }
+   },
+   {
+      "pedestrianCount":384,
+      "processDate":"2023-10-31T09:00:00Z",
+      "location":{
+         "description":"Sauchiehall Street near Elmbank Street Junction",
+         "latitude":55.8661,
+         "longitude":-4.268708
+      }
+   },
+   {
+      "pedestrianCount":245,
+      "processDate":"2023-10-31T10:00:00Z",
+      "location":{
+         "description":"Sauchiehall Street near Elmbank Street Junction",
+         "latitude":55.8661,
+         "longitude":-4.268708
+      }
+   },
+   {
+      "pedestrianCount":324,
+      "processDate":"2023-10-31T11:00:00Z",
+      "location":{
+         "description":"Sauchiehall Street near Elmbank Street Junction",
+         "latitude":55.8661,
+         "longitude":-4.268708
+      }
+   },
+   {
+      "pedestrianCount":476,
+      "processDate":"2023-10-31T12:00:00Z",
+      "location":{
+         "description":"Sauchiehall Street near Elmbank Street Junction",
+         "latitude":55.8661,
+         "longitude":-4.268708
+      }
+   },
+   {
+      "pedestrianCount":480,
+      "processDate":"2023-10-31T13:00:00Z",
+      "location":{
+         "description":"Sauchiehall Street near Elmbank Street Junction",
+         "latitude":55.8661,
+         "longitude":-4.268708
+      }
+   },
+   {
+      "pedestrianCount":421,
+      "processDate":"2023-10-31T14:00:00Z",
+      "location":{
+         "description":"Sauchiehall Street near Elmbank Street Junction",
+         "latitude":55.8661,
+         "longitude":-4.268708
+      }
+   },
+   {
+      "pedestrianCount":449,
+      "processDate":"2023-10-31T15:00:00Z",
+      "location":{
+         "description":"Sauchiehall Street near Elmbank Street Junction",
+         "latitude":55.8661,
+         "longitude":-4.268708
+      }
+   },
+   {
+      "pedestrianCount":535,
+      "processDate":"2023-10-31T16:00:00Z",
+      "location":{
+         "description":"Sauchiehall Street near Elmbank Street Junction",
+         "latitude":55.8661,
+         "longitude":-4.268708
+      }
+   },
+   {
+      "pedestrianCount":735,
+      "processDate":"2023-10-31T17:00:00Z",
+      "location":{
+         "description":"Sauchiehall Street near Elmbank Street Junction",
+         "latitude":55.8661,
+         "longitude":-4.268708
+      }
+   },
+   {
+      "pedestrianCount":574,
+      "processDate":"2023-10-31T18:00:00Z",
+      "location":{
+         "description":"Sauchiehall Street near Elmbank Street Junction",
+         "latitude":55.8661,
+         "longitude":-4.268708
+      }
+   },
+   {
+      "pedestrianCount":449,
+      "processDate":"2023-10-31T19:00:00Z",
+      "location":{
+         "description":"Sauchiehall Street near Elmbank Street Junction",
+         "latitude":55.8661,
+         "longitude":-4.268708
+      }
+   },
+   {
+      "pedestrianCount":462,
+      "processDate":"2023-10-31T20:00:00Z",
+      "location":{
+         "description":"Sauchiehall Street near Elmbank Street Junction",
+         "latitude":55.8661,
+         "longitude":-4.268708
+      }
+   },
+   {
+      "pedestrianCount":482,
+      "processDate":"2023-10-31T21:00:00Z",
+      "location":{
+         "description":"Sauchiehall Street near Elmbank Street Junction",
+         "latitude":55.8661,
+         "longitude":-4.268708
+      }
+   },
+   {
+      "pedestrianCount":639,
+      "processDate":"2023-10-31T22:00:00Z",
+      "location":{
+         "description":"Sauchiehall Street near Elmbank Street Junction",
+         "latitude":55.8661,
+         "longitude":-4.268708
+      }
+   },
+   {
+      "pedestrianCount":694,
+      "processDate":"2023-10-31T23:00:00Z",
+      "location":{
+         "description":"Sauchiehall Street near Elmbank Street Junction",
+         "latitude":55.8661,
+         "longitude":-4.268708
+      }
+   }
+]

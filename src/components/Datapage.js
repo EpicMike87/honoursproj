@@ -5,6 +5,7 @@ const DataPage = () => {
   const [uploadedFileNames, setUploadedFileNames] = useState([]);
   const [selectedFileName, setSelectedFileName] = useState(null);
   const [dataValues, setDataValues] = useState(null);
+  const [headings, setHeadings] = useState(null);
 
   useEffect(() => {
     console.log('Fetching uploaded files...');
@@ -20,11 +21,12 @@ const DataPage = () => {
   useEffect(() => {
     if (selectedFileName) {
       console.log(`Fetching data values for file: ${selectedFileName}`);
-      fetch(`http://localhost:5000/api/get-data-values?file=${selectedFileName}`)
+      fetch(`http://localhost:5000/api/get-csv-data-values?file=${selectedFileName}`)
         .then(response => response.json())
         .then(data => {
           console.log('Received data values:', data);
           setDataValues(data.data_values);
+          setHeadings(data.headings || Object.keys(data.data_values[0]));
         })
         .catch(error => console.error('Error fetching data values:', error));
     }
@@ -60,7 +62,7 @@ const DataPage = () => {
           <>
             <h2>{selectedFileName}</h2>
             {dataValues ? (
-              <Table headings={Object.keys(dataValues[0])} rows={dataValues} />
+              <Table headings={headings} rows={dataValues} />
             ) : (
               <p>Loading data...</p>
             )}

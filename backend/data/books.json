@@ -1,0 +1,46 @@
+{
+  "bookstore": {
+    "name": "Books R Us",
+    "location": "123 Main St, Cityville, USA",
+    "books": [
+      {
+        "title": "The Great Gatsby",
+        "author": "F. Scott Fitzgerald",
+        "genre": "Fiction",
+        "price": 12.99,
+        "published_year": 1925,
+        "isbn": "978-3-16-148410-0"
+      },
+      {
+        "title": "To Kill a Mockingbird",
+        "author": "Harper Lee",
+        "genre": "Fiction",
+        "price": 10.50,
+        "published_year": 1960,
+        "isbn": "978-3-16-148411-0"
+      },
+      {
+        "title": "1984",
+        "author": "George Orwell",
+        "genre": "Science Fiction",
+        "price": 9.99,
+        "published_year": 1949,
+        "isbn": "978-3-16-148412-0"
+      }
+    ],
+    "employees": [
+      {
+        "name": "John Doe",
+        "position": "Manager",
+        "age": 35,
+        "email": "johndoe@booksrus.com"
+      },
+      {
+        "name": "Jane Smith",
+        "position": "Clerk",
+        "age": 28,
+        "email": "janesmith@booksrus.com"
+      }
+    ]
+  }
+}
