@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import Histogram from '../services/Histogram';
+import Histogram from './Histogram';
+import Barchart from './Barchart';
 
 const Visualise = () => {
   const [uploadedFileNames, setUploadedFileNames] = useState([]);
@@ -11,6 +12,8 @@ const Visualise = () => {
   const [binSize, setBinSize] = useState(1);
   const [error, setError] = useState(null);
   const [histogramData, setHistogramData] = useState(null);
+  const [dataValues, setDataValues] = useState([]);
+  const [barChartData, setBarChartData] = useState(null);
 
   useEffect(() => {
     setLoadingFiles(true);
@@ -34,10 +37,10 @@ const Visualise = () => {
   useEffect(() => {
     if (selectedFile) {
       setLoadingHeadings(true);
-  
+
       const fileType = selectedFile.split('.').pop().toLowerCase();
       let apiUrl;
-  
+
       if (fileType === 'csv') {
         apiUrl = `http://localhost:5000/api/get-csv-data-values?file=${selectedFile}`;
       } else if (fileType === 'json') {
@@ -45,7 +48,7 @@ const Visualise = () => {
       } else if (fileType === 'xml') {
         apiUrl = `http://localhost:5000/api/get-xml-data-values?file=${selectedFile}`;
       }
-  
+
       fetch(apiUrl)
         .then(response => {
           if (!response.ok) {
@@ -54,9 +57,9 @@ const Visualise = () => {
           return response.json();
         })
         .then(data => {
-          console.log(data);
           setSelectedFileHeadings(data.headings);
           setLoadingHeadings(false);
+          setDataValues(data.data_values);
         })
         .catch(error => {
           setError(error.message);
@@ -65,11 +68,11 @@ const Visualise = () => {
     }
   }, [selectedFile]);
 
-  const handleColumnSelect = (event) => {
+  const handleColumnSelect = event => {
     setSelectedColumn(event.target.value);
   };
 
-  const handleBinSizeChange = (event) => {
+  const handleBinSizeChange = event => {
     setBinSize(parseInt(event.target.value));
   };
 
@@ -77,7 +80,31 @@ const Visualise = () => {
     try {
       let apiUrl;
       const fileType = selectedFile.split('.').pop().toLowerCase();
-      
+
+      if (fileType === 'csv') {
+        apiUrl = `http://localhost:5000/api/get-csv-data-values?file=${selectedFile}&column=${selectedColumn}&binSize=${binSize}`;
+      } else if (fileType === 'json') {
+        apiUrl = `http://localhost:5000/api/get-json-data-values?file=${selectedFile}&column=${selectedColumn}&binSize=${binSize}`;
+      } else if (fileType === 'xml') {
+        apiUrl = `http://localhost:5000/api/get-xml-data-values?file=${selectedFile}&column=${selectedColumn}&binSize=${binSize}`;
+      }
+
+      const response = await fetch(apiUrl);
+      if (!response.ok) {
+        throw new Error('Failed to get data values');
+      }
+      const data = await response.json();
+      setHistogramData(data);
+    } catch (error) {
+      setError(error.message);
+    }
+  };
+
+  const generateBarChart= async () => {
+    try {
+      let apiUrl;
+      const fileType = selectedFile.split('.').pop().toLowerCase();
+  
       if (fileType === 'csv') {
         apiUrl = `http://localhost:5000/api/get-csv-data-values?file=${selectedFile}&column=${selectedColumn}&binSize=${binSize}`;
       } else if (fileType === 'json') {
@@ -91,7 +118,7 @@ const Visualise = () => {
         throw new Error('Failed to get data values');
       }
       const data = await response.json();
-      setHistogramData(data);
+      setBarChartData(data);
     } catch (error) {
       setError(error.message);
     }
@@ -102,65 +129,37 @@ const Visualise = () => {
       <h1 className="Visualise-heading">Visualise Data</h1>
 
       <div className="Visualise-columns">
+      
         <div className="Visualise-column">
-          <h2>Histogram</h2>
-          {loadingFiles && <p>Loading uploaded files...</p>}
-          {error && <p>Error: {error}</p>}
-          {uploadedFileNames.length > 0 ? (
-            <div>
-              <p>Uploaded Files:</p>
-              <ul>
-                {uploadedFileNames.map((fileName, index) => (
-                  <li key={index} onClick={() => setSelectedFile(fileName)}>
-                    {fileName}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ) : (
-            <p>No files uploaded yet.</p>
-          )}
-
-          {selectedFile && (
-            <div>
-              <h2>Selected File: {selectedFile}</h2>
-              {loadingHeadings && <p>Loading headings...</p>}
-              {selectedFileHeadings && selectedFileHeadings.length > 0 && (
-                <div>
-                  <h3>Headings:</h3>
-                  <label>Select Column:</label>
-                  <select onChange={handleColumnSelect}>
-                    <option value="">Select Column</option>
-                    {selectedFileHeadings.map((heading, index) => (
-                      <option key={index} value={heading}>
-                        {heading}
-                      </option>
-                    ))}
-                  </select>
-                  <label>Bin Size:</label>
-                  <input type="number" min="1" value={binSize} onChange={handleBinSizeChange} />
-                  {selectedColumn && (
-                    <div>
-                      <button onClick={generateHistogram}>Generate Histogram</button>
-                      {histogramData && <Histogram histogramData={histogramData} column={selectedColumn} binSize={binSize} />}
-                    </div>
-                  )}
-                </div>
-              )}
-            </div>
-          )}
+        <Histogram
+          loadingFiles={loadingFiles}
+          error={error}
+          uploadedFileNames={uploadedFileNames}
+          selectedFile={selectedFile}
+          setSelectedFile={setSelectedFile}
+          loadingHeadings={loadingHeadings}
+          selectedFileHeadings={selectedFileHeadings}
+          handleColumnSelect={handleColumnSelect}
+          handleBinSizeChange={handleBinSizeChange}
+          selectedColumn={selectedColumn}
+          generateHistogram={generateHistogram}
+          histogramData={histogramData}
+          binSize={binSize}
+        />
         </div>
-
+        
         <div className="Visualise-column">
-          <h2>Column 2</h2>
-          <p>Some more visualisations will go here.</p>
+        <Barchart
+          loadingFiles={loadingFiles}
+          error={error}
+          uploadedFileNames={uploadedFileNames}
+          setSelectedFile={setSelectedFile}
+          selectedColumn={selectedColumn}
+          generateBarChart={generateBarChart}
+          barChartData={barChartData}
+        />
         </div>
-
-        <div className="Visualise-column">
-          <h2>Column 3</h2>
-          <p>Some more visualisations will go here.</p>
         </div>
-      </div>
     </div>
   );
 };

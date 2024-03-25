@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { TableCSV, TableJSON, TableXML } from '../services/Table';
+import { TableCSV, TableJSON, TableXML } from '../services/TableRender';
 
 const DataPage = () => {
   const [uploadedFileNames, setUploadedFileNames] = useState([]);

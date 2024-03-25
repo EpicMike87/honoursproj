@@ -1,7 +1,7 @@
 import React from 'react';
 import Plot from 'react-plotly.js';
 
-const Histogram = ({ histogramData, column, binSize }) => {
+const HistogramRender = ({ histogramData, column, binSize }) => {
   const generateHistogramData = () => {
     try {
       const dataValues = histogramData && histogramData.data_values;
@@ -57,4 +57,4 @@ const Histogram = ({ histogramData, column, binSize }) => {
   );
 };
 
-export default Histogram;
+export default HistogramRender;
