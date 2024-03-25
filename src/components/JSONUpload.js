@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const JSONUpload = () => {
   const [file, setFile] = useState(null);
@@ -45,6 +45,12 @@ const JSONUpload = () => {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    if (headings) {
+      console.log('Column Headings:', headings);
+    }
+  }, [headings]);
 
   return (
     <div>

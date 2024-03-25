@@ -25,12 +25,13 @@ def perform_csv_upload():
         file = request.files['file']
         filename = data_files.save(file)
 
+        print("Uploaded file path:", filename)
+
         if filename.endswith('.csv'):
             headings = get_csv_column_headings(filename)
+            return jsonify({'headings': headings}), 200
         else:
             return jsonify({'error': 'Unsupported file type'}), 400
-
-        return jsonify(headings=headings), 200
 
     except Exception as e:
         return jsonify({'error': str(e)}), 500
@@ -111,6 +112,18 @@ def get_headings():
     except Exception as e:
         return jsonify({'error': str(e)}), 500
     
+def get_csv_column_headings(filename):
+    try:
+        full_path = data_files.path(filename)
+        data = pd.read_csv(full_path)
+        column_headings = data.columns.tolist()
+        return column_headings
+    except Exception as e:
+        raise ValueError(f'Error reading CSV file: {e}') from e
+
+if __name__ == '__main__':
+    app.run(debug=True)
+
 @app.route('/api/get-csv-data-values', methods=['GET'])
 def get_csv_data_values():
     try:
@@ -118,9 +131,11 @@ def get_csv_data_values():
         if not selected_file:
             return jsonify({'error': 'No file specified'}), 400
 
-        data = pd.read_csv(os.path.join(app.config['UPLOADED_DATA_DEST'], selected_file))
+        file_path = os.path.join(app.config['UPLOADED_DATA_DEST'], selected_file)
+        data = pd.read_csv(file_path)
+        column_headings = data.columns.tolist()
         data_values = data.to_dict(orient='records')
-        return jsonify({'data_values': data_values}), 200
+        return jsonify({'headings': column_headings, 'data_values': data_values}), 200
 
     except Exception as e:
         return jsonify({'error': str(e)}), 500
@@ -132,12 +147,15 @@ def get_json_data_values():
         if not selected_file:
             return jsonify({'error': 'No file specified'}), 400
 
-        with open(os.path.join(app.config['UPLOADED_DATA_DEST'], selected_file), 'r') as json_file:
+        file_path = os.path.join(app.config['UPLOADED_DATA_DEST'], selected_file)
+        with open(file_path, 'r') as json_file:
             json_data = json.load(json_file)
             if isinstance(json_data, list):
-                return jsonify({'data_values': json_data}), 200
+                column_headings = list(json_data[0].keys()) if json_data else []
+                return jsonify({'headings': column_headings, 'data_values': json_data}), 200
             elif isinstance(json_data, dict):
-                return jsonify({'data_values': [json_data]}), 200
+                column_headings = list(json_data.keys())
+                return jsonify({'headings': column_headings, 'data_values': [json_data]}), 200
             else:
                 raise ValueError('Invalid JSON file structure')
 

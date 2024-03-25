@@ -34,7 +34,19 @@ const Visualise = () => {
   useEffect(() => {
     if (selectedFile) {
       setLoadingHeadings(true);
-      fetch(`http://localhost:5000/api/get-headings?file=${selectedFile}`)
+  
+      const fileType = selectedFile.split('.').pop().toLowerCase();
+      let apiUrl;
+  
+      if (fileType === 'csv') {
+        apiUrl = `http://localhost:5000/api/get-csv-data-values?file=${selectedFile}`;
+      } else if (fileType === 'json') {
+        apiUrl = `http://localhost:5000/api/get-json-data-values?file=${selectedFile}`;
+      } else if (fileType === 'xml') {
+        apiUrl = `http://localhost:5000/api/get-xml-data-values?file=${selectedFile}`;
+      }
+  
+      fetch(apiUrl)
         .then(response => {
           if (!response.ok) {
             throw new Error('Failed to fetch headings');
@@ -42,6 +54,7 @@ const Visualise = () => {
           return response.json();
         })
         .then(data => {
+          console.log(data);
           setSelectedFileHeadings(data.headings);
           setLoadingHeadings(false);
         })
@@ -62,7 +75,18 @@ const Visualise = () => {
 
   const generateHistogram = async () => {
     try {
-      const response = await fetch(`http://localhost:5000/api/get-data-values?file=${selectedFile}&column=${selectedColumn}&binSize=${binSize}`);
+      let apiUrl;
+      const fileType = selectedFile.split('.').pop().toLowerCase();
+      
+      if (fileType === 'csv') {
+        apiUrl = `http://localhost:5000/api/get-csv-data-values?file=${selectedFile}&column=${selectedColumn}&binSize=${binSize}`;
+      } else if (fileType === 'json') {
+        apiUrl = `http://localhost:5000/api/get-json-data-values?file=${selectedFile}&column=${selectedColumn}&binSize=${binSize}`;
+      } else if (fileType === 'xml') {
+        apiUrl = `http://localhost:5000/api/get-xml-data-values?file=${selectedFile}&column=${selectedColumn}&binSize=${binSize}`;
+      }
+  
+      const response = await fetch(apiUrl);
       if (!response.ok) {
         throw new Error('Failed to get data values');
       }
@@ -101,7 +125,7 @@ const Visualise = () => {
             <div>
               <h2>Selected File: {selectedFile}</h2>
               {loadingHeadings && <p>Loading headings...</p>}
-              {selectedFileHeadings.length > 0 && (
+              {selectedFileHeadings && selectedFileHeadings.length > 0 && (
                 <div>
                   <h3>Headings:</h3>
                   <label>Select Column:</label>

@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const CSVUpload = () => {
   const [file, setFile] = useState(null);
   const [dataName, setDataName] = useState(null);
   const [headings, setHeadings] = useState(null);
+  const [uploading, setUploading] = useState(false);
 
   const handleFileChange = (e) => {
     setFile(e.target.files[0]);
@@ -13,6 +14,8 @@ const CSVUpload = () => {
 
   const handleUpload = async () => {
     try {
+      setUploading(true);
+
       const formData = new FormData();
       formData.append('file', file);
 
@@ -36,21 +39,30 @@ const CSVUpload = () => {
       }
     } catch (error) {
       console.error('Error during file upload:', error.message);
+    } finally {
+      setUploading(false);
     }
   };
+
+  useEffect(() => {
+    if (headings) {
+      console.log('Column Headings:', headings);
+    }
+  }, [headings]);
 
   return (
     <div>
       <h2>Upload CSV</h2>
       <input type="file" onChange={handleFileChange} />
-      <button onClick={handleUpload}>Confirm</button>
-
+      <button onClick={handleUpload} disabled={!file || uploading}>
+        Confirm
+      </button>
+      {uploading && <p>Uploading...</p>}
       {dataName && (
         <div>
           <h3>Data Name: {dataName}</h3>
         </div>
       )}
-
       {headings && (
         <div>
           <h3>Column Headings:</h3>
