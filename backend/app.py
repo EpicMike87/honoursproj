@@ -124,6 +124,26 @@ def get_csv_column_headings(filename):
 if __name__ == '__main__':
     app.run(debug=True)
 
+def get_json_column_headings(filename):
+    try:
+        full_path = data_files.path(filename)
+        with open(full_path, 'r') as json_file:
+            json_data = json.load(json_file)
+            if isinstance(json_data, list):
+                column_headings = list(json_data[0].keys()) if json_data else []
+                return column_headings
+            elif isinstance(json_data, dict):
+                column_headings = list(json_data.keys())
+                return column_headings
+            else:
+                raise ValueError('Invalid JSON file structure')
+
+    except Exception as e:
+        raise ValueError(f'Error reading JSON file: {e}') from e
+
+if __name__ == '__main__':
+    app.run(debug=True)    
+
 @app.route('/api/get-csv-data-values', methods=['GET'])
 def get_csv_data_values():
     try:

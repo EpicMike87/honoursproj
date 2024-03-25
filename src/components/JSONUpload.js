@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 const JSONUpload = () => {
   const [file, setFile] = useState(null);
@@ -30,8 +30,6 @@ const JSONUpload = () => {
 
       const result = await response.json();
 
-      console.log('Received JSON data:', result);
-
       if (result && result.headings) {
         setHeadings(result.headings);
       }
@@ -46,17 +44,11 @@ const JSONUpload = () => {
     }
   };
 
-  useEffect(() => {
-    if (headings) {
-      console.log('Column Headings:', headings);
-    }
-  }, [headings]);
-
   return (
     <div>
       <h2>Upload JSON</h2>
       <input type="file" onChange={handleFileChange} />
-      <button onClick={handleUpload} disabled={loading}>
+      <button onClick={handleUpload} disabled={!file || loading}>
         {loading ? 'Uploading...' : 'Confirm'}
       </button>
 
