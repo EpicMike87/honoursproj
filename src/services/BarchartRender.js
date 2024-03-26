@@ -10,6 +10,9 @@ const BarchartRender = ({ dataValues, yHeading, xTimeSeries }) => {
     const generateChartData = () => {
       try {
         if (Array.isArray(dataValues)) {
+          if (!xTimeSeries || !yHeading) {
+            throw new Error('X-axis and Y-axis headings are not specified');
+          }
           const xValues = dataValues.map(row => row[xTimeSeries]);
           const yValues = dataValues.map(row => row[yHeading]);
           setXData(xValues);
@@ -21,10 +24,9 @@ const BarchartRender = ({ dataValues, yHeading, xTimeSeries }) => {
         setError(error.message);
       }
     };
-
+  
     generateChartData();
-
-  }, [dataValues, yHeading, xTimeSeries]);
+  }, [dataValues, xTimeSeries, yHeading]);
 
   if (error) {
     return <p>Error generating chart data: {error}</p>;
