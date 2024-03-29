@@ -4,13 +4,13 @@ import BarchartRender from '../services/BarchartRender';
 const Barchart = () => {
   const [uploadedFileNames, setUploadedFileNames] = useState([]);
   const [selectedFile, setSelectedFile] = useState(null);
-  const [selectedXHeading, setSelectedXHeading] = useState(null); // State for selected X-axis heading
-  const [selectedYHeading, setSelectedYHeading] = useState(null); // State for selected Y-axis heading
+  const [selectedXHeading, setSelectedXHeading] = useState(null);
+  const [selectedYHeading, setSelectedYHeading] = useState(null);
   const [selectedFileHeadings, setSelectedFileHeadings] = useState([]);
   const [loadingHeadings, setLoadingHeadings] = useState(false);
-  const [loadingFiles, setLoadingFiles] = useState(false);
   const [error, setError] = useState(null);
   const [barChartData, setBarChartData] = useState(null);
+  const [loadingFiles, setLoadingFiles] = useState(false);
 
   useEffect(() => {
     setLoadingFiles(true);
@@ -141,7 +141,7 @@ const Barchart = () => {
               {(selectedXHeading && selectedYHeading) && (
                 <div>
                   <button onClick={generateBarChart}>Generate Bar Chart</button>
-                  {barChartData && <BarchartRender barChartData={barChartData} />}
+                  {barChartData && <BarchartRender barChartData={barChartData} xTimeSeries={selectedXHeading} yHeading={selectedYHeading} />}
                 </div>
               )}
             </div>

@@ -1,35 +1,39 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import Plot from 'react-plotly.js';
 
-const BarchartRender = ({ dataValues, yHeading, xTimeSeries }) => {
-  const [error, setError] = useState(null);
-  const [xData, setXData] = useState([]);
-  const [yData, setYData] = useState([]);
+const BarchartRender = ({ barChartData, xTimeSeries, yHeading }) => {
+  const generateBarChartData = () => {
+    try {
+      const dataValues = barChartData && barChartData.data_values;
 
-  useEffect(() => {
-    const generateChartData = () => {
-      try {
-        if (Array.isArray(dataValues)) {
-          if (!xTimeSeries || !yHeading) {
-            throw new Error('X-axis and Y-axis headings are not specified');
-          }
-          const xValues = dataValues.map(row => row[xTimeSeries]);
-          const yValues = dataValues.map(row => row[yHeading]);
-          setXData(xValues);
-          setYData(yValues);
-        } else {
-          throw new Error('Data values are not in the expected format');
-        }
-      } catch (error) {
-        setError(error.message);
+      if (!Array.isArray(dataValues)) {
+        throw new Error('Data values are not in the expected format');
       }
-    };
-  
-    generateChartData();
-  }, [dataValues, xTimeSeries, yHeading]);
 
-  if (error) {
-    return <p>Error generating chart data: {error}</p>;
+      const xData = [];
+      const yData = [];
+
+      dataValues.forEach(row => {
+        const xValue = row[xTimeSeries];
+        const yValue = row[yHeading];
+        xData.push(xValue);
+        yData.push(yValue);
+      });
+
+      console.log('xData:', xData);
+      console.log('yData:', yData);
+
+      return { xData, yData };
+    } catch (error) {
+      console.error(error.message);
+      return { xData: [], yData: [] };
+    }
+  };
+
+  const { xData, yData } = generateBarChartData();
+
+  if (!xData || !yData) {
+    return <p>Error generating bar chart data</p>;
   }
 
   return (
