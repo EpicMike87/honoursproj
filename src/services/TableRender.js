@@ -17,7 +17,9 @@ const TableCSV = ({ headings, rows }) => {
               rows.map((row, rowIndex) => (
                 <tr key={rowIndex}>
                   {headings.map((heading, columnIndex) => (
-                    <td key={columnIndex}>{row[heading]}</td>
+                    <td key={columnIndex}>
+                      {row[heading] !== null && row[heading] !== undefined ? row[heading] : ''}
+                    </td>
                   ))}
                 </tr>
               ))
@@ -42,8 +44,6 @@ const TableJSON = ({ dataValues }) => {
     if (!Array.isArray(dataValues) || dataValues.length === 0) {
       return null;
     }
-
-    // Extract headings from the first item
     const headings = Object.keys(dataValues[0]);
 
     return (
@@ -94,7 +94,44 @@ const TableJSON = ({ dataValues }) => {
 };
 
 const TableXML = ({ dataValues }) => {
-  // Implementation for XML data format
+  const renderTable = (dataValues) => {
+    if (!dataValues || !Array.isArray(dataValues) || dataValues.length === 0) {
+      return <p>No data available for the selected dataset.</p>;
+    }
+
+    try {
+      const headings = Object.keys(dataValues[0]);
+      return (
+        <table>
+          <thead>
+            <tr>
+              {headings.map((heading, index) => (
+                <th key={index}>{heading}</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {dataValues.map((row, rowIndex) => (
+              <tr key={rowIndex}>
+                {headings.map((heading, cellIndex) => (
+                  <td key={cellIndex}>{row[heading]}</td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      );
+    } catch (error) {
+      console.error('Error rendering XML data:', error);
+      return <p>Error rendering XML data.</p>;
+    }
+  };
+
+  return (
+    <div>
+      {renderTable(dataValues)}
+    </div>
+  );
 };
 
 export { TableCSV, TableJSON, TableXML };

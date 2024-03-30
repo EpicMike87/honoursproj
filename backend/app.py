@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 from flask_uploads import UploadSet, configure_uploads, DATA
+import xml.etree.ElementTree as ET
 import os
 import pandas as pd
 import json
@@ -142,7 +143,30 @@ def get_json_column_headings(filename):
         raise ValueError(f'Error reading JSON file: {e}') from e
 
 if __name__ == '__main__':
-    app.run(debug=True)    
+    app.run(debug=True)  
+
+def get_xml_headings(filename):
+    try:
+        tree = ET.parse(os.path.join(app.config['UPLOADED_DATA_DEST'], filename))
+        root = tree.getroot()
+
+        def traverse(element, headings):
+            headings.add(element.tag)
+            for child in element:
+                traverse(child, headings)
+
+        headings = set()
+        traverse(root, headings)
+        return list(headings)
+
+    except FileNotFoundError as file_not_found_error:
+        raise ValueError(f'XML file not found: {filename}') from file_not_found_error
+
+    except ET.ParseError as parse_error:
+        raise ValueError(f'Error parsing XML file {filename}: {parse_error}') from parse_error
+
+    except Exception as e:
+        raise ValueError(f'Unexpected error while processing XML file {filename}: {e}') from e      
 
 @app.route('/api/get-csv-data-values', methods=['GET'])
 def get_csv_data_values():
@@ -182,26 +206,31 @@ def get_json_data_values():
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
-    
-def get_xml_headings(filename):
+@app.route('/api/get-xml-data-values', methods=['GET'])
+def get_xml_data_values():
     try:
-        tree = ET.parse(os.path.join(app.config['UPLOADED_DATA_DEST'], filename))
+        selected_file = request.args.get('file')
+        if not selected_file:
+            return jsonify({'error': 'No file specified'}), 400
+
+        file_path = os.path.join(app.config['UPLOADED_DATA_DEST'], selected_file)
+        
+        tree = ET.parse(file_path)
         root = tree.getroot()
-
-        def traverse(element, headings):
-            headings.add(element.tag)
-            for child in element:
-                traverse(child, headings)
-
         headings = set()
-        traverse(root, headings)
-        return list(headings)
+        data_values = []
 
-    except ET.ParseError as parse_error:
-        raise ValueError(f'Error parsing XML file: {parse_error}') from parse_error
+        for child in root:
+            row = {}
+            for element in child:
+                row[element.tag] = element.text
+                headings.add(element.tag)
+            data_values.append(row)
+
+        return jsonify({'headings': list(headings), 'data_values': data_values}), 200
 
     except Exception as e:
-        raise ValueError(f'Unexpected error: {e}') from e
+        return jsonify({'error': str(e)}), 500
 
 @app.route('/api/generate-histogram', methods=['POST'])
 def generate_histogram():

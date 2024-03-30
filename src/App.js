@@ -7,7 +7,8 @@ import CSVUpload from "./components/CSVUpload";
 import JSONUpload from "./components/JSONUpload";
 import XMLUpload from "./components/XMLUpload";
 import Visualise from "./components/Visualise";
-import Placeholder from "./components/Placeholder";
+//import Placeholder from "./components/Placeholder";
+import DataClean from "./components/Dataclean";
 import DataPage from "./components/Datapage";
 
 function App() {
@@ -22,7 +23,7 @@ function App() {
               <Route path="/json" element={<JSONUpload />} />
               <Route path="/xml" element={<XMLUpload />} />
               <Route path="/data" element={<DataPage />} />
-              <Route path="/clean" element={<Placeholder />} />
+              <Route path="/clean" element={<DataClean />} />
               <Route path="/visualise" element={<Visualise />} />
             </Route>
           </Routes>

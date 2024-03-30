@@ -60,7 +60,7 @@ const JSONUpload = () => {
 
       {headings && (
         <div>
-          <h3>Column Headings:</h3>
+          <h3>Attributes:</h3>
           <ul>
             {headings.map((heading, index) => (
               <li key={index}>{heading}</li>

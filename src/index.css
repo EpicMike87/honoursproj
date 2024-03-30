@@ -99,3 +99,16 @@ code {
   color: #555;
   font-size: 1em;
 }
+
+.DataClean-container {
+  display: flex;
+}
+
+.DataClean-left-column {
+  flex: 1;
+  padding-right: 20px;
+}
+
+.DataClean-right-column {
+  flex: 3;
+}
