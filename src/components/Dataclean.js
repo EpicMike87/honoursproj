@@ -4,7 +4,7 @@ const DataClean = () => {
   const [uploadedFileNames, setUploadedFileNames] = useState([]);
   const [selectedFileName, setSelectedFileName] = useState(null);
   const [dataValues, setDataValues] = useState(null);
-  const [nullValueCount, setNullValueCount] = useState(0);
+  const [missingValueCount, setMissingValueCount] = useState(0);
 
   useEffect(() => {
     console.log('Fetching uploaded files...');
@@ -27,13 +27,13 @@ const DataClean = () => {
           setDataValues(data.data_values);
           const count = data.data_values.reduce((acc, row) => {
             Object.values(row).forEach(value => {
-              if (value === null || value === '') {
+              if (value === 'missing') {
                 acc++;
               }
             });
             return acc;
           }, 0);
-          setNullValueCount(count);
+          setMissingValueCount(count);
         })
         .catch(error => console.error('Error fetching data values:', error));
     }
@@ -70,7 +70,7 @@ const DataClean = () => {
             <h2>{selectedFileName}</h2>
             {dataValues ? (
               <>
-                <p>Total Null Values: {nullValueCount}</p>
+                <p>Total Missing Values: {missingValueCount}</p>
                 {/* Display the data values here */}
               </>
             ) : (
@@ -78,7 +78,7 @@ const DataClean = () => {
             )}
           </>
         ) : (
-          <p>Select a file to check for null values.</p>
+          <p>Select a file to check for missing values.</p>
         )}
       </div>
     </div>

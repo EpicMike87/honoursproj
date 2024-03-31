@@ -29,18 +29,21 @@ def perform_csv_upload():
 
         if filename.endswith('.csv'):
             full_path = data_files.path(filename)
-            data = pd.read_csv(full_path)
-        #   data = data.fillna(123)
-            headings = data.columns.tolist()
-            json_data = data.to_json(orient='records')
 
-            return jsonify({'headings': headings, 'data': json_data}), 200
+            data = pd.read_csv(full_path)
+            data.replace({np.nan: "missing"}, inplace=True)
+            data.to_csv(full_path, index=False)
+
+            headings = data.columns.tolist()
+            json_data = data.to_dict(orient='records')
+
+            return jsonify({'headings': headings, 'data_values': json_data}), 200
         else:
             return jsonify({'error': 'Unsupported file type'}), 400
 
     except Exception as e:
         return jsonify({'error': str(e)}), 500
-
+    
 @app.route('/api/json-upload', methods=['POST'])
 def perform_json_upload():
     try:
