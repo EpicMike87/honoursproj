@@ -4,6 +4,7 @@ from flask_uploads import UploadSet, configure_uploads, DATA
 import xml.etree.ElementTree as ET
 import os
 import pandas as pd
+import numpy as np
 import json
 
 app = Flask(__name__)
@@ -26,11 +27,14 @@ def perform_csv_upload():
         file = request.files['file']
         filename = data_files.save(file)
 
-        print("Uploaded file path:", filename)
-
         if filename.endswith('.csv'):
-            headings = get_csv_column_headings(filename)
-            return jsonify({'headings': headings}), 200
+            full_path = data_files.path(filename)
+            data = pd.read_csv(full_path)
+        #   data = data.fillna(123)
+            headings = data.columns.tolist()
+            json_data = data.to_json(orient='records')
+
+            return jsonify({'headings': headings, 'data': json_data}), 200
         else:
             return jsonify({'error': 'Unsupported file type'}), 400
 
@@ -121,9 +125,6 @@ def get_csv_column_headings(filename):
         return column_headings
     except Exception as e:
         raise ValueError(f'Error reading CSV file: {e}') from e
-
-if __name__ == '__main__':
-    app.run(debug=True)
 
 def get_json_column_headings(filename):
     try:
