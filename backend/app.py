@@ -31,7 +31,7 @@ def perform_csv_upload():
             full_path = data_files.path(filename)
 
             data = pd.read_csv(full_path)
-            data.replace({np.nan: "missing"}, inplace=True)
+            data.replace({np.nan: "nll"}, inplace=True)
             data.to_csv(full_path, index=False)
 
             headings = data.columns.tolist()
@@ -235,7 +235,43 @@ def get_xml_data_values():
 
     except Exception as e:
         return jsonify({'error': str(e)}), 500
+    
+@app.route('/api/save-cleaned-data', methods=['POST'])
+def save_cleaned_data():
+    try:
+        data = request.json.get('cleanedData')
 
+        if not data:
+            return jsonify({'error': 'No data provided'}), 400
+
+        original_filename = request.json.get('originalFilename')
+
+        if not original_filename:
+            return jsonify({'error': 'No original filename provided'}), 400
+
+        cleaned_filename = get_cleaned_filename(original_filename)
+        full_cleaned_path = os.path.join(app.config['UPLOADED_DATA_DEST'], cleaned_filename)
+
+        df = pd.DataFrame(data)
+        original_file_path = os.path.join(app.config['UPLOADED_DATA_DEST'], original_filename)
+        original_df = pd.read_csv(original_file_path)
+        df = df[original_df.columns]
+
+        df.to_csv(full_cleaned_path, index=False)
+
+        return jsonify({'success': True}), 200
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+    
+def get_cleaned_filename(original_filename):
+    name, extension = os.path.splitext(original_filename)
+    return f"{name}_clean{extension}"
+
+    
+
+# Does this still do anything?
 @app.route('/api/generate-histogram', methods=['POST'])
 def generate_histogram():
     try:
