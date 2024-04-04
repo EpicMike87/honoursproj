@@ -18,6 +18,32 @@ const DataPage = () => {
       .catch(error => console.error('Error fetching uploaded filenames:', error));
   }, []);
 
+  const handleFileNameClick = (fileName) => {
+    console.log(`File name clicked: ${fileName}`);
+    setSelectedFileName(fileName);
+  };
+
+  const handleDeleteFile = async (fileName) => {
+    try {
+      const response = await fetch('http://localhost:5000/api/delete-file', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ filename: fileName }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to delete file');
+      }
+
+      // Remove the deleted file from the uploadedFileNames state
+      setUploadedFileNames(prevFiles => prevFiles.filter(file => file !== fileName));
+    } catch (error) {
+      console.error('Error deleting file:', error.message);
+    }
+  };
+
   useEffect(() => {
     if (selectedFileName) {
       console.log(`Fetching data values for file: ${selectedFileName}`);
@@ -43,11 +69,6 @@ const DataPage = () => {
     }
   }, [selectedFileName]);
 
-  const handleButtonClick = (fileName) => {
-    console.log(`Button clicked for file: ${fileName}`);
-    setSelectedFileName(fileName);
-  };
-
   return (
     <div className="Data-container">
       <div className="Data-left-column">
@@ -58,7 +79,15 @@ const DataPage = () => {
             <ul>
               {uploadedFileNames.map((fileName, index) => (
                 <li key={index}>
-                  <button onClick={() => handleButtonClick(fileName)}>{fileName}</button>
+                  <button
+                    className="File-name-button"
+                    onClick={() => handleFileNameClick(fileName)}
+                  >
+                    {fileName}
+                  </button>
+                  <button className="Delete-button" onClick={() => handleDeleteFile(fileName)}>
+                    Delete
+                  </button>
                 </li>
               ))}
             </ul>

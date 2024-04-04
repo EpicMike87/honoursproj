@@ -269,6 +269,25 @@ def get_cleaned_filename(original_filename):
     name, extension = os.path.splitext(original_filename)
     return f"{name}_clean{extension}"
 
+@app.route('/api/delete-file', methods=['POST'])
+def delete_file():
+    try:
+        data = request.json
+        filename = data.get('filename')
+
+        if not filename:
+            return jsonify({'error': 'Filename not provided'}), 400
+
+        file_path = os.path.join(app.config['UPLOADED_DATA_DEST'], filename)
+
+        if os.path.exists(file_path):
+            os.remove(file_path)
+            return jsonify({'message': f'File {filename} deleted successfully'}), 200
+        else:
+            return jsonify({'error': 'File not found'}), 404
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
     
 
 # Does this still do anything?
