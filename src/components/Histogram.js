@@ -5,8 +5,8 @@ const Histogram = () => {
   const [uploadedFileNames, setUploadedFileNames] = useState([]);
   const [selectedFile, setSelectedFile] = useState(null);
   const [selectedColumn, setSelectedColumn] = useState(null);
-  const [selectedFileHeadings, setSelectedFileHeadings] = useState([]);
-  const [loadingHeadings, setLoadingHeadings] = useState(false);
+  const [selectedFileAttributes, setSelectedFileAttributes] = useState([]);
+  const [loadingAttributes, setLoadingAttributes] = useState(false);
   const [binSize, setBinSize] = useState(1);
   const [error, setError] = useState(null);
   const [histogramData, setHistogramData] = useState(null);
@@ -33,7 +33,7 @@ const Histogram = () => {
 
   useEffect(() => {
     if (selectedFile) {
-      setLoadingHeadings(true);
+      setLoadingAttributes(true);
       const fileType = selectedFile.split('.').pop().toLowerCase();
       let apiUrl;
       if (fileType === 'csv') {
@@ -47,17 +47,17 @@ const Histogram = () => {
       fetch(apiUrl)
         .then(response => {
           if (!response.ok) {
-            throw new Error('Failed to fetch headings');
+            throw new Error('Failed to fetch attributes');
           }
           return response.json();
         })
         .then(data => {
-          setSelectedFileHeadings(data.headings);
-          setLoadingHeadings(false);
+          setSelectedFileAttributes(data.headings);
+          setLoadingAttributes(false);
         })
         .catch(error => {
           setError(error.message);
-          setLoadingHeadings(false);
+          setLoadingAttributes(false);
         });
     }
   }, [selectedFile]);
@@ -116,17 +116,17 @@ const Histogram = () => {
 
       {selectedFile && (
         <div>
-          <h2>Selected File: {selectedFile}</h2>
-          {loadingHeadings && <p>Loading headings...</p>}
-          {selectedFileHeadings && selectedFileHeadings.length > 0 && (
+          <h2>Selected File for Histogram: {selectedFile}</h2>
+          {loadingAttributes && <p>Loading attributes...</p>}
+          {selectedFileAttributes && selectedFileAttributes.length > 0 && (
             <div>
               <h3>Select Attributes:</h3>
               <label>Select Column:</label>
               <select onChange={handleColumnSelect}>
                 <option value="">Select Column</option>
-                {selectedFileHeadings.map((heading, index) => (
-                  <option key={index} value={heading}>
-                    {heading}
+                {selectedFileAttributes.map((attribute, index) => (
+                  <option key={index} value={attribute}>
+                    {attribute}
                   </option>
                 ))}
               </select>
@@ -147,3 +147,4 @@ const Histogram = () => {
 };
 
 export default Histogram;
+

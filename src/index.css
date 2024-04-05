@@ -43,15 +43,12 @@ code {
   margin-right: 20px;
 }
 
-.Home-content h2 {
-  color: #333;
-  font-size: 1.5em;
-  margin-bottom: 10px;
-}
-
-.Home-content p {
-  color: #555;
+.Home-content {
+  color: black;
+  padding: 20px;
+  padding-top: 5px;
   font-size: 1em;
+  text-align: left;
 }
 
 .Data-container {
@@ -92,6 +89,7 @@ code {
 
 .Visualise-container {
   text-align: center;
+  padding-bottom: 30px;
 }
 
 .Visualise-heading {

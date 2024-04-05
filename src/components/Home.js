@@ -7,29 +7,30 @@ const Home = () => {
 
       <div className="Home-columns">
         <div className="Home-column">
-          <h2>Heading</h2>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-            Nulla facilisi. Integer vel ante ac nisl placerat ullamcorper. 
-            Suspendisse potenti.
+          <h2>Upload your Data</h2>
+          <p className="Home-content">
+          Upload your data to the application. Currently supported formats are:
+          <li>CSV</li>
+          <li>JSON</li>
+          <li>XML</li>
           </p>
         </div>
 
         <div className="Home-column">
-          <h2>Heading</h2>
-          <p>
-            Sed euismod semper libero, at condimentum elit mattis nec. 
-            Vestibulum congue quam ac turpis tincidunt, id bibendum metus 
-            malesuada. Nunc vel est ac justo facilisis dignissim.
+          <h2>Clean your Data</h2>
+          <p className="Home-content">
+          Clean your data for more accurate analysis by improving data quality. This application can:
+<li>Check for null values.</li>
+<li>Check for outliers in values.</li>
+<li>Remove rows with undesirable entries.</li>
+<li>Replace the undesirable entries with calculated averages.</li>
           </p>
         </div>
 
         <div className="Home-column">
-          <h2>Heading</h2>
-          <p>
-            Fusce id justo non libero egestas luctus nec vel sem. Quisque 
-            congue dolor vitae enim hendrerit, eget fringilla risus 
-            ultrices.
+          <h2>Visualise your Data</h2>
+          <p className="Home-content">
+          The application allows you to create visualisations to better understand the data and receive useful insights.
           </p>
         </div>
       </div>

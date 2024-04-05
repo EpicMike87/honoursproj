@@ -1,6 +1,7 @@
 import React from 'react';
 import Histogram from './Histogram';
 import Barchart from './Barchart';
+import LineChart from './Linechart';
 
 const Visualise = () => {
   return (
@@ -11,6 +12,7 @@ const Visualise = () => {
       
         <div className="Visualise-column">
           <Histogram />
+          <LineChart />
         </div>
         
         <div className="Visualise-column">
