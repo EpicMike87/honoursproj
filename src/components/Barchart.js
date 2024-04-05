@@ -119,19 +119,19 @@ const Barchart = () => {
           {loadingHeadings && <p>Loading headings...</p>}
           {selectedFileHeadings && selectedFileHeadings.length > 0 && (
             <div>
-              <h3>Select Attributes:</h3>
-              <label>Select X-axis Heading:</label>
+              <h3>Select Attributes for Bar Chart:</h3>
+              <label> Select X-axis Attribute: </label>
               <select onChange={handleXHeadingSelect}>
-                <option value="">Select X-axis Heading</option>
+                <option value="">Select X-axis Attribute</option>
                 {selectedFileHeadings.map((heading, index) => (
                   <option key={index} value={heading}>
                     {heading}
                   </option>
                 ))}
               </select>
-              <label>Select Y-axis Heading:</label>
+              <label> Select Y-axis Attribute: </label>
               <select onChange={handleYHeadingSelect}>
-                <option value="">Select Y-axis Heading</option>
+                <option value="">Select Y-axis Attribute</option>
                 {selectedFileHeadings.map((heading, index) => (
                   <option key={index} value={heading}>
                     {heading}

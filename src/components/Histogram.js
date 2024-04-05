@@ -120,17 +120,17 @@ const Histogram = () => {
           {loadingAttributes && <p>Loading attributes...</p>}
           {selectedFileAttributes && selectedFileAttributes.length > 0 && (
             <div>
-              <h3>Select Attributes:</h3>
-              <label>Select Column:</label>
+              <h3>Select Attributes for Histogram:</h3>
+              <label> Select Attribute: </label>
               <select onChange={handleColumnSelect}>
-                <option value="">Select Column</option>
+                <option value="">Select Attribute</option>
                 {selectedFileAttributes.map((attribute, index) => (
                   <option key={index} value={attribute}>
                     {attribute}
                   </option>
                 ))}
               </select>
-              <label>Bin Size:</label>
+              <label> Bin Size: </label>
               <input type="number" min="1" value={binSize} onChange={handleBinSizeChange} />
               {selectedColumn && (
                 <div>

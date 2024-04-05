@@ -124,8 +124,8 @@ const LineChart = () => {
           {loadingHeadings && <p>Loading headings...</p>}
           {selectedFileHeadings && selectedFileHeadings.length > 0 && (
             <div>
-              <h3>Select Attributes:</h3>
-              <label>Select X-axis Heading:</label>
+              <h3>Select Attributes for Line Chart:</h3>
+              <label> Select X-axis Attribute: </label>
               <select onChange={handleXHeadingSelect}>
                 <option value="">Select X-axis Heading</option>
                 {selectedFileHeadings.map((heading, index) => (
@@ -134,18 +134,18 @@ const LineChart = () => {
                   </option>
                 ))}
               </select>
-              <label>Select Y-axis Heading 1:</label>
+              <label> Select Y-axis Attribute 1: </label>
               <select onChange={handleYHeading1Select}>
-                <option value="">Select Y-axis Heading</option>
+                <option value="">Select Y-axis Attribute</option>
                 {selectedFileHeadings.map((heading, index) => (
                   <option key={index} value={heading}>
                     {heading}
                   </option>
                 ))}
               </select>
-              <label>Select Y-axis Heading 2 (optional):</label>
+              <label>Select Y-axis Heading 2 (optional): </label>
               <select onChange={handleYHeading2Select}>
-                <option value="">Select Y-axis Heading (optional)</option>
+                <option value="">Select Y-axis Attribute (optional)</option>
                 {selectedFileHeadings.map((heading, index) => (
                   <option key={index} value={heading}>
                     {heading}
