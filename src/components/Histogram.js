@@ -120,7 +120,7 @@ const Histogram = () => {
           {loadingHeadings && <p>Loading headings...</p>}
           {selectedFileHeadings && selectedFileHeadings.length > 0 && (
             <div>
-              <h3>Headings:</h3>
+              <h3>Select Attributes:</h3>
               <label>Select Column:</label>
               <select onChange={handleColumnSelect}>
                 <option value="">Select Column</option>

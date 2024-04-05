@@ -1,7 +1,27 @@
-import React from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import Plot from 'react-plotly.js';
 
 const BarchartRender = ({ barChartData, xTimeSeries, yHeading }) => {
+  const chartContainerRef = useRef(null);
+  const [chartWidth, setChartWidth] = useState(0);
+
+  useEffect(() => {
+    const updateChartWidth = () => {
+      if (chartContainerRef.current) {
+        const containerWidth = chartContainerRef.current.clientWidth;
+        const calculatedWidth = containerWidth * 0.98;
+        setChartWidth(calculatedWidth);
+      }
+    };
+
+    updateChartWidth();
+    window.addEventListener('resize', updateChartWidth);
+
+    return () => {
+      window.removeEventListener('resize', updateChartWidth);
+    };
+  }, []);
+
   const generateBarChartData = () => {
     try {
       const dataValues = barChartData && barChartData.data_values;
@@ -20,9 +40,6 @@ const BarchartRender = ({ barChartData, xTimeSeries, yHeading }) => {
         yData.push(yValue);
       });
 
-      console.log('xData:', xData);
-      console.log('yData:', yData);
-
       return { xData, yData };
     } catch (error) {
       console.error(error.message);
@@ -37,7 +54,7 @@ const BarchartRender = ({ barChartData, xTimeSeries, yHeading }) => {
   }
 
   return (
-    <div>
+    <div ref={chartContainerRef} style={{ width: '100%', height: '500px' }}>
       <Plot
         data={[
           {
@@ -46,7 +63,10 @@ const BarchartRender = ({ barChartData, xTimeSeries, yHeading }) => {
             type: 'bar',
           },
         ]}
-        layout={{ width: 600, height: 400, title: 'Bar Chart' }}
+        layout={{
+          width: chartWidth,
+          height: 500,
+        }}
       />
     </div>
   );

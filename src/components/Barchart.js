@@ -119,7 +119,7 @@ const Barchart = () => {
           {loadingHeadings && <p>Loading headings...</p>}
           {selectedFileHeadings && selectedFileHeadings.length > 0 && (
             <div>
-              <h3>Headings:</h3>
+              <h3>Select Attributes:</h3>
               <label>Select X-axis Heading:</label>
               <select onChange={handleXHeadingSelect}>
                 <option value="">Select X-axis Heading</option>

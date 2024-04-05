@@ -13,23 +13,15 @@ const TableCSV = ({ headings, rows }) => {
             </tr>
           </thead>
           <tbody>
-            {Array.isArray(rows) && rows.length > 0 ? (
-              rows.map((row, rowIndex) => (
-                <tr key={rowIndex}>
-                  {headings.map((heading, columnIndex) => (
-                    <td key={columnIndex}>
-                      {row[heading] !== null && row[heading] !== undefined ? row[heading] : ''}
-                    </td>
-                  ))}
-                </tr>
-              ))
-            ) : (
-              <tr>
-                <td colSpan={headings.length}>
-                  No data available for the selected dataset.
-                </td>
+            {Array.isArray(rows) && rows.slice(0, 25).map((row, rowIndex) => (
+              <tr key={rowIndex}>
+                {headings.map((heading, columnIndex) => (
+                  <td key={columnIndex}>
+                    {row[heading] !== null && row[heading] !== undefined ? row[heading] : ''}
+                  </td>
+                ))}
               </tr>
-            )}
+            ))}
           </tbody>
         </table>
       ) : (
@@ -56,7 +48,7 @@ const TableJSON = ({ dataValues }) => {
           </tr>
         </thead>
         <tbody>
-          {dataValues.map((item, index) => (
+          {dataValues.slice(0, 25).map((item, index) => (
             <tr key={index}>
               {renderRow(item, headings)}
             </tr>
@@ -111,7 +103,7 @@ const TableXML = ({ dataValues }) => {
             </tr>
           </thead>
           <tbody>
-            {dataValues.map((row, rowIndex) => (
+            {dataValues.slice(0, 25).map((row, rowIndex) => (
               <tr key={rowIndex}>
                 {headings.map((heading, cellIndex) => (
                   <td key={cellIndex}>{row[heading]}</td>

@@ -1,7 +1,27 @@
-import React from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import Plot from 'react-plotly.js';
 
 const HistogramRender = ({ histogramData, column, binSize }) => {
+  const chartContainerRef = useRef(null);
+  const [chartWidth, setChartWidth] = useState(0);
+
+  useEffect(() => {
+    const updateChartWidth = () => {
+      if (chartContainerRef.current) {
+        const containerWidth = chartContainerRef.current.clientWidth;
+        const calculatedWidth = containerWidth * 0.98;
+        setChartWidth(calculatedWidth);
+      }
+    };
+
+    updateChartWidth();
+    window.addEventListener('resize', updateChartWidth);
+
+    return () => {
+      window.removeEventListener('resize', updateChartWidth);
+    };
+  }, []);
+
   const generateHistogramData = () => {
     try {
       const dataValues = histogramData && histogramData.data_values;
@@ -20,13 +40,8 @@ const HistogramRender = ({ histogramData, column, binSize }) => {
         }
       });
 
-      console.log('Histogram Map:', histogramMap);
-
       const xData = Array.from(histogramMap.keys());
       const yData = Array.from(histogramMap.values());
-
-      console.log('xData:', xData);
-      console.log('yData:', yData);
 
       return { xData, yData };
     } catch (error) {
@@ -42,7 +57,7 @@ const HistogramRender = ({ histogramData, column, binSize }) => {
   }
 
   return (
-    <div>
+    <div ref={chartContainerRef} style={{ width: '100%', height: '500px' }}>
       <Plot
         data={[
           {
@@ -51,7 +66,11 @@ const HistogramRender = ({ histogramData, column, binSize }) => {
             type: 'histogram',
           },
         ]}
-        layout={{ width: 600, height: 400, title: 'Histogram' }}
+        layout={{
+          width: chartWidth,
+          height: 500,
+          title: 'Histogram',
+        }}
       />
     </div>
   );
