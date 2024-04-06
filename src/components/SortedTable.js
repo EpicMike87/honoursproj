@@ -59,7 +59,7 @@ const SortedTable = () => {
 
   return (
     <div className="SortedTable-container">
-      <h1>Sorted Table</h1>
+      <h2>Sorted Table</h2>
       {loading && <p>Loading data...</p>}
       {error && <p>Error: {error}</p>}
       {uploadedFileNames.length > 0 ? (
