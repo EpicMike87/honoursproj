@@ -62,6 +62,10 @@ const Histogram = () => {
     }
   }, [selectedFile]);
 
+  const handleFileSelect = (fileName) => {
+    setSelectedFile(fileName);
+  };
+
   const handleColumnSelect = event => {
     setSelectedColumn(event.target.value);
   };
@@ -104,8 +108,8 @@ const Histogram = () => {
           <p>Uploaded Files:</p>
           <ul>
             {uploadedFileNames.map((fileName, index) => (
-              <li key={index} onClick={() => setSelectedFile(fileName)}>
-                {fileName}
+              <li key={index}>
+                <button onClick={() => handleFileSelect(fileName)}>{fileName}</button>
               </li>
             ))}
           </ul>
@@ -120,7 +124,7 @@ const Histogram = () => {
           {loadingAttributes && <p>Loading attributes...</p>}
           {selectedFileAttributes && selectedFileAttributes.length > 0 && (
             <div>
-              <h3>Select Attributes for Histogram:</h3>
+              <h3>Select Attribute for Histogram:</h3>
               <label> Select Attribute: </label>
               <select onChange={handleColumnSelect}>
                 <option value="">Select Attribute</option>
@@ -147,4 +151,3 @@ const Histogram = () => {
 };
 
 export default Histogram;
-

@@ -63,6 +63,10 @@ const LineChart = () => {
     }
   }, [selectedFile]);
 
+  const handleFileSelect = (fileName) => {
+    setSelectedFile(fileName);
+  };
+
   const handleXHeadingSelect = event => {
     setSelectedXHeading(event.target.value);
   };
@@ -109,8 +113,8 @@ const LineChart = () => {
           <p>Uploaded Files:</p>
           <ul>
             {uploadedFileNames.map((fileName, index) => (
-              <li key={index} onClick={() => setSelectedFile(fileName)}>
-                {fileName}
+              <li key={index}>
+                <button onClick={() => handleFileSelect(fileName)}>{fileName}</button>
               </li>
             ))}
           </ul>
@@ -143,7 +147,7 @@ const LineChart = () => {
                   </option>
                 ))}
               </select>
-              <label>Select Y-axis Heading 2 (optional): </label>
+              <label>Select Y-axis Attribute 2 (optional): </label>
               <select onChange={handleYHeading2Select}>
                 <option value="">Select Y-axis Attribute (optional)</option>
                 {selectedFileHeadings.map((heading, index) => (

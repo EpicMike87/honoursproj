@@ -37,7 +37,6 @@ const DataPage = () => {
         throw new Error('Failed to delete file');
       }
 
-      // Remove the deleted file from the uploadedFileNames state
       setUploadedFileNames(prevFiles => prevFiles.filter(file => file !== fileName));
     } catch (error) {
       console.error('Error deleting file:', error.message);

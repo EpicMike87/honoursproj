@@ -2,6 +2,7 @@ import React from 'react';
 import Histogram from './Histogram';
 import Barchart from './Barchart';
 import LineChart from './Linechart';
+import SortedTable from './SortedTable';
 
 const Visualise = () => {
   return (
@@ -17,6 +18,7 @@ const Visualise = () => {
         
         <div className="Visualise-column">
           <Barchart />
+          <SortedTable />
         </div>
       </div>
     </div>

@@ -62,6 +62,10 @@ const Barchart = () => {
     }
   }, [selectedFile]);
 
+  const handleFileSelect = (fileName) => {
+    setSelectedFile(fileName);
+  };
+
   const handleXHeadingSelect = event => {
     setSelectedXHeading(event.target.value);
   };
@@ -104,8 +108,8 @@ const Barchart = () => {
           <p>Uploaded Files:</p>
           <ul>
             {uploadedFileNames.map((fileName, index) => (
-              <li key={index} onClick={() => setSelectedFile(fileName)}>
-                {fileName}
+              <li key={index}>
+                <button onClick={() => handleFileSelect(fileName)}>{fileName}</button>
               </li>
             ))}
           </ul>
