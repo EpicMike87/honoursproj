@@ -106,6 +106,16 @@ code {
   text-align: left;
 }
 
+.Visualise-filename{
+  font-size: 15px;
+  font-weight: bold;
+  background-color: #BFCACD;
+  color: black;
+  border-radius: 1px;
+  padding: 4px 8px;
+  cursor: pointer;
+}
+
 .Visualise-column:last-child {
   margin-right: 0;
 }
