@@ -28,29 +28,27 @@ const HistogramRender = ({ histogramData, column, binSize }) => {
       if (!Array.isArray(dataValues)) {
         throw new Error('Data values are not in the expected format');
       }
-  
+
       const histogramMap = new Map();
       dataValues.forEach(row => {
         const xValue = row[column];
-        const binIndex = xValue;
-  
+        const binIndex = Math.floor(xValue / binSize) * binSize;
         if (histogramMap.has(binIndex)) {
           histogramMap.set(binIndex, histogramMap.get(binIndex) + 1);
         } else {
           histogramMap.set(binIndex, 1);
         }
       });
-  
+
       const xData = Array.from(histogramMap.keys());
       const yData = Array.from(histogramMap.values());
-  
+
       return { xData, yData };
     } catch (error) {
-      console.error('Error generating histogram data:', error.message);
+      console.error(error.message);
       return { xData: [], yData: [] };
     }
   };
-
 
   const { xData, yData } = generateHistogramData();
 
