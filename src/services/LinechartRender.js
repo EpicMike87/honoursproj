@@ -47,11 +47,52 @@ const LinechartRender = ({ lineChartData, xTimeSeries, yHeading1, yHeading2 }) =
         }
       });
 
-      return { xData, yData1, yData2 };
+      // Group by time
+      const groupedData = groupDataByTime(xData, yData1, yData2);
+
+      return groupedData;
     } catch (error) {
       console.error('Error generating chart data:', error.message);
       return { xData: [], yData1: [], yData2: [] };
     }
+  };
+
+  const groupDataByTime = (xData, yData1, yData2) => {
+    const groupedData = { xData: [], yData1: [], yData2: [] };
+
+    const groupedByTime = {};
+
+    xData.forEach((x, index) => {
+      const date = new Date(x);
+      const timeKey = getTimeKey(date);
+
+      if (!groupedByTime[timeKey]) {
+        groupedByTime[timeKey] = {
+          xData: [],
+          yData1: [],
+          yData2: [],
+        };
+      }
+
+      groupedByTime[timeKey].xData.push(x);
+      groupedByTime[timeKey].yData1.push(yData1[index]);
+
+      if (yData2.length > 0) {
+        groupedByTime[timeKey].yData2.push(yData2[index]);
+      }
+    });
+
+    Object.values(groupedByTime).forEach(group => {
+      groupedData.xData.push(...group.xData);
+      groupedData.yData1.push(...group.yData1);
+      groupedData.yData2.push(...group.yData2);
+    });
+
+    return groupedData;
+  };
+
+  const getTimeKey = (date) => {
+    return date.getFullYear().toString();
   };
 
   const { xData, yData1, yData2 } = generateLineChartData();

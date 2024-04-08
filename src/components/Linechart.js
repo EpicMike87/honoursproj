@@ -12,6 +12,7 @@ const LineChart = () => {
   const [error, setError] = useState(null);
   const [lineChartData, setLineChartData] = useState(null);
   const [loadingFiles, setLoadingFiles] = useState(false);
+  const [timeGrouping, setTimeGrouping] = useState('day');
 
   useEffect(() => {
     setLoadingFiles(true);
@@ -79,18 +80,16 @@ const LineChart = () => {
     setSelectedYHeading2(event.target.value);
   };
 
+  const handleTimeGroupingChange = event => {
+    setTimeGrouping(event.target.value);
+  };
+
   const generateLineChart = async () => {
     try {
       let apiUrl;
       const fileType = selectedFile.split('.').pop().toLowerCase();
 
-      if (fileType === 'csv') {
-        apiUrl = `http://localhost:5000/api/get-csv-data-values?file=${selectedFile}&xHeading=${selectedXHeading}&yHeading1=${selectedYHeading1}&yHeading2=${selectedYHeading2}`;
-      } else if (fileType === 'json') {
-        apiUrl = `http://localhost:5000/api/get-json-data-values?file=${selectedFile}&xHeading=${selectedXHeading}&yHeading1=${selectedYHeading1}&yHeading2=${selectedYHeading2}`;
-      } else if (fileType === 'xml') {
-        apiUrl = `http://localhost:5000/api/get-xml-data-values?file=${selectedFile}&xHeading=${selectedXHeading}&yHeading1=${selectedYHeading1}&yHeading2=${selectedYHeading2}`;
-      }
+      apiUrl = `http://localhost:5000/api/get-${fileType}-data-values?file=${selectedFile}&xHeading=${selectedXHeading}&yHeading1=${selectedYHeading1}&yHeading2=${selectedYHeading2}&timeGrouping=${timeGrouping}`;
 
       const response = await fetch(apiUrl);
       if (!response.ok) {
@@ -155,6 +154,12 @@ const LineChart = () => {
                     {heading}
                   </option>
                 ))}
+              </select>
+              <label>Time Grouping:</label>
+              <select onChange={handleTimeGroupingChange} value={timeGrouping}>
+                <option value="day">Day</option>
+                <option value="month">Month</option>
+                <option value="year">Year</option>
               </select>
               {(selectedXHeading && selectedYHeading1) && (
                 <div>

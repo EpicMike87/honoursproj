@@ -11,6 +11,7 @@ const Barchart = () => {
   const [error, setError] = useState(null);
   const [barChartData, setBarChartData] = useState(null);
   const [loadingFiles, setLoadingFiles] = useState(false);
+  const [timeGrouping, setTimeGrouping] = useState('day'); // Default time grouping option
 
   useEffect(() => {
     setLoadingFiles(true);
@@ -74,17 +75,21 @@ const Barchart = () => {
     setSelectedYHeading(event.target.value);
   };
 
+  const handleTimeGroupingChange = event => {
+    setTimeGrouping(event.target.value);
+  };
+
   const generateBarChart = async () => {
     try {
       let apiUrl;
       const fileType = selectedFile.split('.').pop().toLowerCase();
 
       if (fileType === 'csv') {
-        apiUrl = `http://localhost:5000/api/get-csv-data-values?file=${selectedFile}&xHeading=${selectedXHeading}&yHeading=${selectedYHeading}`;
+        apiUrl = `http://localhost:5000/api/get-csv-data-values?file=${selectedFile}&xHeading=${selectedXHeading}&yHeading=${selectedYHeading}&timeGrouping=${timeGrouping}`;
       } else if (fileType === 'json') {
-        apiUrl = `http://localhost:5000/api/get-json-data-values?file=${selectedFile}&xHeading=${selectedXHeading}&yHeading=${selectedYHeading}`;
+        apiUrl = `http://localhost:5000/api/get-json-data-values?file=${selectedFile}&xHeading=${selectedXHeading}&yHeading=${selectedYHeading}&timeGrouping=${timeGrouping}`;
       } else if (fileType === 'xml') {
-        apiUrl = `http://localhost:5000/api/get-xml-data-values?file=${selectedFile}&xHeading=${selectedXHeading}&yHeading=${selectedYHeading}`;
+        apiUrl = `http://localhost:5000/api/get-xml-data-values?file=${selectedFile}&xHeading=${selectedXHeading}&yHeading=${selectedYHeading}&timeGrouping=${timeGrouping}`;
       }
 
       const response = await fetch(apiUrl);
@@ -120,11 +125,11 @@ const Barchart = () => {
       {selectedFile && (
         <div>
           <h2>Selected File: {selectedFile}</h2>
-          {loadingHeadings && <p>Loading headings...</p>}
+          {loadingHeadings && <p>Loading attributes...</p>}
           {selectedFileHeadings && selectedFileHeadings.length > 0 && (
             <div>
               <h3>Select Attributes for Bar Chart:</h3>
-              <label> Select X-axis Attribute: </label>
+              <label>Select X-axis Attribute:</label>
               <select onChange={handleXHeadingSelect}>
                 <option value="">Select X-axis Attribute</option>
                 {selectedFileHeadings.map((heading, index) => (
@@ -133,7 +138,7 @@ const Barchart = () => {
                   </option>
                 ))}
               </select>
-              <label> Select Y-axis Attribute: </label>
+              <label>Select Y-axis Attribute:</label>
               <select onChange={handleYHeadingSelect}>
                 <option value="">Select Y-axis Attribute</option>
                 {selectedFileHeadings.map((heading, index) => (
@@ -142,10 +147,25 @@ const Barchart = () => {
                   </option>
                 ))}
               </select>
+              <div>
+                <label>Select Time Grouping:</label>
+                <select value={timeGrouping} onChange={handleTimeGroupingChange}>
+                  <option value="day">Day</option>
+                  <option value="month">Month</option>
+                  <option value="year">Year</option>
+                </select>
+              </div>
               {(selectedXHeading && selectedYHeading) && (
                 <div>
                   <button onClick={generateBarChart}>Generate Bar Chart</button>
-                  {barChartData && <BarchartRender barChartData={barChartData} xTimeSeries={selectedXHeading} yHeading={selectedYHeading} />}
+                  {barChartData && (
+                    <BarchartRender
+                      barChartData={barChartData}
+                      xTimeSeries={selectedXHeading}
+                      yHeading={selectedYHeading}
+                      timeGrouping={timeGrouping}
+                    />
+                  )}
                 </div>
               )}
             </div>

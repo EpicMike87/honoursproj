@@ -289,25 +289,5 @@ def delete_file():
     except Exception as e:
         return jsonify({'error': str(e)}), 500
     
-
-# Does this still do anything?
-@app.route('/api/generate-histogram', methods=['POST'])
-def generate_histogram():
-    try:
-        selected_file = request.form['file']
-        selected_column = request.form['column']
-    
-        data = pd.read_csv(f"data/{selected_file}")
-
-        if selected_column not in data.columns:
-            return jsonify({'error': f'Column {selected_column} not found in the dataset'}), 400
-
-        histogram_data = data[selected_column].value_counts().sort_index().tolist()
-
-        return jsonify({'histogram_data': histogram_data}), 200
-
-    except Exception as e:
-        return jsonify({'error': str(e)}), 500
-
 if __name__ == '__main__':
     app.run(debug=True)
