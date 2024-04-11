@@ -47,7 +47,6 @@ const LinechartRender = ({ lineChartData, xTimeSeries, yHeading1, yHeading2 }) =
         }
       });
 
-      // Group by time
       const groupedData = groupDataByTime(xData, yData1, yData2);
 
       return groupedData;

@@ -30,6 +30,7 @@ const HistogramRender = ({ histogramData, column, binSize }) => {
       }
 
       const histogramMap = new Map();
+      
       dataValues.forEach(row => {
         const xValue = row[column];
         const binIndex = Math.floor(xValue / binSize) * binSize;

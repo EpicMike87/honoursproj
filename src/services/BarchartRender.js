@@ -27,26 +27,24 @@ const BarchartRender = ({ barChartData, xTimeSeries, yHeading, timeGrouping }) =
       return [];
     }
 
-    // Create a map to store grouped data
     const groupedData = new Map();
 
-    // Group data based on the specified time grouping
     data.forEach(row => {
       const timestamp = new Date(row[xTimeSeries]);
       let key;
 
       switch (timeGrouping) {
         case 'day':
-          key = timestamp.toISOString().slice(0, 10); // Group by date (YYYY-MM-DD)
+          key = timestamp.toISOString().slice(0, 10);
           break;
         case 'month':
-          key = `${timestamp.getUTCFullYear()}-${timestamp.getUTCMonth() + 1}`; // Group by month (YYYY-MM)
+          key = `${timestamp.getUTCFullYear()}-${timestamp.getUTCMonth() + 1}`;
           break;
         case 'year':
-          key = `${timestamp.getUTCFullYear()}`; // Group by year (YYYY)
+          key = `${timestamp.getUTCFullYear()}`;
           break;
         default:
-          key = timestamp.toISOString().slice(0, 10); // Default to daily grouping
+          key = timestamp.toISOString().slice(0, 10);
           break;
       }
 
@@ -56,7 +54,6 @@ const BarchartRender = ({ barChartData, xTimeSeries, yHeading, timeGrouping }) =
       groupedData.get(key).push(row);
     });
 
-    // Convert grouped data map to arrays of xData and yData
     const xData = [...groupedData.keys()];
     const yData = [...groupedData.values()].map(group => {
       const total = group.reduce((sum, row) => sum + parseFloat(row[yHeading] || 0), 0);

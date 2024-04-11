@@ -11,7 +11,7 @@ const Barchart = () => {
   const [error, setError] = useState(null);
   const [barChartData, setBarChartData] = useState(null);
   const [loadingFiles, setLoadingFiles] = useState(false);
-  const [timeGrouping, setTimeGrouping] = useState('day'); // Default time grouping option
+  const [timeGrouping, setTimeGrouping] = useState('day');
 
   useEffect(() => {
     setLoadingFiles(true);

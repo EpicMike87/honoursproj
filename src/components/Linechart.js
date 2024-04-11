@@ -124,7 +124,7 @@ const LineChart = () => {
       {selectedFile && (
         <div>
           <h2>Selected File: {selectedFile}</h2>
-          {loadingHeadings && <p>Loading headings...</p>}
+          {loadingHeadings && <p>Loading attributes...</p>}
           {selectedFileHeadings && selectedFileHeadings.length > 0 && (
             <div>
               <h3>Select Attributes for Line Chart:</h3>
