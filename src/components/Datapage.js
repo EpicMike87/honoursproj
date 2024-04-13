@@ -78,13 +78,17 @@ const DataPage = () => {
             <ul>
               {uploadedFileNames.map((fileName, index) => (
                 <li key={index}>
-                  <button
+                  <button          
                     className="File-name-button"
+                    id={`button-${fileName}`}
                     onClick={() => handleFileNameClick(fileName)}
                   >
                     {fileName}
                   </button>
-                  <button className="Delete-button" onClick={() => handleDeleteFile(fileName)}>
+                  <button
+                    className="Delete-button"
+                    id={`delete-${fileName}`}
+                    onClick={() => handleDeleteFile(fileName)}>
                     Delete
                   </button>
                 </li>
@@ -99,7 +103,7 @@ const DataPage = () => {
       <div className="Data-right-column">
         {selectedFileName ? (
           <>
-            <h2>{selectedFileName}</h2>
+            <h2 id="selected-filename">{selectedFileName}</h2>
             {dataValues ? (
               <>
                 {selectedFileName.endsWith('.csv') && <TableCSV headings={headings} rows={dataValues} />}

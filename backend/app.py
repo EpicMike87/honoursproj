@@ -55,14 +55,19 @@ def perform_json_upload():
         filename = data_files.save(file)
 
         if filename.endswith('.json'):
+            stored_filename = os.path.basename(filename)
+            base_filename = os.path.splitext(stored_filename)[0]
+
             headings = get_json_column_headings(filename)
+            data_name = base_filename 
+
+            return jsonify({'headings': headings, 'dataName': data_name}), 200
         else:
             return jsonify({'error': 'Unsupported file type'}), 400
 
-        return jsonify(headings=headings), 200
-
     except Exception as e:
         return jsonify({'error': str(e)}), 500
+
     
 @app.route('/api/xml-upload', methods=['POST'])
 def perform_xml_upload():
@@ -80,8 +85,9 @@ def perform_xml_upload():
         file.save(file_path)
 
         headings = get_xml_headings(filename)
+        base_filename = os.path.splitext(filename)[0]
 
-        return jsonify(headings=headings), 200
+        return jsonify({'headings': headings, 'dataName': base_filename}), 200
 
     except Exception as e:
         print("Exception:", e)

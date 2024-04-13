@@ -61,12 +61,12 @@ const CSVUpload = () => {
       {uploading && <p>Uploading...</p>}
       {dataName && (
         <div>
-          <h3>Data Name: {dataName}</h3>
+          <h3 id="data-name">Data Name: {dataName}</h3>
         </div>
       )}
       {headings && (
         <div>
-          <h3>Attributes:</h3>
+          <h3 id="attributes-heading">Attributes:</h3>
           <ul>
             {headings.map((heading, index) => (
               <li key={index}>{heading}</li>
