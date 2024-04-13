@@ -51,7 +51,7 @@ const CSVUpload = () => {
   }, [headings]);
 
   return (
-    <div>
+    <div className="Upload-container">
       <h2>Upload CSV</h2>
       <input type="file" onChange={handleFileChange} />
       <button onClick={handleUpload} disabled={!file || uploading}>

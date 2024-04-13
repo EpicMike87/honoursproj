@@ -33,7 +33,7 @@ const XMLUpload = () => {
   };
 
   return (
-    <div>
+    <div className="Upload-container">
       <h2>Upload XML</h2>
       <input type="file" onChange={handleFileChange} />
       <button onClick={handleUpload}>Confirm</button>

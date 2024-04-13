@@ -5,25 +5,25 @@ const Navigation = () => {
   return (
     <div className="navigation-section">
       <div className="nav-buttons">
-        <Link to="/" className="nav-button">
+        <Link to="/" className="nav-button" id="home-button">
           Home
         </Link>
-        <Link to="data" className="nav-button">
+        <Link to="data" className="nav-button" id="mydata-button">
           My Data
         </Link>
-        <Link to="csv" className="nav-button">
+        <Link to="csv" className="nav-button" id="uploadcsv-button">
           Upload CSV
         </Link>
-        <Link to="json" className="nav-button">
+        <Link to="json" className="nav-button" id="uploadjson-button">
           Upload JSON
         </Link>
-        <Link to="xml" className="nav-button">
+        <Link to="xml" className="nav-button" id="uploadxml-button">
           Upload XML
         </Link>
-        <Link to="clean" className="nav-button">
+        <Link to="clean" className="nav-button" id="cleandata-button">
           Clean Data
         </Link>
-        <Link to="visualise" className="nav-button">
+        <Link to="visualise" className="nav-button" id="visualise-button">
           Visualise
         </Link>
       </div>
