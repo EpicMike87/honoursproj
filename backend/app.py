@@ -36,8 +36,9 @@ def perform_csv_upload():
 
             headings = data.columns.tolist()
             json_data = data.to_dict(orient='records')
+            data_name = filename.split('.')[0]
 
-            return jsonify({'headings': headings, 'data_values': json_data}), 200
+            return jsonify({'headings': headings, 'data_values': json_data, 'dataName': data_name}), 200
         else:
             return jsonify({'error': 'Unsupported file type'}), 400
 

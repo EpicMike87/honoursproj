@@ -47,8 +47,9 @@ const CSVUpload = () => {
   useEffect(() => {
     if (headings) {
       console.log('Column Headings:', headings);
+      console.log('Data Name:', dataName);
     }
-  }, [headings]);
+  }, [headings, dataName]);
 
   return (
     <div className="Upload-container">
