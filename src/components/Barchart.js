@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import BarchartRender from '../services/BarchartRender';
 
-const Barchart = () => {
+const BarChart = () => {
   const [uploadedFileNames, setUploadedFileNames] = useState([]);
   const [selectedFile, setSelectedFile] = useState(null);
   const [selectedXHeading, setSelectedXHeading] = useState(null);
@@ -104,7 +104,7 @@ const Barchart = () => {
   };
 
   return (
-    <div className="Barchart-section">
+    <div className="BarChart-section">
       <h2>Bar Chart</h2>
       {loadingFiles && <p>Loading uploaded files...</p>}
       {error && <p>Error: {error}</p>}
@@ -114,7 +114,11 @@ const Barchart = () => {
           <ul>
             {uploadedFileNames.map((fileName, index) => (
               <li key={index}>
-                <button className='Visualise-filename' onClick={() => handleFileSelect(fileName)}>{fileName}</button>
+                <button
+                className='Visualise-filename'
+                id={`button-${fileName}`}
+                onClick={() => handleFileSelect(fileName)}>{fileName}
+                </button>
               </li>
             ))}
           </ul>
@@ -176,4 +180,4 @@ const Barchart = () => {
   );
 };
 
-export default Barchart;
+export default BarChart;

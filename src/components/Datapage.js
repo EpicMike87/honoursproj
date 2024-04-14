@@ -81,8 +81,7 @@ const DataPage = () => {
                   <button          
                     className="File-name-button"
                     id={`button-${fileName}`}
-                    onClick={() => handleFileNameClick(fileName)}
-                  >
+                    onClick={() => handleFileNameClick(fileName)}>
                     {fileName}
                   </button>
                   <button

@@ -68,7 +68,11 @@ const SortedTable = () => {
           <ul>
             {uploadedFileNames.map((fileName, index) => (
               <li key={index}>
-                <button className='Visualise-filename' onClick={() => setSelectedFileName(fileName)}>{fileName}</button>
+                <button
+                className='Visualise-filename'
+                id={`button-${fileName}`}
+                onClick={() => setSelectedFileName(fileName)}>{fileName}
+                </button>
               </li>
             ))}
           </ul>

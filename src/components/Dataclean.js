@@ -84,8 +84,12 @@ const DataClean = () => {
             <ul>
               {uploadedFileNames.map((fileName, index) => (
                 <li key={index}>
-                  <button className="File-name-button"
-                  onClick={() => handleButtonClick(fileName)}>{fileName}</button>
+                  <button
+                  className="File-name-button"
+                  id={`button-${fileName}`}
+                  onClick={() => handleButtonClick(fileName)}>
+                    {fileName}
+                  </button>
                 </li>
               ))}
             </ul>
@@ -101,8 +105,12 @@ const DataClean = () => {
             <h2>{selectedFileName}</h2>
             {dataValues ? (
               <>
-                <p>Total Missing Values: {missingValueCount}</p>
-                <button onClick={handleCleanData}>Remove</button>
+                <p id="missingvalues-count">
+                Total Missing Values: {missingValueCount}</p>
+                <button
+                id="remove-button"
+                onClick={handleCleanData}>Remove
+                </button>
               </>
             ) : (
               <p>Loading data...</p>
