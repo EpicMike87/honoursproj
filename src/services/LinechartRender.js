@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useState } from 'react';
 import Plot from 'react-plotly.js';
 
-const LinechartRender = ({ lineChartData, xTimeSeries, yHeading1, yHeading2 }) => {
+const LinechartRender = ({ lineChartData, xTimeSeries, yHeading1, yHeading2, timeGrouping }) => {
   const chartContainerRef = useRef(null);
   const [chartWidth, setChartWidth] = useState(0);
 
@@ -22,79 +22,56 @@ const LinechartRender = ({ lineChartData, xTimeSeries, yHeading1, yHeading2 }) =
     };
   }, []);
 
-  const generateLineChartData = () => {
-    try {
-      if (!lineChartData || !Array.isArray(lineChartData.data_values) || !Array.isArray(lineChartData.headings)) {
-        throw new Error('Line chart data is not in the expected format');
-      }
-
-      const { data_values, headings } = lineChartData;
-
-      const isValidAttribute = attribute => headings.includes(attribute);
-
-      const xData = [];
-      const yData1 = [];
-      const yData2 = [];
-
-      data_values.forEach(row => {
-        if (isValidAttribute(xTimeSeries) && isValidAttribute(yHeading1)) {
-          xData.push(row[xTimeSeries]);
-          yData1.push(row[yHeading1]);
-        }
-
-        if (yHeading2 && isValidAttribute(yHeading2)) {
-          yData2.push(row[yHeading2]);
-        }
-      });
-
-      const groupedData = groupDataByTime(xData, yData1, yData2);
-
-      return groupedData;
-    } catch (error) {
-      console.error('Error generating chart data:', error.message);
+  const groupDataByTime = (data, timeGrouping) => {
+    if (!Array.isArray(data)) {
       return { xData: [], yData1: [], yData2: [] };
     }
-  };
 
-  const groupDataByTime = (xData, yData1, yData2) => {
-    const groupedData = { xData: [], yData1: [], yData2: [] };
+    const groupedData = new Map();
 
-    const groupedByTime = {};
+    data.forEach(row => {
+      const timestamp = new Date(row[xTimeSeries]);
+      let key;
 
-    xData.forEach((x, index) => {
-      const date = new Date(x);
-      const timeKey = getTimeKey(date);
-
-      if (!groupedByTime[timeKey]) {
-        groupedByTime[timeKey] = {
-          xData: [],
-          yData1: [],
-          yData2: [],
-        };
+      switch (timeGrouping) {
+        case 'day':
+          key = timestamp.toISOString().slice(0, 10);
+          break;
+        case 'month':
+          key = `${timestamp.getUTCFullYear()}-${timestamp.getUTCMonth() + 1}`;
+          break;
+        case 'year':
+          key = `${timestamp.getUTCFullYear()}`;
+          break;
+        default:
+          key = timestamp.toISOString().slice(0, 10);
+          break;
       }
 
-      groupedByTime[timeKey].xData.push(x);
-      groupedByTime[timeKey].yData1.push(yData1[index]);
-
-      if (yData2.length > 0) {
-        groupedByTime[timeKey].yData2.push(yData2[index]);
+      if (!groupedData.has(key)) {
+        groupedData.set(key, []);
       }
+      groupedData.get(key).push(row);
     });
 
-    Object.values(groupedByTime).forEach(group => {
-      groupedData.xData.push(...group.xData);
-      groupedData.yData1.push(...group.yData1);
-      groupedData.yData2.push(...group.yData2);
+    const xData = [...groupedData.keys()];
+
+    const yData1 = [...groupedData.values()].map(group => {
+      const total = group.reduce((sum, row) => sum + parseFloat(row[yHeading1] || 0), 0);
+      return total;
     });
 
-    return groupedData;
+    const yData2 = yHeading2
+      ? [...groupedData.values()].map(group => {
+          const total = group.reduce((sum, row) => sum + parseFloat(row[yHeading2] || 0), 0);
+          return total;
+        })
+      : [];
+
+    return { xData, yData1, yData2 };
   };
 
-  const getTimeKey = (date) => {
-    return date.getFullYear().toString();
-  };
-
-  const { xData, yData1, yData2 } = generateLineChartData();
+  const { xData, yData1, yData2 } = groupDataByTime(lineChartData.data_values, timeGrouping);
 
   if (!xData.length || !yData1.length) {
     return <p>Error generating line chart data</p>;

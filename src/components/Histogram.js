@@ -111,7 +111,7 @@ const Histogram = () => {
               <li key={index}>
                 <button
                 className='Visualise-filename'
-                id={`button-${fileName}`}
+                id={`histogram-button-${fileName}`}
                 onClick={() => handleFileSelect(fileName)}>{fileName}
                 </button>
               </li>
@@ -131,7 +131,9 @@ const Histogram = () => {
               <h3>Select Attribute for Histogram:</h3>
               <label> Select Attribute: </label>
               <select onChange={handleColumnSelect}>
-                <option value="">Select Attribute</option>
+                <option
+                id="histogram-attributes"
+                value="">Select Attribute</option>
                 {selectedFileAttributes.map((attribute, index) => (
                   <option key={index} value={attribute}>
                     {attribute}
@@ -139,11 +141,22 @@ const Histogram = () => {
                 ))}
               </select>
               <label> Bin Size: </label>
-              <input type="number" min="1" value={binSize} onChange={handleBinSizeChange} />
+              <input
+              id="histogram-binsize"
+              type="number"
+              min="1"
+              value={binSize} onChange={handleBinSizeChange}
+              />
               {selectedColumn && (
                 <div>
-                  <button onClick={generateHistogram}>Generate Histogram</button>
+                  <button
+                  class="generate-button"
+                  id="generate-histogram-button"
+                  onClick={generateHistogram}>Generate Histogram
+                  </button>
+                  <div class="render-section" id="histogram-render">
                   {histogramData && <HistogramRender histogramData={histogramData} column={selectedColumn} binSize={binSize} />}
+                  </div>
                 </div>
               )}
             </div>

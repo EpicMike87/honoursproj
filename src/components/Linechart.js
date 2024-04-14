@@ -88,9 +88,9 @@ const LineChart = () => {
     try {
       let apiUrl;
       const fileType = selectedFile.split('.').pop().toLowerCase();
-
+  
       apiUrl = `http://localhost:5000/api/get-${fileType}-data-values?file=${selectedFile}&xHeading=${selectedXHeading}&yHeading1=${selectedYHeading1}&yHeading2=${selectedYHeading2}&timeGrouping=${timeGrouping}`;
-
+  
       const response = await fetch(apiUrl);
       if (!response.ok) {
         throw new Error('Failed to get data values');
@@ -115,7 +115,7 @@ const LineChart = () => {
               <li key={index}>
                 <button
                 className='Visualise-filename'
-                id={`button-${fileName}`}
+                id={`linechart-button-${fileName}`}
                 onClick={() => handleFileSelect(fileName)}>{fileName}
                 </button>
               </li>
@@ -160,7 +160,7 @@ const LineChart = () => {
                 ))}
               </select>
               <label>Time Grouping:</label>
-              <select onChange={handleTimeGroupingChange} value={timeGrouping}>
+              <select value={timeGrouping} onChange={handleTimeGroupingChange}>
                 <option value="day">Day</option>
                 <option value="month">Month</option>
                 <option value="year">Year</option>
@@ -174,6 +174,7 @@ const LineChart = () => {
                       xTimeSeries={selectedXHeading}
                       yHeading1={selectedYHeading1}
                       yHeading2={selectedYHeading2}
+                      timeGrouping={timeGrouping}
                     />
                   )}
                 </div>

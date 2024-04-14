@@ -116,7 +116,7 @@ const BarChart = () => {
               <li key={index}>
                 <button
                 className='Visualise-filename'
-                id={`button-${fileName}`}
+                id={`barchart-button-${fileName}`}
                 onClick={() => handleFileSelect(fileName)}>{fileName}
                 </button>
               </li>

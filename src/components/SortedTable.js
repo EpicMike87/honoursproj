@@ -70,7 +70,7 @@ const SortedTable = () => {
               <li key={index}>
                 <button
                 className='Visualise-filename'
-                id={`button-${fileName}`}
+                id={`table-button-${fileName}`}
                 onClick={() => setSelectedFileName(fileName)}>{fileName}
                 </button>
               </li>
