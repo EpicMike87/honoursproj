@@ -115,9 +115,10 @@ const BarChart = () => {
             {uploadedFileNames.map((fileName, index) => (
               <li key={index}>
                 <button
-                className='Visualise-filename'
-                id={`barchart-button-${fileName}`}
-                onClick={() => handleFileSelect(fileName)}>{fileName}
+                  className='Visualise-filename'
+                  id={`barchart-button-${fileName}`}
+                  onClick={() => handleFileSelect(fileName)}>
+                  {fileName}
                 </button>
               </li>
             ))}
@@ -135,11 +136,9 @@ const BarChart = () => {
               <h3>Select Attributes for Bar Chart:</h3>
               <label>Select X-axis Attribute:</label>
               <select
-              id="barchart-attribute-x"
-              onChange={handleXHeadingSelect}>
-                <option
-                value="">Select X-axis Attribute
-                </option>
+                id="barchart-attribute-x"
+                onChange={handleXHeadingSelect}>
+                <option value="">Select X-axis Attribute</option>
                 {selectedFileHeadings.map((heading, index) => (
                   <option key={index} value={heading}>
                     {heading}
@@ -148,11 +147,9 @@ const BarChart = () => {
               </select>
               <label>Select Y-axis Attribute:</label>
               <select
-              id="barchart-attribute-y"
-              onChange={handleYHeadingSelect}>
-              <option
-              value="">Select Y-axis Attribute
-              </option>
+                id="barchart-attribute-y"
+                onChange={handleYHeadingSelect}>
+                <option value="">Select Y-axis Attribute</option>
                 {selectedFileHeadings.map((heading, index) => (
                   <option key={index} value={heading}>
                     {heading}
@@ -162,28 +159,51 @@ const BarChart = () => {
               <div>
                 <label>Select Time Grouping:</label>
                 <select
-                id="barchart-timeseries"
-                value={timeGrouping} onChange={handleTimeGroupingChange}>
+                  id="barchart-timeseries"
+                  value={timeGrouping}
+                  onChange={handleTimeGroupingChange}>
                   <option value="day">Day</option>
                   <option value="month">Month</option>
                   <option value="year">Year</option>
+                  <option value="none">None</option>
                 </select>
               </div>
+              {selectedXHeading && !selectedYHeading && (
+                <div>
+                  <button
+                    className="generate-button"
+                    id="generate-barchart-button"
+                    onClick={generateBarChart}>
+                    Generate Bar Chart
+                  </button>
+                  {barChartData && (
+                    <div className="render-section" id="barchart-render">
+                      <BarchartRender
+                        barChartData={barChartData}
+                        xTimeSeries={selectedXHeading}
+                        yHeading={selectedXHeading}
+                        timeGrouping={timeGrouping}
+                      />
+                    </div>
+                  )}
+                </div>
+              )}
               {(selectedXHeading && selectedYHeading) && (
                 <div>
                   <button
-                  class="generate-button"
-                  id="generate-barchart-button"
-                  onClick={generateBarChart}>Generate Bar Chart
+                    className="generate-button"
+                    id="generate-barchart-button"
+                    onClick={generateBarChart}>
+                    Generate Bar Chart
                   </button>
                   {barChartData && (
-                    <div class="render-section" id="barchart-render">
-                    <BarchartRender
-                      barChartData={barChartData}
-                      xTimeSeries={selectedXHeading}
-                      yHeading={selectedYHeading}
-                      timeGrouping={timeGrouping}
-                    />
+                    <div className="render-section" id="barchart-render">
+                      <BarchartRender
+                        barChartData={barChartData}
+                        xTimeSeries={selectedXHeading}
+                        yHeading={selectedYHeading}
+                        timeGrouping={timeGrouping}
+                      />
                     </div>
                   )}
                 </div>

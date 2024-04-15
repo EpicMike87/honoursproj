@@ -24,44 +24,53 @@ const BarchartRender = ({ barChartData, xTimeSeries, yHeading, timeGrouping }) =
 
   const groupDataByTime = (data, timeGrouping) => {
     if (!Array.isArray(data)) {
-      return [];
+      return { xData: [], yData: [] };
     }
-
+  
     const groupedData = new Map();
-
+  
     data.forEach(row => {
-      const timestamp = new Date(row[xTimeSeries]);
+      const timestamp = row[xTimeSeries];
+  
+      if (!timestamp) {
+        return; // Skip rows with undefined or null timestamp
+      }
+  
       let key;
-
+  
       switch (timeGrouping) {
         case 'day':
-          key = timestamp.toISOString().slice(0, 10);
+          key = new Date(timestamp).toISOString().slice(0, 10);
           break;
         case 'month':
-          key = `${timestamp.getUTCFullYear()}-${timestamp.getUTCMonth() + 1}`;
+          key = `${new Date(timestamp).getUTCFullYear()}-${new Date(timestamp).getUTCMonth() + 1}`;
           break;
         case 'year':
-          key = `${timestamp.getUTCFullYear()}`;
+          key = `${new Date(timestamp).getUTCFullYear()}`;
+          break;
+        case 'none':
+          key = 'All';
           break;
         default:
-          key = timestamp.toISOString().slice(0, 10);
+          key = new Date(timestamp).toISOString().slice(0, 10);
           break;
       }
-
+  
       if (!groupedData.has(key)) {
         groupedData.set(key, []);
       }
       groupedData.get(key).push(row);
     });
-
+  
     const xData = [...groupedData.keys()];
     const yData = [...groupedData.values()].map(group => {
       const total = group.reduce((sum, row) => sum + parseFloat(row[yHeading] || 0), 0);
       return total;
     });
-
+  
     return { xData, yData };
   };
+  
 
   const { xData, yData } = groupDataByTime(barChartData.data_values, timeGrouping);
 
