@@ -134,8 +134,12 @@ const BarChart = () => {
             <div>
               <h3>Select Attributes for Bar Chart:</h3>
               <label>Select X-axis Attribute:</label>
-              <select onChange={handleXHeadingSelect}>
-                <option value="">Select X-axis Attribute</option>
+              <select
+              id="barchart-attribute-x"
+              onChange={handleXHeadingSelect}>
+                <option
+                value="">Select X-axis Attribute
+                </option>
                 {selectedFileHeadings.map((heading, index) => (
                   <option key={index} value={heading}>
                     {heading}
@@ -143,8 +147,12 @@ const BarChart = () => {
                 ))}
               </select>
               <label>Select Y-axis Attribute:</label>
-              <select onChange={handleYHeadingSelect}>
-                <option value="">Select Y-axis Attribute</option>
+              <select
+              id="barchart-attribute-y"
+              onChange={handleYHeadingSelect}>
+              <option
+              value="">Select Y-axis Attribute
+              </option>
                 {selectedFileHeadings.map((heading, index) => (
                   <option key={index} value={heading}>
                     {heading}
@@ -153,7 +161,9 @@ const BarChart = () => {
               </select>
               <div>
                 <label>Select Time Grouping:</label>
-                <select value={timeGrouping} onChange={handleTimeGroupingChange}>
+                <select
+                id="barchart-timeseries"
+                value={timeGrouping} onChange={handleTimeGroupingChange}>
                   <option value="day">Day</option>
                   <option value="month">Month</option>
                   <option value="year">Year</option>
@@ -161,14 +171,20 @@ const BarChart = () => {
               </div>
               {(selectedXHeading && selectedYHeading) && (
                 <div>
-                  <button onClick={generateBarChart}>Generate Bar Chart</button>
+                  <button
+                  class="generate-button"
+                  id="generate-barchart-button"
+                  onClick={generateBarChart}>Generate Bar Chart
+                  </button>
                   {barChartData && (
+                    <div class="render-section" id="barchart-render">
                     <BarchartRender
                       barChartData={barChartData}
                       xTimeSeries={selectedXHeading}
                       yHeading={selectedYHeading}
                       timeGrouping={timeGrouping}
                     />
+                    </div>
                   )}
                 </div>
               )}

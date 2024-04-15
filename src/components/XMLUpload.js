@@ -2,10 +2,13 @@ import React, { useState } from 'react';
 
 const XMLUpload = () => {
   const [file, setFile] = useState(null);
+  const [dataName, setDataName] = useState(null);
   const [headings, setHeadings] = useState(null);
 
   const handleFileChange = (e) => {
     setFile(e.target.files[0]);
+    setDataName(null);
+    setHeadings(null);
   };
 
   const handleUpload = async () => {
@@ -27,6 +30,11 @@ const XMLUpload = () => {
       if (result && result.headings) {
         setHeadings(result.headings);
       }
+
+      if (result && result.dataName) {
+        setDataName(result.dataName);
+      }
+
     } catch (error) {
       console.error('Error during XML file upload:', error.message);
     }
@@ -40,7 +48,7 @@ const XMLUpload = () => {
 
       {headings && (
         <div>
-          <h3>Attributes:</h3>
+          <h3 id="data-name">Data Name: {dataName}</h3>
           <ul>
             {headings.map((heading, index) => (
               <li key={index}>{heading}</li>

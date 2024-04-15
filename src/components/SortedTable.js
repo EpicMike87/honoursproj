@@ -82,7 +82,8 @@ const SortedTable = () => {
       )}
       {selectedFileName && (
         <div>
-          <h2>Selected File: {selectedFileName}</h2>
+          <h2 id="selected-file-table">Selected File: {selectedFileName}</h2>
+          <div id="sorted-table">
           {dataValues && headings && (
             <>
               {selectedFileName.endsWith('.csv') && (
@@ -96,6 +97,7 @@ const SortedTable = () => {
               )}
             </>
           )}
+          </div>
         </div>
       )}
     </div>

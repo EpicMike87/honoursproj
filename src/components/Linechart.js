@@ -133,8 +133,11 @@ const LineChart = () => {
             <div>
               <h3>Select Attributes for Line Chart:</h3>
               <label> Select X-axis Attribute: </label>
-              <select onChange={handleXHeadingSelect}>
-                <option value="">Select X-axis Heading</option>
+              <select
+              id="linechart-attribute-x"onChange={handleXHeadingSelect}>
+                <option
+                value="">Select X-axis Heading
+                </option>
                 {selectedFileHeadings.map((heading, index) => (
                   <option key={index} value={heading}>
                     {heading}
@@ -142,8 +145,12 @@ const LineChart = () => {
                 ))}
               </select>
               <label> Select Y-axis Attribute 1: </label>
-              <select onChange={handleYHeading1Select}>
-                <option value="">Select Y-axis Attribute</option>
+              <select
+              id="linechart-attribute-y1"
+              onChange={handleYHeading1Select}>
+                <option
+                value="">Select Y-axis Attribute
+                </option>
                 {selectedFileHeadings.map((heading, index) => (
                   <option key={index} value={heading}>
                     {heading}
@@ -151,8 +158,12 @@ const LineChart = () => {
                 ))}
               </select>
               <label>Select Y-axis Attribute 2 (optional): </label>
-              <select onChange={handleYHeading2Select}>
-                <option value="">Select Y-axis Attribute (optional)</option>
+              <select
+              id="linechart-attribute-y2"
+              onChange={handleYHeading2Select}>
+                <option 
+                value="">Select Y-axis Attribute (optional)
+                </option>
                 {selectedFileHeadings.map((heading, index) => (
                   <option key={index} value={heading}>
                     {heading}
@@ -160,15 +171,22 @@ const LineChart = () => {
                 ))}
               </select>
               <label>Time Grouping:</label>
-              <select value={timeGrouping} onChange={handleTimeGroupingChange}>
+              <select
+              id="linechart-timeseries"
+              value={timeGrouping} onChange={handleTimeGroupingChange}>
                 <option value="day">Day</option>
                 <option value="month">Month</option>
                 <option value="year">Year</option>
               </select>
               {(selectedXHeading && selectedYHeading1) && (
                 <div>
-                  <button onClick={generateLineChart}>Generate Line Chart</button>
+                  <button
+                  class="generate-button"
+                  id="generate-linechart-button"
+                  onClick={generateLineChart}>Generate Line Chart
+                  </button>
                   {lineChartData && (
+                    <div class="render-section" id="linechart-render">
                     <LineChartRender
                       lineChartData={lineChartData}
                       xTimeSeries={selectedXHeading}
@@ -176,6 +194,7 @@ const LineChart = () => {
                       yHeading2={selectedYHeading2}
                       timeGrouping={timeGrouping}
                     />
+                    </div>
                   )}
                 </div>
               )}

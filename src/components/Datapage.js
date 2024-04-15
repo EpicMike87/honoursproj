@@ -103,16 +103,21 @@ const DataPage = () => {
         {selectedFileName ? (
           <>
             <h2 id="selected-filename">{selectedFileName}</h2>
+           
             {dataValues ? (
               <>
+               <div id="data-view-section">
                 {selectedFileName.endsWith('.csv') && <TableCSV headings={headings} rows={dataValues} />}
                 {selectedFileName.endsWith('.json') && <TableJSON dataValues={dataValues} />}
                 {selectedFileName.endsWith('.xml') && <TableXML dataValues={dataValues} />}
+                </div>
               </>
             ) : (
               <p>Loading data...</p>
             )}
+            
           </>
+          
         ) : (
           <p>Select a file to display data.</p>
         )}

@@ -130,10 +130,12 @@ const Histogram = () => {
             <div>
               <h3>Select Attribute for Histogram:</h3>
               <label> Select Attribute: </label>
-              <select onChange={handleColumnSelect}>
+              <select
+                id="histogram-attribute"
+                onChange={handleColumnSelect}>
                 <option
-                id="histogram-attributes"
-                value="">Select Attribute</option>
+                value="">Select Attribute
+                </option>
                 {selectedFileAttributes.map((attribute, index) => (
                   <option key={index} value={attribute}>
                     {attribute}
