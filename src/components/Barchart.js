@@ -11,7 +11,7 @@ const BarChart = () => {
   const [error, setError] = useState(null);
   const [barChartData, setBarChartData] = useState(null);
   const [loadingFiles, setLoadingFiles] = useState(false);
-  const [timeGrouping, setTimeGrouping] = useState('day');
+  const [timeGrouping, setTimeGrouping] = useState('none');
 
   useEffect(() => {
     setLoadingFiles(true);

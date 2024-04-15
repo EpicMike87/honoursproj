@@ -22,57 +22,32 @@ const BarchartRender = ({ barChartData, xTimeSeries, yHeading, timeGrouping }) =
     };
   }, []);
 
-  const groupDataByTime = (data, timeGrouping) => {
-    if (!Array.isArray(data)) {
+  const groupDataByAttribute = (data, attribute) => {
+    if (!Array.isArray(data) || !attribute) {
       return { xData: [], yData: [] };
     }
   
     const groupedData = new Map();
   
     data.forEach(row => {
-      const timestamp = row[xTimeSeries];
+      const valueForAttribute = row[attribute];
   
-      if (!timestamp) {
-        return; // Skip rows with undefined or null timestamp
+      if (!groupedData.has(valueForAttribute)) {
+        groupedData.set(valueForAttribute, 0);
       }
   
-      let key;
-  
-      switch (timeGrouping) {
-        case 'day':
-          key = new Date(timestamp).toISOString().slice(0, 10);
-          break;
-        case 'month':
-          key = `${new Date(timestamp).getUTCFullYear()}-${new Date(timestamp).getUTCMonth() + 1}`;
-          break;
-        case 'year':
-          key = `${new Date(timestamp).getUTCFullYear()}`;
-          break;
-        case 'none':
-          key = 'All';
-          break;
-        default:
-          key = new Date(timestamp).toISOString().slice(0, 10);
-          break;
-      }
-  
-      if (!groupedData.has(key)) {
-        groupedData.set(key, []);
-      }
-      groupedData.get(key).push(row);
+      groupedData.set(valueForAttribute, groupedData.get(valueForAttribute) + 1);
     });
   
-    const xData = [...groupedData.keys()];
-    const yData = [...groupedData.values()].map(group => {
-      const total = group.reduce((sum, row) => sum + parseFloat(row[yHeading] || 0), 0);
-      return total;
-    });
+    const xData = Array.from(groupedData.keys());
+    const yData = Array.from(groupedData.values());
   
     return { xData, yData };
   };
-  
 
-  const { xData, yData } = groupDataByTime(barChartData.data_values, timeGrouping);
+  const { xData, yData } = xTimeSeries
+    ? groupDataByAttribute(barChartData.data_values, xTimeSeries)
+    : { xData: [], yData: [] };
 
   if (!xData || !yData) {
     return <p>Error generating bar chart data</p>;
