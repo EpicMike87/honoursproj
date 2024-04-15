@@ -28,29 +28,34 @@ const HistogramRender = ({ histogramData, column, binSize }) => {
       if (!Array.isArray(dataValues)) {
         throw new Error('Data values are not in the expected format');
       }
-
-      const histogramMap = new Map();
-      
-      dataValues.forEach(row => {
-        const xValue = row[column];
-        const binIndex = Math.floor(xValue / binSize) * binSize;
-        if (histogramMap.has(binIndex)) {
-          histogramMap.set(binIndex, histogramMap.get(binIndex) + 1);
-        } else {
-          histogramMap.set(binIndex, 1);
-        }
+  
+      const columnValues = dataValues.map(row => row[column]);
+      const minValue = Math.min(...columnValues);
+      const maxValue = Math.max(...columnValues);
+      const numBins = Math.ceil((maxValue - minValue) / binSize);
+  
+      const bins = [];
+      const counts = Array(numBins).fill(0);
+  
+      columnValues.forEach(value => {
+        const binIndex = Math.floor((value - minValue) / binSize);
+        counts[binIndex]++;
       });
-
-      const xData = Array.from(histogramMap.keys());
-      const yData = Array.from(histogramMap.values());
-
-      return { xData, yData };
+  
+      for (let i = 0; i < numBins; i++) {
+        const binStart = minValue + i * binSize;
+        const binEnd = binStart + binSize - 1;
+        const binLabel = `${binStart}-${binEnd}`;
+        bins.push(binLabel);
+      }
+  
+      return { xData: bins, yData: counts };
     } catch (error) {
       console.error(error.message);
       return { xData: [], yData: [] };
     }
   };
-
+  
   const { xData, yData } = generateHistogramData();
 
   if (!xData || !yData) {
@@ -64,13 +69,15 @@ const HistogramRender = ({ histogramData, column, binSize }) => {
           {
             x: xData,
             y: yData,
-            type: 'histogram',
+            type: 'bar',
           },
         ]}
         layout={{
           width: chartWidth,
           height: 500,
-          title: 'Histogram',
+          title: `Histogram of ${column}`,
+          xaxis: { title: column },
+          yaxis: { title: 'Frequency' },
         }}
       />
     </div>
