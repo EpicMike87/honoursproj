@@ -23,31 +23,71 @@ const BarchartRender = ({ barChartData, xTimeSeries, yHeading, timeGrouping }) =
   }, []);
 
   const groupDataByAttribute = (data, attribute) => {
-    if (!Array.isArray(data) || !attribute) {
+    if (!Array.isArray(data)) {
       return { xData: [], yData: [] };
     }
-  
+
     const groupedData = new Map();
-  
+
     data.forEach(row => {
       const valueForAttribute = row[attribute];
-  
+
       if (!groupedData.has(valueForAttribute)) {
         groupedData.set(valueForAttribute, 0);
       }
-  
+
       groupedData.set(valueForAttribute, groupedData.get(valueForAttribute) + 1);
     });
-  
+
     const xData = Array.from(groupedData.keys());
     const yData = Array.from(groupedData.values());
-  
+
     return { xData, yData };
   };
 
-  const { xData, yData } = xTimeSeries
-    ? groupDataByAttribute(barChartData.data_values, xTimeSeries)
-    : { xData: [], yData: [] };
+  const groupDataByTime = (data, timeGrouping, xTimeSeries) => {
+    if (!Array.isArray(data)) {
+      return { xData: [], yData: [] };
+    }
+
+    const groupedData = new Map();
+
+    data.forEach(row => {
+      const timestamp = new Date(row[xTimeSeries]);
+      let key;
+
+      switch (timeGrouping) {
+        case 'day':
+          key = timestamp.toISOString().slice(0, 10);
+          break;
+        case 'month':
+          key = `${timestamp.getUTCFullYear()}-${timestamp.getUTCMonth() + 1}`;
+          break;
+        case 'year':
+          key = `${timestamp.getUTCFullYear()}`;
+          break;
+        default:
+          key = timestamp.toISOString().slice(0, 10);
+          break;
+      }
+
+      if (!groupedData.has(key)) {
+        groupedData.set(key, 0);
+      }
+
+      groupedData.set(key, groupedData.get(key) + 1);
+    });
+
+    const xData = Array.from(groupedData.keys());
+    const yData = Array.from(groupedData.values());
+
+    return { xData, yData };
+  };
+
+  const { xData, yData } =
+    timeGrouping === 'none'
+      ? groupDataByAttribute(barChartData.data_values, xTimeSeries || yHeading)
+      : groupDataByTime(barChartData.data_values, timeGrouping, xTimeSeries);
 
   if (!xData || !yData) {
     return <p>Error generating bar chart data</p>;
