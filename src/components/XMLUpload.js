@@ -4,6 +4,7 @@ const XMLUpload = () => {
   const [file, setFile] = useState(null);
   const [dataName, setDataName] = useState(null);
   const [headings, setHeadings] = useState(null);
+  const [uploading, setUploading] = useState(false);
 
   const handleFileChange = (e) => {
     setFile(e.target.files[0]);
@@ -15,6 +16,7 @@ const XMLUpload = () => {
     try {
       const formData = new FormData();
       formData.append('file', file);
+        setUploading(true);
 
       const response = await fetch('http://localhost:5000/api/xml-upload', {
         method: 'POST',
@@ -44,8 +46,9 @@ const XMLUpload = () => {
     <div className="Upload-container">
       <h2>Upload XML</h2>
       <input type="file" onChange={handleFileChange} />
-      <button onClick={handleUpload}>Confirm</button>
-
+      <button onClick={handleUpload} disabled={!file || uploading}>
+        Confirm
+      </button>
       {headings && (
         <div>
           <h3 id="data-name">Data Name: {dataName}</h3>
