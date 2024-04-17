@@ -1,10 +1,8 @@
 import React, { useRef, useEffect, useState } from 'react';
 import Plot from 'react-plotly.js';
-
 const BarchartRender = ({ barChartData, xTimeSeries, yHeading, timeGrouping }) => {
   const chartContainerRef = useRef(null);
   const [chartWidth, setChartWidth] = useState(0);
-
   useEffect(() => {
     const updateChartWidth = () => {
       if (chartContainerRef.current) {
@@ -13,16 +11,14 @@ const BarchartRender = ({ barChartData, xTimeSeries, yHeading, timeGrouping }) =
         setChartWidth(calculatedWidth);
       }
     };
-
     updateChartWidth();
     window.addEventListener('resize', updateChartWidth);
-
     return () => {
       window.removeEventListener('resize', updateChartWidth);
     };
   }, []);
 
-  const groupDataByAttribute = (data, attribute) => {
+  const groupDataByTime = (data, timeGrouping) => {
     if (!Array.isArray(data)) {
       return { xData: [], yData: [] };
     }
@@ -30,69 +26,53 @@ const BarchartRender = ({ barChartData, xTimeSeries, yHeading, timeGrouping }) =
     const groupedData = new Map();
 
     data.forEach(row => {
-      const valueForAttribute = row[attribute];
+      const timestamp = row[xTimeSeries];
 
-      if (!groupedData.has(valueForAttribute)) {
-        groupedData.set(valueForAttribute, 0);
+      if (!timestamp) {
+        return;
       }
 
-      groupedData.set(valueForAttribute, groupedData.get(valueForAttribute) + 1);
-    });
-
-    const xData = Array.from(groupedData.keys());
-    const yData = Array.from(groupedData.values());
-
-    return { xData, yData };
-  };
-
-  const groupDataByTime = (data, timeGrouping, xTimeSeries) => {
-    if (!Array.isArray(data)) {
-      return { xData: [], yData: [] };
-    }
-
-    const groupedData = new Map();
-
-    data.forEach(row => {
-      const timestamp = new Date(row[xTimeSeries]);
       let key;
 
       switch (timeGrouping) {
         case 'day':
-          key = timestamp.toISOString().slice(0, 10);
+          key = new Date(timestamp).toISOString().slice(0, 10);
           break;
         case 'month':
-          key = `${timestamp.getUTCFullYear()}-${timestamp.getUTCMonth() + 1}`;
+          key = `${new Date(timestamp).getUTCFullYear()}-${new Date(timestamp).getUTCMonth() + 1}`;
           break;
         case 'year':
-          key = `${timestamp.getUTCFullYear()}`;
+          key = `${new Date(timestamp).getUTCFullYear()}`;
+          break;
+        case 'none':
+          key = 'All';
           break;
         default:
-          key = timestamp.toISOString().slice(0, 10);
+          key = new Date(timestamp).toISOString().slice(0, 10);
           break;
       }
 
       if (!groupedData.has(key)) {
-        groupedData.set(key, 0);
+        groupedData.set(key, []);
       }
-
-      groupedData.set(key, groupedData.get(key) + 1);
+      groupedData.get(key).push(row);
     });
 
-    const xData = Array.from(groupedData.keys());
-    const yData = Array.from(groupedData.values());
+    const xData = [...groupedData.keys()];
+    const yData = [...groupedData.values()].map(group => {
+      const total = group.reduce((sum, row) => sum + parseFloat(row[yHeading] || 0), 0);
+      return total;
+    });
 
     return { xData, yData };
   };
 
-  const { xData, yData } =
-    timeGrouping === 'none'
-      ? groupDataByAttribute(barChartData.data_values, xTimeSeries || yHeading)
-      : groupDataByTime(barChartData.data_values, timeGrouping, xTimeSeries);
+
+  const { xData, yData } = groupDataByTime(barChartData.data_values, timeGrouping);
 
   if (!xData || !yData) {
     return <p>Error generating bar chart data</p>;
   }
-
   return (
     <div ref={chartContainerRef} style={{ width: '100%', height: '500px' }}>
       <Plot
@@ -114,5 +94,4 @@ const BarchartRender = ({ barChartData, xTimeSeries, yHeading, timeGrouping }) =
     </div>
   );
 };
-
 export default BarchartRender;
