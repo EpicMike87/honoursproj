@@ -28,24 +28,28 @@ const LinechartRender = ({ lineChartData, xTimeSeries, yHeading1, yHeading2, tim
     }
 
     const groupedData = new Map();
+    const allKey = 'All';
 
     data.forEach(row => {
-      const timestamp = new Date(row[xTimeSeries]);
-      let key;
+      let key = allKey;
 
-      switch (timeGrouping) {
-        case 'day':
-          key = timestamp.toISOString().slice(0, 10);
-          break;
-        case 'month':
-          key = `${timestamp.getUTCFullYear()}-${timestamp.getUTCMonth() + 1}`;
-          break;
-        case 'year':
-          key = `${timestamp.getUTCFullYear()}`;
-          break;
-        default:
-          key = timestamp.toISOString().slice(0, 10);
-          break;
+      if (timeGrouping !== 'none') {
+        const timestamp = new Date(row[xTimeSeries]);
+
+        switch (timeGrouping) {
+          case 'day':
+            key = timestamp.toISOString().slice(0, 10);
+            break;
+          case 'month':
+            key = `${timestamp.getUTCFullYear()}-${timestamp.getUTCMonth() + 1}`;
+            break;
+          case 'year':
+            key = `${timestamp.getUTCFullYear()}`;
+            break;
+          default:
+            key = timestamp.toISOString().slice(0, 10);
+            break;
+        }
       }
 
       if (!groupedData.has(key)) {
@@ -54,21 +58,18 @@ const LinechartRender = ({ lineChartData, xTimeSeries, yHeading1, yHeading2, tim
       groupedData.get(key).push(row);
     });
 
-    const xData = [...groupedData.keys()];
-
-    const yData1 = [...groupedData.values()].map(group => {
-      const total = group.reduce((sum, row) => sum + parseFloat(row[yHeading1] || 0), 0);
-      return total;
-    });
-
-    const yData2 = yHeading2
-      ? [...groupedData.values()].map(group => {
-          const total = group.reduce((sum, row) => sum + parseFloat(row[yHeading2] || 0), 0);
-          return total;
-        })
-      : [];
+    const xData = [allKey]; // Single X-axis label for 'none' time grouping
+    const yData1 = [sumDataValues(groupedData.get(allKey), yHeading1)];
+    const yData2 = yHeading2 ? [sumDataValues(groupedData.get(allKey), yHeading2)] : [];
 
     return { xData, yData1, yData2 };
+  };
+
+  const sumDataValues = (data, heading) => {
+    if (!Array.isArray(data)) {
+      return 0;
+    }
+    return data.reduce((sum, row) => sum + parseFloat(row[heading] || 0), 0);
   };
 
   const { xData, yData1, yData2 } = groupDataByTime(lineChartData.data_values, timeGrouping);

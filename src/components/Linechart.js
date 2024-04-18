@@ -12,7 +12,7 @@ const LineChart = () => {
   const [error, setError] = useState(null);
   const [lineChartData, setLineChartData] = useState(null);
   const [loadingFiles, setLoadingFiles] = useState(false);
-  const [timeGrouping, setTimeGrouping] = useState('day');
+  const [timeGrouping, setTimeGrouping] = useState('day'); // Default time grouping
 
   useEffect(() => {
     setLoadingFiles(true);
@@ -114,9 +114,10 @@ const LineChart = () => {
             {uploadedFileNames.map((fileName, index) => (
               <li key={index}>
                 <button
-                className='Visualise-filename'
-                id={`linechart-button-${fileName}`}
-                onClick={() => handleFileSelect(fileName)}>{fileName}
+                  className='Visualise-filename'
+                  id={`linechart-button-${fileName}`}
+                  onClick={() => handleFileSelect(fileName)}>
+                  {fileName}
                 </button>
               </li>
             ))}
@@ -132,38 +133,27 @@ const LineChart = () => {
           {selectedFileHeadings && selectedFileHeadings.length > 0 && (
             <div>
               <h3>Select Attributes for Line Chart:</h3>
-              <label> Select X-axis Attribute: </label>
-              <select
-              id="linechart-attribute-x"onChange={handleXHeadingSelect}>
-                <option
-                value="">Select X-axis Heading
-                </option>
+              <label>Select X-axis Attribute:</label>
+              <select id="linechart-attribute-x" onChange={handleXHeadingSelect}>
+                <option value="">Select X-axis Heading</option>
                 {selectedFileHeadings.map((heading, index) => (
                   <option key={index} value={heading}>
                     {heading}
                   </option>
                 ))}
               </select>
-              <label> Select Y-axis Attribute 1: </label>
-              <select
-              id="linechart-attribute-y1"
-              onChange={handleYHeading1Select}>
-                <option
-                value="">Select Y-axis Attribute
-                </option>
+              <label>Select Y-axis Attribute 1:</label>
+              <select id="linechart-attribute-y1" onChange={handleYHeading1Select}>
+                <option value="">Select Y-axis Attribute</option>
                 {selectedFileHeadings.map((heading, index) => (
                   <option key={index} value={heading}>
                     {heading}
                   </option>
                 ))}
               </select>
-              <label>Select Y-axis Attribute 2 (optional): </label>
-              <select
-              id="linechart-attribute-y2"
-              onChange={handleYHeading2Select}>
-                <option 
-                value="">Select Y-axis Attribute (optional)
-                </option>
+              <label>Select Y-axis Attribute 2 (optional):</label>
+              <select id="linechart-attribute-y2" onChange={handleYHeading2Select}>
+                <option value="">Select Y-axis Attribute (optional)</option>
                 {selectedFileHeadings.map((heading, index) => (
                   <option key={index} value={heading}>
                     {heading}
@@ -171,29 +161,26 @@ const LineChart = () => {
                 ))}
               </select>
               <label>Time Grouping:</label>
-              <select
-              id="linechart-timeseries"
-              value={timeGrouping} onChange={handleTimeGroupingChange}>
+              <select id="linechart-timeseries" value={timeGrouping} onChange={handleTimeGroupingChange}>
                 <option value="day">Day</option>
                 <option value="month">Month</option>
                 <option value="year">Year</option>
+                <option value="none">None</option>
               </select>
               {(selectedXHeading && selectedYHeading1) && (
                 <div>
-                  <button
-                  class="generate-button"
-                  id="generate-linechart-button"
-                  onClick={generateLineChart}>Generate Line Chart
+                  <button className="generate-button" id="generate-linechart-button" onClick={generateLineChart}>
+                    Generate Line Chart
                   </button>
                   {lineChartData && (
-                    <div class="render-section" id="linechart-render">
-                    <LineChartRender
-                      lineChartData={lineChartData}
-                      xTimeSeries={selectedXHeading}
-                      yHeading1={selectedYHeading1}
-                      yHeading2={selectedYHeading2}
-                      timeGrouping={timeGrouping}
-                    />
+                    <div className="render-section" id="linechart-render">
+                      <LineChartRender
+                        lineChartData={lineChartData}
+                        xTimeSeries={selectedXHeading}
+                        yHeading1={selectedYHeading1}
+                        yHeading2={selectedYHeading2}
+                        timeGrouping={timeGrouping}
+                      />
                     </div>
                   )}
                 </div>
