@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useState } from 'react';
 import Plot from 'react-plotly.js';
 
-const LinechartRender = ({ lineChartData, xTimeSeries, yHeading1, yHeading2, timeGrouping }) => {
+const LinechartRender = ({ lineChartData, xTimeSeries, yHeading1, yHeading2 }) => {
   const chartContainerRef = useRef(null);
   const [chartWidth, setChartWidth] = useState(0);
 
@@ -22,57 +22,19 @@ const LinechartRender = ({ lineChartData, xTimeSeries, yHeading1, yHeading2, tim
     };
   }, []);
 
-  const groupDataByTime = (data, timeGrouping) => {
+  const groupDataByTime = (data) => {
     if (!Array.isArray(data)) {
       return { xData: [], yData1: [], yData2: [] };
     }
 
-    const groupedData = new Map();
-    const allKey = 'All';
-
-    data.forEach(row => {
-      let key = allKey;
-
-      if (timeGrouping !== 'none') {
-        const timestamp = new Date(row[xTimeSeries]);
-
-        switch (timeGrouping) {
-          case 'day':
-            key = timestamp.toISOString().slice(0, 10);
-            break;
-          case 'month':
-            key = `${timestamp.getUTCFullYear()}-${timestamp.getUTCMonth() + 1}`;
-            break;
-          case 'year':
-            key = `${timestamp.getUTCFullYear()}`;
-            break;
-          default:
-            key = timestamp.toISOString().slice(0, 10);
-            break;
-        }
-      }
-
-      if (!groupedData.has(key)) {
-        groupedData.set(key, []);
-      }
-      groupedData.get(key).push(row);
-    });
-
-    const xData = [allKey]; // Single X-axis label for 'none' time grouping
-    const yData1 = [sumDataValues(groupedData.get(allKey), yHeading1)];
-    const yData2 = yHeading2 ? [sumDataValues(groupedData.get(allKey), yHeading2)] : [];
+    const xData = data.map(row => row[xTimeSeries]);
+    const yData1 = data.map(row => parseFloat(row[yHeading1] || 0));
+    const yData2 = yHeading2 ? data.map(row => parseFloat(row[yHeading2] || 0)) : [];
 
     return { xData, yData1, yData2 };
   };
 
-  const sumDataValues = (data, heading) => {
-    if (!Array.isArray(data)) {
-      return 0;
-    }
-    return data.reduce((sum, row) => sum + parseFloat(row[heading] || 0), 0);
-  };
-
-  const { xData, yData1, yData2 } = groupDataByTime(lineChartData.data_values, timeGrouping);
+  const { xData, yData1, yData2 } = groupDataByTime(lineChartData.data_values);
 
   if (!xData.length || !yData1.length) {
     return <p>Error generating line chart data</p>;

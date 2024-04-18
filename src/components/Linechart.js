@@ -12,7 +12,6 @@ const LineChart = () => {
   const [error, setError] = useState(null);
   const [lineChartData, setLineChartData] = useState(null);
   const [loadingFiles, setLoadingFiles] = useState(false);
-  const [timeGrouping, setTimeGrouping] = useState('day'); // Default time grouping
 
   useEffect(() => {
     setLoadingFiles(true);
@@ -80,16 +79,12 @@ const LineChart = () => {
     setSelectedYHeading2(event.target.value);
   };
 
-  const handleTimeGroupingChange = event => {
-    setTimeGrouping(event.target.value);
-  };
-
   const generateLineChart = async () => {
     try {
       let apiUrl;
       const fileType = selectedFile.split('.').pop().toLowerCase();
   
-      apiUrl = `http://localhost:5000/api/get-${fileType}-data-values?file=${selectedFile}&xHeading=${selectedXHeading}&yHeading1=${selectedYHeading1}&yHeading2=${selectedYHeading2}&timeGrouping=${timeGrouping}`;
+      apiUrl = `http://localhost:5000/api/get-${fileType}-data-values?file=${selectedFile}&xHeading=${selectedXHeading}&yHeading1=${selectedYHeading1}&yHeading2=${selectedYHeading2}`;
   
       const response = await fetch(apiUrl);
       if (!response.ok) {
@@ -160,13 +155,6 @@ const LineChart = () => {
                   </option>
                 ))}
               </select>
-              <label>Time Grouping:</label>
-              <select id="linechart-timeseries" value={timeGrouping} onChange={handleTimeGroupingChange}>
-                <option value="day">Day</option>
-                <option value="month">Month</option>
-                <option value="year">Year</option>
-                <option value="none">None</option>
-              </select>
               {(selectedXHeading && selectedYHeading1) && (
                 <div>
                   <button className="generate-button" id="generate-linechart-button" onClick={generateLineChart}>
@@ -179,7 +167,6 @@ const LineChart = () => {
                         xTimeSeries={selectedXHeading}
                         yHeading1={selectedYHeading1}
                         yHeading2={selectedYHeading2}
-                        timeGrouping={timeGrouping}
                       />
                     </div>
                   )}
