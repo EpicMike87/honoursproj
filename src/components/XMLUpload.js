@@ -50,17 +50,22 @@ const XMLUpload = () => {
         Confirm
       </button>
       {headings && (
-        <div>
-          <h3 id="data-name">Data Name: {dataName}</h3>
-          <ul>
-            {headings.map((heading, index) => (
-              <li key={index}>{heading}</li>
-            ))}
-          </ul>
-        </div>
-      )}
-    </div>
-  );
+       <div>
+       <h3 id="data-name">Data Name: {dataName}</h3>
+     </div>
+   )}
+   {headings && (
+     <div>
+       <h3 id="attributes-heading">Attributes:</h3>
+       <ul>
+         {headings.map((heading, index) => (
+           <li key={index}>{heading}</li>
+         ))}
+       </ul>
+     </div>
+   )}
+ </div>
+);
 };
 
 export default XMLUpload;
